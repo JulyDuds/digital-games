@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            background: rgba(36, 36, 36, 0.95);
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .about-logo {
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .about-version {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .about-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: var(--dark);
+            border-left: 5px solid var(--accent);
+            border-radius: 8px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--light);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .section-content {
+            color: var(--light);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .tech-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .tech-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .back-link {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .credits {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--secondary);
+            text-align: center;
+            color: var(--light);
+        }
+
+        .credits p {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <div class="about-header">
+            <img src="img/DigitalDetective.svg" alt="Digital Detective Games" class="about-logo">
+            <h1 class="about-title">DIGITAL DETECTIVE GAMES</h1>
+            <p class="about-version">Versão 1.0.0</p>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-rocket"></i>
+                Missão
+            </h2>
+            <div class="section-content">
+                <p>
+                    O <span class="highlight">Digital Detective Games</span> é uma plataforma de jogos clássicos 
+                    desenvolvida como refatoração do projeto GameLab original. O objetivo é demonstrar habilidades 
+                    em desenvolvimento web através de uma interface nostálgica inspirada no Windows 98, combinada 
+                    com uma paleta de cores moderna e corporativa.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-lightbulb"></i>
+                Conceito
+            </h2>
+            <div class="section-content">
+                <p>
+                    Criamos uma experiência única onde jogos clássicos são apresentados como "aplicativos" em um 
+                    ambiente de desktop simulado. Cada jogo funciona em janelas modais independentes que podem ser 
+                    arrastadas, redimensionadas e gerenciadas, proporcionando uma experiência nostálgica e funcional.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-code"></i>
+                Tecnologias
+            </h2>
+            <div class="section-content">
+                <ul class="tech-list">
+                    <li class="tech-item">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </li>
+                    <li class="tech-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </li>
+                    <li class="tech-item">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript ES6+</span>
+                    </li>
+                    <li class="tech-item">
+                        <i class="fas fa-volume-up"></i>
+                        <span>Web Audio API</span>
+                    </li>
+                    <li class="tech-item">
+                        <i class="fas fa-save"></i>
+                        <span>LocalStorage API</span>
+                    </li>
+                    <li class="tech-item">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Canvas API</span>
+                    </li>
+                    <li class="tech-item">
+                        <i class="fab fa-font-awesome"></i>
+                        <span>Font Awesome</span>
+                    </li>
+                    <li class="tech-item">
+                        <i class="fas fa-font"></i>
+                        <span>Google Fonts</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-gamepad"></i>
+                Jogos Disponíveis
+            </h2>
+            <div class="section-content">
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 15px 0;">
+                        <strong style="color: var(--accent);">⚔️ Tic-Tac-Toe:</strong> 
+                        Jogo da velha com IA invencível usando algoritmo Minimax
+                    </li>
+                    <li style="margin: 15px 0;">
+                        <strong style="color: var(--accent);">💣 Campo Minado:</strong> 
+                        Clássico jogo de campo minado com 3 níveis de dificuldade
+                    </li>
+                    <li style="margin: 15px 0;">
+                        <strong style="color: var(--accent);">🕵️ Jogo da Forca:</strong> 
+                        Adivinhe palavras com sistema de categorias e dicas
+                    </li>
+                    <li style="margin: 15px 0;">
+                        <strong style="color: var(--accent);">🏓 Pong:</strong> 
+                        O primeiro videogame da história com física realista
+                    </li>
+                    <li style="margin: 15px 0;">
+                        <strong style="color: var(--accent);">🧠 Memory Game:</strong> 
+                        Teste sua memória encontrando pares de cartas
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-palette"></i>
+                Design
+            </h2>
+            <div class="section-content">
+                <p>
+                    A paleta de cores foi cuidadosamente selecionada para criar uma identidade visual única, 
+                    combinando tons de cinza com vermelho vibrante. O design das janelas foi inspirado no 
+                    icônico Windows 98, trazendo nostalgia enquanto mantém a usabilidade moderna.
+                </p>
+                <p style="margin-top: 15px;">
+                    <strong>Cores principais:</strong><br>
+                    • Cinza Escuro (#242424) - Base e backgrounds<br>
+                    • Cinza Médio (#808080) - Elementos secundários<br>
+                    • Vermelho (#FD0100) - Destaques e interações<br>
+                    • Cinza Claro (#CBDCC1) - Textos e contraste
+                </p>
+            </div>
+        </div>
+
+        <div class="credits">
+            <p><strong>Baseado no projeto GameLab - IEFP Leiria</strong></p>
+            <p>Refatorado e redesenhado para Digital Detective Games</p>
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html" class="btn">
+                <i class="fas fa-arrow-left"></i> Voltar ao Desktop
+            </a>
+        </div>
+    </div>
+
+    <script src="js/footer.js"></script>
+</body>
+</html>
+

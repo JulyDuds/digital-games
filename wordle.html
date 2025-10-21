@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #c0c0c0;
+            overflow: auto;
+        }
+
+        .wordle-board {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            gap: 5px;
+            max-width: 350px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .wordle-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+        }
+
+        .letter-box {
+            aspect-ratio: 1;
+            min-height: 60px;
+            background: #ffffff;
+            border: 3px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #000000;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .letter-box.correct {
+            background: #00ff00;
+            border-color: #008000;
+        }
+
+        .letter-box.present {
+            background: #ffff00;
+            border-color: #808000;
+        }
+
+        .letter-box.absent {
+            background: #808080;
+            color: #ffffff;
+            border-color: #404040;
+        }
+
+        .letter-box.current {
+            border: 3px solid #000000;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { border-color: #000000; }
+            25%, 75% { border-color: #ffffff; }
+        }
+
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 3px;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+        }
+
+        .key {
+            padding: 15px 8px;
+            background: #c0c0c0;
+            color: #000000;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .key:hover:not(.disabled) {
+            background: #d4d4d4;
+        }
+
+        .key:active:not(.disabled) {
+            border-color: #000000 #ffffff #ffffff #000000;
+            padding: 16px 7px 14px 9px;
+        }
+
+        .key.correct {
+            background: #00ff00;
+            color: #000000;
+        }
+
+        .key.present {
+            background: #ffff00;
+            color: #000000;
+        }
+
+        .key.absent {
+            background: #808080;
+            color: #ffffff;
+        }
+
+        .key.enter {
+            grid-column: span 2;
+        }
+
+        .key.backspace {
+            grid-column: span 2;
+        }
+
+        .message-box {
+            background: #ffffcc;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            padding: 12px;
+            margin: 15px auto;
+            max-width: 400px;
+            text-align: center;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .message-box.error {
+            background: #ff9999;
+        }
+
+        .message-box.success {
+            background: #99ff99;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="score">
+                <div class="wins"><i class="fas fa-trophy"></i> <span id="wins">0</span></div>
+                <div class="losses"><i class="fas fa-gamepad"></i> <span id="games">0</span></div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <div class="game-info">
+                <div class="info-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Tentativa: <span id="current-row">1</span>/6</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Sequência: <span id="streak">0</span></span>
+                </div>
+            </div>
+
+            <div class="game-status" id="game-status">
+                Adivinhe a palavra de 5 letras!
+            </div>
+
+            <div class="message-box" id="message-box" style="display: none;"></div>
+
+            <div class="wordle-board" id="wordle-board"></div>
+
+            <div class="keyboard" id="keyboard"></div>
+
+            <div class="controls">
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-sync-alt"></i> Nova Palavra
+                </button>
+                <button class="btn" id="sound-btn">
+                    <i class="fas fa-volume-up"></i> Som
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="js/footer.js"></script>
+    <script src="js/wordle.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #c0c0c0;
+            overflow: auto;
+        }
+
+        .hangman-canvas {
+            width: 400px;
+            height: 400px;
+            margin: 20px auto;
+            border: 3px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            background: #ffffff;
+            display: block;
+        }
+
+        .word-display {
+            font-size: 3rem;
+            letter-spacing: 20px;
+            text-align: center;
+            color: #000000;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin: 30px 0;
+            min-height: 80px;
+        }
+
+        .category-display {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+            gap: 5px;
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 15px;
+        }
+
+        .key {
+            padding: 15px 10px;
+            background: #c0c0c0;
+            color: #000000;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .key:hover:not(.disabled) {
+            background: #d4d4d4;
+        }
+
+        .key:active:not(.disabled) {
+            border-color: #000000 #ffffff #ffffff #000000;
+            padding: 16px 9px 14px 11px;
+        }
+
+        .key.disabled {
+            background: #808080;
+            color: #c0c0c0;
+            border-color: #808080;
+            cursor: not-allowed;
+        }
+
+
+        .hint-box {
+            background: #ffffcc;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            padding: 12px;
+            margin: 15px auto;
+            max-width: 500px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .hint-box strong {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+
+            <div class="score">
+                <div class="wins"><i class="fas fa-trophy"></i> <span id="wins">0</span></div>
+                <div class="losses"><i class="fas fa-gamepad"></i> <span id="games">0</span></div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <canvas class="hangman-canvas" id="hangman-canvas" width="400" height="400"></canvas>
+
+            <div class="category-display" id="category-display">
+                Categoria: <span id="category">-</span>
+            </div>
+
+            <div class="word-display" id="word-display">
+                _ _ _ _ _
+            </div>
+
+            <div class="hint-box" id="hint-box" style="display: none;">
+                <strong>Dica:</strong> <span id="hint-text"></span>
+            </div>
+
+            <div class="game-info">
+                <div class="info-item">
+                    <i class="fas fa-heart"></i>
+                    <span>Vidas: <span id="lives">6</span></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check"></i>
+                    <span>Acertos: <span id="correct">0</span></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-times"></i>
+                    <span>Erros: <span id="wrong">0</span></span>
+                </div>
+            </div>
+
+            <div class="game-status" id="game-status">
+                Adivinhe a palavra!
+            </div>
+
+            <div class="keyboard" id="keyboard"></div>
+
+            <div class="controls">
+                <button class="btn" id="hint-btn">
+                    <i class="fas fa-lightbulb"></i> Dica
+                </button>
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-sync-alt"></i> Nova Palavra
+                </button>
+                <button class="btn" id="sound-btn">
+                    <i class="fas fa-volume-up"></i> Som
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="js/footer.js"></script>
+    <script src="js/jogodaforca.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo Minado | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #c0c0c0;
+            overflow: auto;
+        }
+
+        .game-board {
+            display: grid;
+            gap: 0;
+            max-width: 600px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 5px;
+            background: #c0c0c0;
+            border: 3px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            min-width: 30px;
+            min-height: 30px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #000000;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .cell:hover:not(.revealed):not(.flagged) {
+            background: #d4d4d4;
+        }
+
+        .cell.revealed {
+            background: #c0c0c0;
+            border: 1px solid #808080;
+            cursor: default;
+        }
+
+        .cell.flagged {
+            background: #c0c0c0;
+        }
+
+        .cell.flagged i {
+            color: #ff0000;
+        }
+
+        .cell.mine {
+            background: #ff0000;
+        }
+
+        .cell.mine i {
+            color: #000000;
+        }
+
+        .cell.number-1 { color: #0000ff; }
+        .cell.number-2 { color: #008000; }
+        .cell.number-3 { color: var(--accent); }
+        .cell.number-4 { color: #000080; }
+        .cell.number-5 { color: #800000; }
+        .cell.number-6 { color: #008080; }
+        .cell.number-7 { color: #000000; }
+        .cell.number-8 { color: #808080; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="score">
+                <div class="wins"><i class="fas fa-trophy"></i> <span id="wins">0</span></div>
+                <div class="losses"><i class="fas fa-gamepad"></i> <span id="games">0</span></div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <div class="difficulty-selector">
+                <button class="difficulty-btn" data-difficulty="easy">Fácil (8x8)</button>
+                <button class="difficulty-btn active" data-difficulty="medium">Médio (12x12)</button>
+                <button class="difficulty-btn" data-difficulty="hard">Difícil (16x16)</button>
+            </div>
+
+            <div class="game-info">
+                <div class="info-item">
+                    <i class="fas fa-bomb"></i>
+                    <span>Minas: <span id="mines-count">0</span></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-flag"></i>
+                    <span>Bandeiras: <span id="flags-count">0</span></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Tempo: <span id="timer">0</span>s</span>
+                </div>
+            </div>
+
+            <div class="game-status" id="game-status">
+                Clique para começar!
+            </div>
+
+            <div class="game-board" id="game-board"></div>
+
+            <div class="controls">
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-sync-alt"></i> Novo Jogo
+                </button>
+                <button class="btn" id="sound-btn">
+                    <i class="fas fa-volume-up"></i> Som
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="js/footer.js"></script>
+    <script src="js/minesweeper.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #c0c0c0;
+            overflow: auto;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            min-height: 120px;
+            background: #ffffff;
+            border: 3px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .cell:hover:not(.taken) {
+            background: #e0e0e0;
+        }
+
+        .cell:active:not(.taken) {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .cell.taken {
+            cursor: not-allowed;
+        }
+
+        .cell.x {
+            color: var(--accent);
+        }
+
+        .cell.o {
+            color: var(--light);
+        }
+
+        .cell.winner {
+            animation: pulse 0.5s infinite;
+            background: #ffff00;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .game-info {
+            text-align: center;
+            padding: 15px;
+            background: #c0c0c0;
+        }
+
+        .current-player {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .game-status {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+
+        .score-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            flex-wrap: wrap;
+            background: #c0c0c0;
+        }
+
+        .score-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            color: #000000;
+            background: #ffffff;
+            padding: 5px 10px;
+            border: 1px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .score-item i {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="score">
+                <div class="wins"><i class="fas fa-trophy"></i> <span id="wins">0</span></div>
+                <div class="losses"><i class="fas fa-gamepad"></i> <span id="games">0</span></div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="ai">vs IA</button>
+                <button class="mode-btn" data-mode="player">2 Jogadores</button>
+            </div>
+
+            <div class="game-info">
+                <div class="current-player">
+                    Jogador Atual: <span id="current-player">X</span>
+                </div>
+                <div class="game-status" id="game-status">
+                    Faça sua jogada!
+                </div>
+            </div>
+
+            <div class="game-board" id="game-board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+
+            <div class="score-display">
+                <div class="score-item score-x">
+                    <i class="fas fa-times"></i>
+                    <span>X: <span id="score-x">0</span></span>
+                </div>
+                <div class="score-item score-draw">
+                    <i class="fas fa-equals"></i>
+                    <span>Empates: <span id="score-draw">0</span></span>
+                </div>
+                <div class="score-item score-o">
+                    <i class="fas fa-circle"></i>
+                    <span>O: <span id="score-o">0</span></span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-sync-alt"></i> Reiniciar
+                </button>
+                <button class="btn" id="sound-btn">
+                    <i class="fas fa-volume-up"></i> Som
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="js/footer.js"></script>
+    <script src="js/tictactoe.js"></script>
+</body>
+</html>
+
