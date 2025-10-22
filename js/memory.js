@@ -12,11 +12,14 @@ class MemoryGame {
             hard: { rows: 4, cols: 6 }
         };
 
-        // Emojis para as cartas
-        this.emojis = [
-            '🔒', '🔑', '💻', '🖥️', '📱', '⌨️', '🖱️', '💾',
-            '📡', '🔌', '🔋', '💡', '🎮', '🎯', '🎲', '🃏',
-            '🚀', '⚡', '🔥', '💎', '🏆', '⭐', '🌟', '✨'
+        // Ícones Font Awesome para as cartas
+        this.icons = [
+            'fa-lock', 'fa-key', 'fa-laptop', 'fa-desktop', 
+            'fa-mobile', 'fa-keyboard', 'fa-computer-mouse', 'fa-floppy-disk',
+            'fa-satellite-dish', 'fa-plug', 'fa-battery-full', 'fa-lightbulb',
+            'fa-gamepad', 'fa-bullseye', 'fa-dice', 'fa-ghost',
+            'fa-rocket', 'fa-bolt', 'fa-fire', 'fa-gem',
+            'fa-trophy', 'fa-star', 'fa-flag', 'fa-heart'
         ];
 
         // Estado do jogo
@@ -103,11 +106,11 @@ class MemoryGame {
         const totalCards = config.rows * config.cols;
         const pairsNeeded = totalCards / 2;
 
-        // Selecionar emojis aleatórios
-        const selectedEmojis = this.shuffleArray([...this.emojis]).slice(0, pairsNeeded);
+        // Selecionar ícones aleatórios
+        const selectedIcons = this.shuffleArray([...this.icons]).slice(0, pairsNeeded);
         
         // Criar pares e embaralhar
-        this.cards = this.shuffleArray([...selectedEmojis, ...selectedEmojis]);
+        this.cards = this.shuffleArray([...selectedIcons, ...selectedIcons]);
         
         this.totalPairsDisplay.textContent = pairsNeeded;
     }
@@ -127,11 +130,11 @@ class MemoryGame {
         this.gameBoard.innerHTML = '';
         this.gameBoard.style.gridTemplateColumns = `repeat(${config.cols}, 1fr)`;
 
-        this.cards.forEach((emoji, index) => {
+        this.cards.forEach((icon, index) => {
             const card = document.createElement('div');
             card.className = 'card';
             card.dataset.index = index;
-            card.dataset.emoji = emoji;
+            card.dataset.icon = icon;
 
             const cardBack = document.createElement('div');
             cardBack.className = 'card-back';
@@ -139,7 +142,7 @@ class MemoryGame {
 
             const cardFront = document.createElement('div');
             cardFront.className = 'card-front';
-            cardFront.textContent = emoji;
+            cardFront.innerHTML = `<i class="fas ${icon}"></i>`;
 
             card.appendChild(cardBack);
             card.appendChild(cardFront);
@@ -160,9 +163,17 @@ class MemoryGame {
             return;
         }
 
+        // Limitar a 2 cartas viradas
+        if (this.flippedCards.length >= 2) return;
+
         // Virar carta
         card.classList.add('flipped');
-        this.flippedCards.push({ index, emoji: card.dataset.emoji, element: card });
+        this.flippedCards.push({ 
+            index, 
+            icon: card.dataset.icon, 
+            element: card 
+        });
+        
         this.playSound('flip');
 
         // Verificar se duas cartas foram viradas
@@ -180,7 +191,7 @@ class MemoryGame {
     checkMatch() {
         const [card1, card2] = this.flippedCards;
 
-        if (card1.emoji === card2.emoji) {
+        if (card1.icon === card2.icon) {
             // Par encontrado!
             card1.element.classList.add('matched');
             card2.element.classList.add('matched');
@@ -190,10 +201,12 @@ class MemoryGame {
             
             this.checkWin();
         } else {
-            // Não combinou
-            card1.element.classList.remove('flipped');
-            card2.element.classList.remove('flipped');
-            this.playSound('nomatch');
+            // Não combinou - virar de volta após delay
+            setTimeout(() => {
+                card1.element.classList.remove('flipped');
+                card2.element.classList.remove('flipped');
+                this.playSound('nomatch');
+            }, 600);
         }
 
         this.flippedCards = [];
@@ -312,4 +325,3 @@ class MemoryGame {
 document.addEventListener('DOMContentLoaded', () => {
     new MemoryGame();
 });
-

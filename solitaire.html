@@ -7,217 +7,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #c0c0c0;
-            overflow: auto;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .score {
-            display: flex;
-            gap: 20px;
-            font-size: 1.2rem;
-        }
-
-        .game-area {
-            background: #35654d;
-            border: 3px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .game-info {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            background: #c0c0c0;
-            padding: 10px;
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .game-status {
-            text-align: center;
-            background: #c0c0c0;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
-            font-weight: bold;
-        }
-
-        .solitaire-board {
-            padding: 20px;
-            min-height: 600px;
-        }
-
-        .top-area {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            gap: 10px;
-        }
-
-        .deck-area, .foundation-area {
-            display: flex;
-            gap: 10px;
-        }
-
-        .tableau-area {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-        }
-
-        .card-pile {
-            width: 80px;
-            min-height: 100px;
-            background: #008000;
-            border: 2px solid;
-            border-color: #ffffff #000000 #000000 #ffffff;
-            border-radius: 5px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .card-pile.empty {
-            background: #006000;
-            border-style: dashed;
-        }
-
-        .card {
-            width: 80px;
-            height: 100px;
-            background: #ffffff;
-            border: 2px solid #000000;
-            border-radius: 5px;
-            position: absolute;
-            cursor: grab;
-            display: flex;
-            flex-direction: column;
-            padding: 5px;
-            user-select: none;
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            transition: opacity 0.2s;
-        }
-
-        .card:active {
-            cursor: grabbing;
-        }
-
-        .card.face-down {
-            background: linear-gradient(135deg, #0000ff 0%, #000080 100%);
-            cursor: default;
-        }
-
-        .card.face-down:active {
-            cursor: default;
-        }
-
-        .card.red {
-            color: #ff0000;
-        }
-
-        .card.black {
-            color: #000000;
-        }
-
-        .card-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .card-suit {
-            font-size: 2rem;
-            text-align: center;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            background: #c0c0c0;
-            border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-family: 'Roboto', sans-serif;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.2s;
-        }
-
-        .btn:hover {
-            background: #d0d0d0;
-            transform: translateY(-2px);
-        }
-
-        .btn:active {
-            border-color: #808080 #ffffff #ffffff #808080;
-            transform: translateY(0);
-        }
-
-        #undo-btn:disabled {
-            cursor: not-allowed;
-            background-color: #cccccc;
-            border-color: #999999;
-            transform: none;
-        }
-
-        #undo-btn:disabled:hover {
-            background-color: #cccccc;
-            transform: none;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #333;
-        }
-
-        .history-info {
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 5px 10px;
-            margin: 10px auto;
-            max-width: 300px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -261,16 +50,16 @@
                     
                     <div class="foundation-area">
                         <div class="card-pile empty foundation" data-suit="hearts" id="foundation-0">
-                            <div style="padding: 30px; text-align: center; color: #ff0000; font-size: 2rem;">♥</div>
+                            <div class="suit-symbol" style="padding: 30px; text-align: center; font-size: 2rem;">♥</div>
                         </div>
                         <div class="card-pile empty foundation" data-suit="diamonds" id="foundation-1">
-                            <div style="padding: 30px; text-align: center; color: #ff0000; font-size: 2rem;">♦</div>
+                            <div class="suit-symbol" style="padding: 30px; text-align: center; font-size: 2rem;">♦</div>
                         </div>
                         <div class="card-pile empty foundation" data-suit="clubs" id="foundation-2">
-                            <div style="padding: 30px; text-align: center; color: #000000; font-size: 2rem;">♣</div>
+                            <div class="suit-symbol" style="padding: 30px; text-align: center; font-size: 2rem;">♣</div>
                         </div>
                         <div class="card-pile empty foundation" data-suit="spades" id="foundation-3">
-                            <div style="padding: 30px; text-align: center; color: #000000; font-size: 2rem;">♠</div>
+                            <div class="suit-symbol" style="padding: 30px; text-align: center; font-size: 2rem;">♠</div>
                         </div>
                     </div>
                 </div>
@@ -290,6 +79,9 @@
                 </button>
                 <button class="btn" id="undo-btn" title="Nenhum movimento para desfazer">
                     <i class="fas fa-undo"></i> Desfazer
+                </button>
+                <button class="btn" id="auto-complete-btn" style="display: none;" title="Auto-completar o jogo">
+                    <i class="fas fa-robot"></i> Auto Completar
                 </button>
             </div>
         </main>

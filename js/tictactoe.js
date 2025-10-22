@@ -1,22 +1,24 @@
 /**
  * Tic-Tac-Toe Game - Digital Detective Games
- * Jogo da Velha com IA usando algoritmo Minimax
+ * Jogo da Velha com IA acessível
  */
 
 class TicTacToe {
     constructor() {
         // Estado do jogo
-        this.board = ['', '', '', '', '', '', '', '', ''];
+        this.board = Array(9).fill('');
         this.currentPlayer = 'X';
-        this.gameMode = 'ai'; // 'ai' ou 'player'
+        this.gameMode = 'ai';
         this.gameActive = true;
         this.soundEnabled = true;
+        this.difficulty = 'easy'; // 'easy', 'medium', 'hard'
 
         // Estatísticas
-        this.scores = {
-            x: 0,
-            o: 0,
-            draw: 0
+        this.stats = {
+            xWins: 0,
+            oWins: 0,
+            draws: 0,
+            games: 0
         };
 
         // Combinações vencedoras
@@ -45,7 +47,7 @@ class TicTacToe {
 
     init() {
         // Carregar estatísticas
-        this.loadScores();
+        this.loadStats();
 
         // Event listeners
         this.cells.forEach(cell => {
@@ -65,27 +67,26 @@ class TicTacToe {
     handleCellClick(e) {
         const cellIndex = parseInt(e.target.dataset.index);
 
-        // Verificar se a célula já está ocupada ou se o jogo acabou
         if (this.board[cellIndex] !== '' || !this.gameActive) {
             return;
         }
 
-        // Fazer a jogada
+        // Fazer jogada do jogador
         this.makeMove(cellIndex, this.currentPlayer);
 
-        // Se estiver no modo IA e o jogo ainda estiver ativo
+        // Se for modo IA e ainda tiver jogo, IA joga
         if (this.gameMode === 'ai' && this.gameActive && this.currentPlayer === 'O') {
-            // Pequeno delay para a IA parecer mais natural
             setTimeout(() => {
                 this.aiMove();
-            }, 500);
+            }, 600);
         }
     }
 
     makeMove(index, player) {
         this.board[index] = player;
-        this.cells[index].textContent = player;
-        this.cells[index].classList.add('taken', player.toLowerCase());
+        const cell = this.cells[index];
+        cell.textContent = player;
+        cell.classList.add('taken', player.toLowerCase());
 
         this.playSound('move');
 
@@ -108,60 +109,103 @@ class TicTacToe {
     aiMove() {
         if (!this.gameActive) return;
 
-        // Usar Minimax para encontrar a melhor jogada
-        const bestMove = this.findBestMove();
-        this.makeMove(bestMove, 'O');
-    }
+        let move;
+        const availableMoves = this.getAvailableMoves();
+        
+        // IA FÁCIL - Comportamento mais previsível e com erros
+        if (availableMoves.length === 0) return;
 
-    findBestMove() {
-        let bestScore = -Infinity;
-        let bestMove = -1;
+        // 1. Tentar vencer (40% de chance de não perceber)
+        if (Math.random() > 0.4) {
+            move = this.findWinningMove('O');
+        }
 
-        for (let i = 0; i < 9; i++) {
-            if (this.board[i] === '') {
-                this.board[i] = 'O';
-                let score = this.minimax(this.board, 0, false);
-                this.board[i] = '';
+        // 2. Bloquear jogador (30% de chance de não bloquear)
+        if (!move && Math.random() > 0.3) {
+            move = this.findWinningMove('X');
+        }
 
-                if (score > bestScore) {
-                    bestScore = score;
-                    bestMove = i;
-                }
+        // 3. Jogadas estratégicas com probabilidades diferentes
+        if (!move) {
+            const random = Math.random();
+            
+            if (random < 0.4) {
+                // 40% - Jogada aleatória (pode ser ruim)
+                move = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            } else if (random < 0.7) {
+                // 30% - Centro ou canto
+                move = this.findStrategicMove();
+            } else {
+                // 30% - Jogada que cria oportunidades para o jogador
+                move = this.findGenerousMove();
             }
         }
 
-        return bestMove;
-    }
-
-    minimax(board, depth, isMaximizing) {
-        // Verificar estados terminais
-        if (this.checkWin('O')) return 10 - depth;
-        if (this.checkWin('X')) return depth - 10;
-        if (this.checkDraw()) return 0;
-
-        if (isMaximizing) {
-            let bestScore = -Infinity;
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = 'O';
-                    let score = this.minimax(board, depth + 1, false);
-                    board[i] = '';
-                    bestScore = Math.max(score, bestScore);
-                }
-            }
-            return bestScore;
+        // Garantir que a jogada é válida
+        if (move !== null && move !== undefined && this.board[move] === '') {
+            this.makeMove(move, 'O');
         } else {
-            let bestScore = Infinity;
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = 'X';
-                    let score = this.minimax(board, depth + 1, true);
-                    board[i] = '';
-                    bestScore = Math.min(score, bestScore);
-                }
-            }
-            return bestScore;
+            // Fallback: jogada aleatória
+            const fallbackMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            this.makeMove(fallbackMove, 'O');
         }
+    }
+
+    findWinningMove(player) {
+        for (const pattern of this.winPatterns) {
+            const positions = pattern.map(index => this.board[index]);
+            const emptyIndex = pattern.find(index => this.board[index] === '');
+            
+            // Verificar se há 2 do mesmo jogador e 1 vazio
+            if (positions.filter(cell => cell === player).length === 2 && emptyIndex !== undefined) {
+                return emptyIndex;
+            }
+        }
+        return null;
+    }
+
+    findStrategicMove() {
+        // Prioridade: centro > cantos > arestas
+        if (this.board[4] === '') return 4; // Centro
+        
+        const corners = [0, 2, 6, 8];
+        const availableCorners = corners.filter(index => this.board[index] === '');
+        if (availableCorners.length > 0) {
+            return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+        }
+        
+        // Se não há cantos, retorna null para cair no fallback
+        return null;
+    }
+
+    findGenerousMove() {
+        // Encontra jogadas que dão oportunidades para o jogador
+        const availableMoves = this.getAvailableMoves();
+        
+        // Filtra jogadas que não criam ameaças imediatas para a IA
+        const safeMoves = availableMoves.filter(move => {
+            // Simula a jogada
+            this.board[move] = 'O';
+            const createsThreat = this.checkWin('O');
+            this.board[move] = '';
+            
+            // Prefere jogadas que não criam ameaças diretas
+            return !createsThreat;
+        });
+        
+        // Se há jogadas seguras, escolhe uma aleatoriamente
+        if (safeMoves.length > 0) {
+            return safeMoves[Math.floor(Math.random() * safeMoves.length)];
+        }
+        
+        // Se não há jogadas seguras, retorna null para cair no fallback
+        return null;
+    }
+
+    getAvailableMoves() {
+        return this.board
+            .map((cell, index) => cell === '' ? index : null)
+            .filter(index => index !== null);
     }
 
     checkWin(player) {
@@ -179,7 +223,7 @@ class TicTacToe {
 
         if (result === 'draw') {
             this.statusDisplay.textContent = 'Empate!';
-            this.scores.draw++;
+            this.stats.draws++;
             this.playSound('draw');
         } else {
             // Destacar células vencedoras
@@ -193,23 +237,24 @@ class TicTacToe {
                 });
             }
 
-            this.statusDisplay.textContent = `Jogador ${result} venceu!`;
-            
             if (result === 'X') {
-                this.scores.x++;
+                this.statusDisplay.textContent = 'Jogador X venceu!';
+                this.stats.xWins++;
                 this.playSound('win');
             } else {
-                this.scores.o++;
+                this.statusDisplay.textContent = 'Jogador O venceu!';
+                this.stats.oWins++;
                 this.playSound('lose');
             }
         }
 
-        this.saveScores();
+        this.stats.games++;
+        this.saveStats();
         this.updateDisplay();
     }
 
     restartGame() {
-        this.board = ['', '', '', '', '', '', '', '', ''];
+        this.board = Array(9).fill('');
         this.currentPlayer = 'X';
         this.gameActive = true;
 
@@ -219,6 +264,7 @@ class TicTacToe {
         });
 
         this.updateDisplay();
+        this.statusDisplay.textContent = this.gameMode === 'ai' ? 'Sua vez!' : 'Vez do jogador X';
     }
 
     changeMode(mode) {
@@ -236,27 +282,23 @@ class TicTacToe {
 
     updateDisplay() {
         this.currentPlayerDisplay.textContent = this.currentPlayer;
+        this.currentPlayerDisplay.className = this.currentPlayer.toLowerCase();
         
         if (this.gameActive) {
             if (this.gameMode === 'ai') {
-                if (this.currentPlayer === 'X') {
-                    this.statusDisplay.textContent = 'Sua vez!';
-                } else {
-                    this.statusDisplay.textContent = 'IA está pensando...';
-                }
+                this.statusDisplay.textContent = this.currentPlayer === 'X' ? 'Sua vez!' : 'IA está pensando...';
             } else {
                 this.statusDisplay.textContent = `Vez do jogador ${this.currentPlayer}`;
             }
         }
 
         // Atualizar scores
-        this.scoreXDisplay.textContent = this.scores.x;
-        this.scoreODisplay.textContent = this.scores.o;
-        this.scoreDrawDisplay.textContent = this.scores.draw;
+        this.scoreXDisplay.textContent = this.stats.xWins;
+        this.scoreODisplay.textContent = this.stats.oWins;
+        this.scoreDrawDisplay.textContent = this.stats.draws;
         
-        const totalGames = this.scores.x + this.scores.o + this.scores.draw;
-        this.winsDisplay.textContent = this.scores.x;
-        this.gamesDisplay.textContent = totalGames;
+        this.winsDisplay.textContent = this.stats.xWins;
+        this.gamesDisplay.textContent = this.stats.games;
     }
 
     toggleSound() {
@@ -273,7 +315,6 @@ class TicTacToe {
     playSound(type) {
         if (!this.soundEnabled) return;
 
-        // Criar e tocar som usando Web Audio API
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
@@ -281,47 +322,52 @@ class TicTacToe {
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
 
-        // Diferentes sons para diferentes eventos
         switch(type) {
             case 'move':
                 oscillator.frequency.value = 400;
                 gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.1);
                 break;
             case 'win':
-                oscillator.frequency.value = 800;
-                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.3);
-                break;
+                // Sequência de tons para vitória
+                [600, 800, 1000].forEach((freq, i) => {
+                    setTimeout(() => {
+                        const osc = audioContext.createOscillator();
+                        const gn = audioContext.createGain();
+                        osc.connect(gn);
+                        gn.connect(audioContext.destination);
+                        osc.frequency.value = freq;
+                        gn.gain.setValueAtTime(0.2, audioContext.currentTime);
+                        gn.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                        osc.start(audioContext.currentTime);
+                        osc.stop(audioContext.currentTime + 0.2);
+                    }, i * 150);
+                });
+                return;
             case 'lose':
                 oscillator.frequency.value = 200;
                 gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.3);
                 break;
             case 'draw':
                 oscillator.frequency.value = 500;
                 gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.2);
                 break;
         }
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.5);
     }
 
-    saveScores() {
-        localStorage.setItem('tictactoe-scores', JSON.stringify(this.scores));
+    saveStats() {
+        localStorage.setItem('tictactoe-stats', JSON.stringify(this.stats));
     }
 
-    loadScores() {
-        const saved = localStorage.getItem('tictactoe-scores');
+    loadStats() {
+        const saved = localStorage.getItem('tictactoe-stats');
         if (saved) {
-            this.scores = JSON.parse(saved);
+            this.stats = JSON.parse(saved);
         }
     }
 }
@@ -330,4 +376,3 @@ class TicTacToe {
 document.addEventListener('DOMContentLoaded', () => {
     new TicTacToe();
 });
-

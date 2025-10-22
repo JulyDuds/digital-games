@@ -7,16 +7,19 @@ class Minesweeper {
     constructor() {
         // Configurações de dificuldade
         this.difficulties = {
-            easy: { size: 8, mines: 10 },
-            medium: { size: 12, mines: 25 },
-            hard: { size: 16, mines: 50 }
+            easy: { rows: 8, cols: 8, mines: 10 },
+            medium: { rows: 12, cols: 12, mines: 25 },
+            hard: { rows: 16, cols: 16, mines: 50 }
         };
 
         // Estado do jogo
         this.currentDifficulty = 'medium';
-        this.boardSize = this.difficulties[this.currentDifficulty].size;
+        this.rows = this.difficulties[this.currentDifficulty].rows;
+        this.cols = this.difficulties[this.currentDifficulty].cols;
         this.minesCount = this.difficulties[this.currentDifficulty].mines;
+        
         this.board = [];
+        this.minePositions = [];
         this.revealed = [];
         this.flagged = [];
         this.gameActive = false;
@@ -24,11 +27,17 @@ class Minesweeper {
         this.soundEnabled = true;
         this.timer = 0;
         this.timerInterval = null;
+        this.firstClick = true;
 
         // Estatísticas
         this.stats = {
             wins: 0,
-            games: 0
+            games: 0,
+            bestTimes: {
+                easy: null,
+                medium: null,
+                hard: null
+            }
         };
 
         // Elementos do DOM
@@ -68,39 +77,59 @@ class Minesweeper {
         // Reset estado
         this.gameActive = true;
         this.gameStarted = false;
+        this.firstClick = true;
         this.timer = 0;
         this.stopTimer();
 
-        // Criar tabuleiro
-        this.createBoard();
-        this.renderBoard();
-        this.updateDisplay();
-        this.statusDisplay.textContent = 'Clique para começar!';
-    }
+        // Atualizar configurações baseadas na dificuldade
+        const config = this.difficulties[this.currentDifficulty];
+        this.rows = config.rows;
+        this.cols = config.cols;
+        this.minesCount = config.mines;
 
-    createBoard() {
-        const totalCells = this.boardSize * this.boardSize;
+        // Inicializar arrays
+        const totalCells = this.rows * this.cols;
         this.board = Array(totalCells).fill(0);
         this.revealed = Array(totalCells).fill(false);
         this.flagged = Array(totalCells).fill(false);
+        this.minePositions = [];
+
+        // Renderizar tabuleiro
+        this.renderBoard();
+        this.updateDisplay();
+        this.statusDisplay.textContent = 'Clique para começar!';
+        this.statusDisplay.className = '';
     }
 
-    placeMines(firstClick) {
-        // Garantir que a primeira célula clicada não tem mina
-        const safeZone = this.getNeighbors(firstClick);
-        safeZone.push(firstClick);
-
-        let minesPlaced = 0;
-        while (minesPlaced < this.minesCount) {
-            const pos = Math.floor(Math.random() * this.board.length);
-            if (this.board[pos] !== -1 && !safeZone.includes(pos)) {
-                this.board[pos] = -1;
-                minesPlaced++;
+    placeMines(firstClickIndex) {
+        this.minePositions = [];
+        const totalCells = this.rows * this.cols;
+        
+        // Criar array de posições possíveis (excluindo primeira clique e suas vizinhas)
+        const safeZone = this.getNeighbors(firstClickIndex);
+        safeZone.push(firstClickIndex);
+        const possiblePositions = [];
+        
+        for (let i = 0; i < totalCells; i++) {
+            if (!safeZone.includes(i)) {
+                possiblePositions.push(i);
             }
         }
 
-        // Calcular números
-        for (let i = 0; i < this.board.length; i++) {
+        // Embaralhar posições possíveis
+        this.shuffleArray(possiblePositions);
+
+        // Colocar minas
+        for (let i = 0; i < this.minesCount; i++) {
+            if (i < possiblePositions.length) {
+                const minePos = possiblePositions[i];
+                this.board[minePos] = -1;
+                this.minePositions.push(minePos);
+            }
+        }
+
+        // Calcular números para todas as células
+        for (let i = 0; i < totalCells; i++) {
             if (this.board[i] !== -1) {
                 const neighbors = this.getNeighbors(i);
                 const mineCount = neighbors.filter(n => this.board[n] === -1).length;
@@ -110,8 +139,8 @@ class Minesweeper {
     }
 
     getNeighbors(index) {
-        const row = Math.floor(index / this.boardSize);
-        const col = index % this.boardSize;
+        const row = Math.floor(index / this.cols);
+        const col = index % this.cols;
         const neighbors = [];
 
         for (let dr = -1; dr <= 1; dr++) {
@@ -119,9 +148,9 @@ class Minesweeper {
                 if (dr === 0 && dc === 0) continue;
                 const newRow = row + dr;
                 const newCol = col + dc;
-                if (newRow >= 0 && newRow < this.boardSize && 
-                    newCol >= 0 && newCol < this.boardSize) {
-                    neighbors.push(newRow * this.boardSize + newCol);
+                if (newRow >= 0 && newRow < this.rows && 
+                    newCol >= 0 && newCol < this.cols) {
+                    neighbors.push(newRow * this.cols + newCol);
                 }
             }
         }
@@ -131,85 +160,132 @@ class Minesweeper {
 
     renderBoard() {
         this.gameBoard.innerHTML = '';
-        this.gameBoard.style.gridTemplateColumns = `repeat(${this.boardSize}, 1fr)`;
+        this.gameBoard.className = `minesweeper-board ${this.currentDifficulty}`;
+        this.gameBoard.style.gridTemplateColumns = `repeat(${this.cols}, 1fr)`;
 
-        for (let i = 0; i < this.board.length; i++) {
+        for (let i = 0; i < this.rows * this.cols; i++) {
             const cell = document.createElement('div');
-            cell.className = 'cell';
+            cell.className = 'minesweeper-cell';
             cell.dataset.index = i;
 
+            // Event listeners
             cell.addEventListener('click', (e) => this.handleCellClick(e));
             cell.addEventListener('contextmenu', (e) => this.handleCellRightClick(e));
+            
+            // Para melhor experiência mobile
+            cell.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                cell.classList.add('pressed');
+            });
+
+            cell.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                cell.classList.remove('pressed');
+            });
 
             this.gameBoard.appendChild(cell);
         }
     }
 
     handleCellClick(e) {
-        e.preventDefault();
-        const index = parseInt(e.target.dataset.index);
-
-        if (!this.gameActive || this.revealed[index] || this.flagged[index]) {
-            return;
-        }
-
-        // Primeira jogada - colocar minas
-        if (!this.gameStarted) {
-            this.gameStarted = true;
-            this.placeMines(index);
-            this.startTimer();
-        }
-
+        if (!this.gameActive) return;
+        
+        const index = parseInt(e.currentTarget.dataset.index);
         this.revealCell(index);
     }
 
     handleCellRightClick(e) {
         e.preventDefault();
-        const index = parseInt(e.target.dataset.index);
-
-        if (!this.gameActive || this.revealed[index]) {
-            return;
-        }
-
+        if (!this.gameActive) return;
+        
+        const index = parseInt(e.currentTarget.dataset.index);
         this.toggleFlag(index);
     }
 
     revealCell(index) {
-        if (this.revealed[index]) return;
+        if (this.revealed[index] || this.flagged[index]) return;
+
+        // Primeira jogada - colocar minas
+        if (this.firstClick) {
+            this.firstClick = false;
+            this.gameStarted = true;
+            this.placeMines(index);
+            this.startTimer();
+            this.statusDisplay.textContent = 'Jogo em andamento...';
+        }
 
         this.revealed[index] = true;
         const cell = this.gameBoard.children[index];
         cell.classList.add('revealed');
 
+        const value = this.board[index];
+
         // Verificar se é mina
-        if (this.board[index] === -1) {
-            cell.classList.add('mine');
+        if (value === -1) {
+            cell.classList.add('mine', 'exploded');
             cell.innerHTML = '<i class="fas fa-bomb"></i>';
             this.gameOver(false);
             this.playSound('lose');
             return;
         }
 
-        // Mostrar número
-        const value = this.board[index];
+        // Mostrar valor da célula
         if (value > 0) {
             cell.textContent = value;
             cell.classList.add(`number-${value}`);
+            this.playSound('reveal');
         } else {
-            // Revelar células vizinhas vazias
-            const neighbors = this.getNeighbors(index);
-            neighbors.forEach(n => {
-                if (!this.revealed[n] && !this.flagged[n]) {
-                    this.revealCell(n);
-                }
-            });
+            // Célula vazia - revelar recursivamente em cascata
+            cell.textContent = '';
+            this.playSound('reveal-empty');
+            this.revealAdjacentCells(index);
         }
 
-        this.playSound('reveal');
         this.checkWin();
     }
 
+    revealAdjacentCells(index) {
+        // Usar uma fila para processamento BFS (Breadth-First Search)
+        const queue = [index];
+        const visited = new Set([index]);
+        
+        while (queue.length > 0) {
+            const currentIndex = queue.shift();
+            const neighbors = this.getNeighbors(currentIndex);
+            
+            for (const neighbor of neighbors) {
+                if (visited.has(neighbor) || this.revealed[neighbor] || this.flagged[neighbor]) {
+                    continue;
+                }
+                
+                this.revealed[neighbor] = true;
+                visited.add(neighbor);
+                const neighborCell = this.gameBoard.children[neighbor];
+                neighborCell.classList.add('revealed');
+                
+                const neighborValue = this.board[neighbor];
+                
+                if (neighborValue === 0) {
+                    neighborCell.textContent = '';
+                    queue.push(neighbor);
+                } else if (neighborValue > 0) {
+                    neighborCell.textContent = neighborValue;
+                    neighborCell.classList.add(`number-${neighborValue}`);
+                }
+            }
+        }
+    }
+
     toggleFlag(index) {
+        if (this.revealed[index]) return;
+
+        const flagsUsed = this.flagged.filter(f => f).length;
+        
+        if (!this.flagged[index] && flagsUsed >= this.minesCount) {
+            this.playSound('error');
+            return;
+        }
+
         this.flagged[index] = !this.flagged[index];
         const cell = this.gameBoard.children[index];
 
@@ -228,10 +304,16 @@ class Minesweeper {
 
     checkWin() {
         // Verificar se todas as células não-mina foram reveladas
-        const nonMineCells = this.board.filter(cell => cell !== -1).length;
-        const revealedNonMine = this.revealed.filter((r, i) => r && this.board[i] !== -1).length;
+        let allNonMinesRevealed = true;
+        
+        for (let i = 0; i < this.board.length; i++) {
+            if (this.board[i] !== -1 && !this.revealed[i]) {
+                allNonMinesRevealed = false;
+                break;
+            }
+        }
 
-        if (revealedNonMine === nonMineCells) {
+        if (allNonMinesRevealed) {
             this.gameOver(true);
         }
     }
@@ -240,23 +322,24 @@ class Minesweeper {
         this.gameActive = false;
         this.stopTimer();
 
-        // Revelar todas as minas
-        for (let i = 0; i < this.board.length; i++) {
-            if (this.board[i] === -1) {
-                const cell = this.gameBoard.children[i];
-                if (!this.flagged[i]) {
-                    cell.classList.add('mine');
-                    cell.innerHTML = '<i class="fas fa-bomb"></i>';
-                }
-            }
-        }
+        // Revelar todo o tabuleiro
+        this.revealAllCells();
 
         if (won) {
-            this.statusDisplay.textContent = '🎉 Você venceu!';
+            this.statusDisplay.textContent = '🎉 Vitória! Parabéns!';
+            this.statusDisplay.classList.add('win');
             this.stats.wins++;
+            
+            // Atualizar melhor tempo
+            const currentBest = this.stats.bestTimes[this.currentDifficulty];
+            if (!currentBest || this.timer < currentBest) {
+                this.stats.bestTimes[this.currentDifficulty] = this.timer;
+            }
+            
             this.playSound('win');
         } else {
-            this.statusDisplay.textContent = '💣 Game Over!';
+            this.statusDisplay.textContent = '💣 Game Over! Tente novamente.';
+            this.statusDisplay.classList.add('lose');
             this.playSound('lose');
         }
 
@@ -265,11 +348,42 @@ class Minesweeper {
         this.updateDisplay();
     }
 
+    revealAllCells() {
+        for (let i = 0; i < this.board.length; i++) {
+            const cell = this.gameBoard.children[i];
+            
+            if (this.board[i] === -1) {
+                // Mina
+                if (this.flagged[i] && !this.revealed[i]) {
+                    // Mina corretamente marcada
+                    cell.classList.add('flagged', 'mine-correct');
+                } else if (!this.flagged[i]) {
+                    // Mina não marcada
+                    cell.classList.add('mine');
+                    cell.innerHTML = '<i class="fas fa-bomb"></i>';
+                }
+            } else {
+                // Não é mina
+                if (this.flagged[i]) {
+                    // Bandeira incorreta
+                    cell.classList.add('flagged', 'mine-wrong');
+                    cell.innerHTML = '<i class="fas fa-times"></i>';
+                } else if (!this.revealed[i]) {
+                    // Célula não revelada
+                    cell.classList.add('revealed');
+                    const value = this.board[i];
+                    if (value > 0) {
+                        cell.textContent = value;
+                        cell.classList.add(`number-${value}`);
+                    }
+                }
+            }
+        }
+    }
+
     changeDifficulty(difficulty) {
         this.currentDifficulty = difficulty;
-        this.boardSize = this.difficulties[difficulty].size;
-        this.minesCount = this.difficulties[difficulty].mines;
-
+        
         this.difficultyBtns.forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.difficulty === difficulty) {
@@ -295,8 +409,10 @@ class Minesweeper {
     }
 
     updateDisplay() {
-        this.minesDisplay.textContent = this.minesCount;
         const flagsUsed = this.flagged.filter(f => f).length;
+        const minesLeft = this.minesCount - flagsUsed;
+        
+        this.minesDisplay.textContent = minesLeft;
         this.flagsDisplay.textContent = `${flagsUsed}/${this.minesCount}`;
         this.timerDisplay.textContent = this.timer;
         this.winsDisplay.textContent = this.stats.wins;
@@ -309,6 +425,7 @@ class Minesweeper {
         
         if (this.soundEnabled) {
             icon.className = 'fas fa-volume-up';
+            this.playSound('toggle');
         } else {
             icon.className = 'fas fa-volume-mute';
         }
@@ -326,34 +443,58 @@ class Minesweeper {
 
         switch(type) {
             case 'reveal':
-                oscillator.frequency.value = 300;
-                gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.05);
-                break;
-            case 'flag':
-                oscillator.frequency.value = 600;
+                oscillator.frequency.value = 400;
                 gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.1);
                 break;
+                
+            case 'reveal-empty':
+                oscillator.frequency.value = 300;
+                gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                break;
+                
+            case 'flag':
+                oscillator.frequency.value = 600;
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                break;
+                
             case 'win':
                 oscillator.frequency.value = 800;
                 gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.4);
                 break;
+                
             case 'lose':
                 oscillator.frequency.value = 150;
                 gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.5);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+                break;
+                
+            case 'error':
+                oscillator.frequency.value = 200;
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                break;
+                
+            case 'toggle':
+                oscillator.frequency.value = 500;
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
                 break;
         }
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.5);
+    }
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
 
     saveStats() {
@@ -372,4 +513,3 @@ class Minesweeper {
 document.addEventListener('DOMContentLoaded', () => {
     new Minesweeper();
 });
-

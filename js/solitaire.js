@@ -1,6 +1,6 @@
 /**
  * Solitaire (Paciência) - Digital Detective Games
- * Lógica completamente refeita com drag & drop e sistema de desfazer
+ * Versão completa com tema vermelho e cinza
  */
 
 class SolitaireGame {
@@ -43,6 +43,7 @@ class SolitaireGame {
         this.draggedCards = [];
         this.dragSource = null;
         this.selectedCard = null;
+        this.autoCompleteInterval = null;
 
         // Sistema de histórico para desfazer
         this.moveHistory = [];
@@ -71,6 +72,7 @@ class SolitaireGame {
         this.hintBtn = document.getElementById('hint-btn');
         this.soundBtn = document.getElementById('sound-btn');
         this.undoBtn = document.getElementById('undo-btn');
+        this.autoCompleteBtn = document.getElementById('auto-complete-btn');
         this.winsDisplay = document.getElementById('wins');
         this.gamesDisplay = document.getElementById('games');
     }
@@ -84,6 +86,7 @@ class SolitaireGame {
         this.hintBtn.addEventListener('click', () => this.showHint());
         this.soundBtn.addEventListener('click', () => this.toggleSound());
         this.undoBtn.addEventListener('click', () => this.undoMove());
+        this.autoCompleteBtn.addEventListener('click', () => this.startAutoComplete());
         this.stockPile.addEventListener('click', () => this.drawFromStock());
 
         // Iniciar jogo
@@ -117,6 +120,9 @@ class SolitaireGame {
     }
 
     newGame() {
+        // Parar auto-completar se estiver ativo
+        this.stopAutoComplete();
+
         // Reset estado
         const deck = this.createDeck();
         this.stock = [];
@@ -502,21 +508,145 @@ class SolitaireGame {
         }
     }
 
+    // FUNÇÃO DE AUTO-COMPLETAR
+    canAutoComplete() {
+        // Verificar se não há cartas bloqueadas (todas estão viradas para cima)
+        for (let col = 0; col < 7; col++) {
+            for (let card of this.tableau[col]) {
+                if (!card.faceUp) {
+                    return false;
+                }
+            }
+        }
+
+        // Verificar se stock e waste estão vazios
+        if (this.stock.length > 0 || this.waste.length > 0) {
+            return false;
+        }
+
+        // Verificar se ainda há cartas no tableau
+        let hasCardsInTableau = false;
+        for (let col = 0; col < 7; col++) {
+            if (this.tableau[col].length > 0) {
+                hasCardsInTableau = true;
+                break;
+            }
+        }
+
+        return hasCardsInTableau;
+    }
+
+    startAutoComplete() {
+        if (!this.canAutoComplete()) {
+            this.statusDisplay.textContent = 'Não é possível auto-completar o jogo. Ainda há cartas bloqueadas.';
+            this.playSound('error');
+            return;
+        }
+
+        if (!confirm('Deseja auto-completar o jogo? O jogo moverá automaticamente todas as cartas para as fundações.')) {
+            return;
+        }
+
+        this.saveGameState("Início do auto-completar");
+        this.gameActive = false;
+        this.autoCompleteBtn.disabled = true;
+        this.statusDisplay.textContent = 'Auto-completando...';
+
+        this.autoCompleteMoves = 0;
+        this.autoCompleteInterval = setInterval(() => {
+            if (!this.performAutoCompleteMove()) {
+                this.stopAutoComplete();
+                this.checkWin();
+            }
+        }, 500); // Movimento a cada 500ms para melhor visualização
+    }
+
+    stopAutoComplete() {
+        if (this.autoCompleteInterval) {
+            clearInterval(this.autoCompleteInterval);
+            this.autoCompleteInterval = null;
+        }
+        this.gameActive = true;
+        this.autoCompleteBtn.disabled = false;
+    }
+
+    performAutoCompleteMove() {
+        // Tentar mover cartas para as fundações
+        let moved = false;
+
+        // 1. Verificar cartas do tableau que podem ir para as fundações
+        for (let col = 0; col < 7; col++) {
+            const column = this.tableau[col];
+            if (column.length === 0) continue;
+
+            const topCard = column[column.length - 1];
+            
+            // Verificar se esta carta pode ir para alguma fundação
+            for (let foundIndex = 0; foundIndex < 4; foundIndex++) {
+                if (this.isValidFoundationMove(topCard, this.foundations[foundIndex])) {
+                    // Mover a carta
+                    const card = column.pop();
+                    this.foundations[foundIndex].push(card);
+                    
+                    this.moves++;
+                    this.autoCompleteMoves++;
+                    this.score += 15;
+                    
+                    this.render();
+                    this.updateDisplay();
+                    this.playSound('move');
+                    
+                    this.statusDisplay.textContent = `Auto-completando... ${this.autoCompleteMoves} movimentos`;
+                    
+                    moved = true;
+                    break;
+                }
+            }
+            
+            if (moved) break;
+        }
+
+        // Se não moveu nenhuma carta, verificar se o jogo está completo
+        if (!moved) {
+            const allComplete = this.foundations.every(foundation => 
+                foundation.length === 13 && foundation[foundation.length - 1].rank === 13
+            );
+            
+            if (allComplete) {
+                this.statusDisplay.textContent = 'Jogo auto-completado com sucesso!';
+            } else {
+                this.statusDisplay.textContent = 'Não foi possível completar o jogo automaticamente.';
+            }
+        }
+
+        return moved;
+    }
+
     // RENDERIZAÇÃO
     render() {
         this.renderStock();
         this.renderWaste();
         this.renderFoundations();
         this.renderTableau();
+        this.updateAutoCompleteButton();
+    }
+
+    updateAutoCompleteButton() {
+        if (this.canAutoComplete()) {
+            this.autoCompleteBtn.style.display = 'block';
+            this.autoCompleteBtn.title = 'Auto-completar o jogo (todas as cartas estão visíveis)';
+        } else {
+            this.autoCompleteBtn.style.display = 'none';
+        }
     }
 
     renderStock() {
         if (this.stock.length > 0) {
             this.stockPile.innerHTML = '<div style="padding: 30px; text-align: center; color: white; font-size: 2rem;">🂠</div>';
-            this.stockPile.style.background = '#0000ff';
+            this.stockPile.style.background = 'linear-gradient(135deg, #800000 0%, #b30000 100%)';
         } else {
-            this.stockPile.innerHTML = '<div style="padding: 30px; text-align: center; color: #006000; font-size: 1.5rem;">↻</div>';
-            this.stockPile.style.background = '#008000';
+            this.stockPile.innerHTML = '<div style="padding: 30px; text-align: center; color: #ff9999; font-size: 1.5rem;">↻</div>';
+            this.stockPile.style.background = '#600000';
         }
     }
 
@@ -547,10 +677,10 @@ class SolitaireGame {
             } else {
                 // Mostrar símbolo do naipe
                 const symbolDiv = document.createElement('div');
+                symbolDiv.className = 'suit-symbol';
                 symbolDiv.style.padding = '30px';
                 symbolDiv.style.textAlign = 'center';
                 symbolDiv.style.fontSize = '2rem';
-                symbolDiv.style.color = this.suits[i].color === 'red' ? '#ff0000' : '#000000';
                 symbolDiv.textContent = this.suits[i].symbol;
                 foundationElement.appendChild(symbolDiv);
                 foundationElement.classList.add('empty');
