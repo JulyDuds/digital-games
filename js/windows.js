@@ -374,7 +374,7 @@ class WindowManager {
             'jogodaforca': {
                 title: 'Jogo da Forca',
                 url: 'jogodaforca.html',
-                width: 1000,
+                width: 900,
                 height: 850
             },
             'pong': {
@@ -398,7 +398,7 @@ class WindowManager {
             'wordle': {
                 title: 'Wordle',
                 url: 'wordle.html',
-                width: 650,
+                width: 750,
                 height: 850
             },
             'solitaire': {

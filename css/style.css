@@ -14,6 +14,8 @@
     --window-titlebar-text: #ffffff;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -21,11 +23,15 @@
 }
 
 body {
-    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+    font-family: 'Pixelify Sans', 'MS Sans Serif', 'Microsoft Sans Serif';
     background: #030303;
     color: #000000;
     min-height: 100vh;
     overflow: hidden;
+    font-size: 15px;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+    font-smoothing: none;
 }
 
 /* Desktop Styles */
@@ -76,18 +82,21 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 5px;
-    font-size: 28px;
+    font-size: 20px;
     color: #000000;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+    image-rendering: pixelated;
 }
 
 .icon-label {
     color: #ffffff;
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
-    font-weight: bold;
+    font-weight: normal;
     line-height: 1.2;
+    font-family: 'Pixelify Sans';
+    word-break: break-word;
 }
 
 /* Taskbar */
@@ -118,9 +127,10 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-weight: bold;
-    font-size: 12px;
+    font-weight: normal;
+    font-size: 13px;
     min-width: 70px;
+    font-family: 'Pixelify Sans';
 }
 
 .start-button:hover {
@@ -148,11 +158,12 @@ body {
     border-color: #ffffff #000000 #000000 #ffffff;
     cursor: pointer;
     white-space: nowrap;
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: normal;
     max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: 'Pixelify Sans';
 }
 
 .taskbar-app:hover {
@@ -169,8 +180,8 @@ body {
     padding: 4px 8px;
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
-    font-family: 'MS Sans Serif', sans-serif;
-    font-size: 11px;
+    font-family: 'Pixelify Sans';
+    font-size: 12px;
     color: #000000;
     min-width: 80px;
     text-align: center;
@@ -195,15 +206,18 @@ body {
 }
 
 .start-menu-header {
-    background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+    background: linear-gradient(90deg, #800000 0%, #c76161 100%);
     padding: 20px 10px;
     color: #ffffff;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 18px;
     text-orientation: mixed;
     float: left;
     height: 100%;
     min-height: 200px;
+    font-family: 'Pixelify Sans';
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
 }
 
 .start-menu-items {
@@ -218,17 +232,18 @@ body {
     gap: 10px;
     cursor: pointer;
     color: #000000;
-    font-size: 11px;
+    font-size: 12px;
     min-height: 32px;
+    font-family: 'Pixelify Sans';
 }
 
 .start-menu-item:hover {
-    background: #000080;
+    background: #790000;
     color: #ffffff;
 }
 
 .start-menu-item i {
-    font-size: 16px;
+    font-size: 18px;
     width: 20px;
     text-align: center;
 }
@@ -243,8 +258,8 @@ body {
 /* Window Styles */
 .window {
     position: absolute;
-    min-width: 400px;
-    min-height: 300px;
+    min-width: 500px;
+    min-height: 350px;
     background: #c0c0c0;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
@@ -279,9 +294,9 @@ body {
 }
 
 .window-title {
-    font-weight: bold;
-    font-size: 11px;
-    font-family: 'MS Sans Serif', sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: 'Pixelify Sans';
 }
 
 .window-controls {
@@ -300,8 +315,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 8px;
+    font-size: 9px;
     padding: 0;
+    font-family: 'Pixelify Sans';
 }
 
 .window-btn:hover {
@@ -318,7 +334,7 @@ body {
 
 .window-content {
     flex: 1;
-    overflow: hidden;
+    overflow: auto; /* Alterado de hidden para auto */
     background: #ffffff;
     position: relative;
     border: 1px solid;
@@ -424,13 +440,13 @@ body {
 }
 
 .header h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: normal;
     display: flex;
     align-items: center;
     gap: 10px;
     color: #000000;
-    font-family: 'MS Sans Serif', sans-serif;
+    font-family: 'Pixelify Sans';
 }
 
 .header h1 span {
@@ -450,12 +466,13 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 1rem;
+    font-size: 12px;
     color: #000000;
     background: #ffffff;
     padding: 3px 8px;
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
+    font-family: 'Pixelify Sans';
 }
 
 .wins i, .losses i {
@@ -474,14 +491,14 @@ body {
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     background: #c0c0c0;
-    font-weight: 600;
-    font-size: 11px;
+    font-weight: normal;
+    font-size: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
     color: #000000;
-    font-family: 'MS Sans Serif', sans-serif;
+    font-family: 'Pixelify Sans';
 }
 
 .btn:hover {
@@ -501,10 +518,11 @@ body {
     background: #c0c0c0;
     padding: 10px;
     text-align: center;
-    font-size: 10px;
+    font-size: 12px;
     border-top: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     color: #000000;
+    font-family: 'Pixelify Sans';
 }
 
 /* Utility Classes */
@@ -547,10 +565,7 @@ body {
     animation: fadeIn 0.3s ease-out;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
+
 
 /* Common Game Styles */
 .game-board {
@@ -563,7 +578,6 @@ body {
     justify-content: space-around;
     padding: 15px;
     flex-wrap: wrap;
-    gap: 15px;
     background: #c0c0c0;
 }
 
@@ -571,25 +585,27 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 1.1rem;
+    font-size: 12px;
     color: #000000;
     background: #ffffff;
     padding: 5px 12px;
     border: 2px solid;
     border-color: #808080 #ffffff #ffffff #808080;
+    font-family: 'Pixelify Sans';
 }
 
 .info-item i {
-    font-size: 1.2rem;
+    font-size: 15px;
     color: var(--accent);
 }
 
 .game-status {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 15px;
     padding: 15px;
     color: var(--accent);
-    font-weight: bold;
+    font-weight: normal;
+    font-family: 'Pixelify Sans';
 }
 
 .controls {
@@ -615,8 +631,9 @@ body {
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 11px;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: 'Pixelify Sans';
 }
 
 .difficulty-btn:hover, .mode-btn:hover {
@@ -640,6 +657,7 @@ body {
     border: 3px solid;
     border-color: #808080 #ffffff #ffffff #808080;
     background: #000000;
+    image-rendering: pixelated;
 }
 
 .instructions {
@@ -651,11 +669,16 @@ body {
     max-width: 600px;
     text-align: center;
     color: #000000;
-    font-size: 0.95rem;
+    font-size: 12px;
+    font-family: 'Pixelify Sans';
+    line-height: 1.5;
 }
 
 .instructions strong {
     color: var(--accent);
+}
+.icon-red {
+    color: #ff0000;
 }
 
 /* Solitaire Styles */
@@ -679,7 +702,6 @@ body {
 .tableau-area {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
 }
 
 .card-pile {
@@ -714,6 +736,7 @@ body {
     user-select: none;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transition: opacity 0.2s;
+    font-family: 'Pixelify Sans';
 }
 
 .card:active {
@@ -739,12 +762,12 @@ body {
 }
 
 .card-value {
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: normal;
 }
 
 .card-suit {
-    font-size: 2rem;
+    font-size: 35px;
     text-align: center;
     flex: 1;
     display: flex;
@@ -766,7 +789,7 @@ body {
 }
 
 #auto-complete-btn {
-    background: linear-gradient(135deg, #800000 0%, #b30000 100%);
+    background: linear-gradient(135deg, #fd6464 0%, #f58989 100%);
     color: white;
     border-color: #ffffff #600000 #600000 #ffffff;
 }
@@ -791,8 +814,9 @@ body {
     margin: 10px auto;
     max-width: 300px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 12px;
     color: #800000;
+    font-family: 'Pixelify Sans';
 }
 
 .foundation .suit-symbol {
@@ -812,7 +836,7 @@ body {
     background: #700000;
 }
 
-/* Tic-Tac-Toe Styles - CORRIGIDO */
+/* Tic-Tac-Toe Styles */
 .tictactoe-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -835,11 +859,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 24px;
     cursor: pointer;
     color: #000000;
-    font-weight: bold;
-    font-family: 'Fira Code', monospace;
+    font-weight: normal;
+    font-family: 'Pixelify Sans';
     transition: all 0.1s ease;
 }
 
@@ -876,25 +900,26 @@ body {
 @keyframes pulse {
     0%, 100% { 
         transform: scale(1); 
-        background: #ff0000;
+        background: #f5a5a5;
     }
     50% { 
         transform: scale(1.05); 
-        background: #ff9b9b;
+        background: hsl(0, 75%, 78%);
     }
 }
 
 .current-player {
-    font-size: 1.3rem;
+    font-size: 15px;
     margin-bottom: 10px;
     color: #000000;
-    font-weight: bold;
+    font-weight: normal;
     text-align: center;
     background: #ffffff;
     padding: 8px 15px;
     border: 2px solid;
     border-color: #808080 #ffffff #ffffff #808080;
     display: inline-block;
+    font-family: 'Pixelify Sans';
 }
 
 .current-player.x {
@@ -912,14 +937,13 @@ body {
     padding: 15px;
     flex-wrap: wrap;
     background: #c0c0c0;
-    margin: 15px 0;
 }
 
 .score-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 1rem;
+    font-size: 12px;
     color: #000000;
     background: #ffffff;
     padding: 8px 15px;
@@ -927,10 +951,11 @@ body {
     border-color: #808080 #ffffff #ffffff #808080;
     min-width: 120px;
     justify-content: center;
+    font-family: 'Pixelify Sans';
 }
 
 .score-item i {
-    font-size: 1.2rem;
+    font-size: 15px;
 }
 
 .score-x i {
@@ -947,22 +972,21 @@ body {
 
 .game-info {
     text-align: center;
-    margin: 15px 0;
 }
 
 #game-status {
-    font-size: 1.3rem;
+    font-size: 15px;
     padding: 12px 20px;
-    background: #ffffcc;
+    background: #ebebeb;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     color: #000000;
-    font-weight: bold;
-    margin: 10px 0;
+    font-weight: normal;
     min-height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Pixelify Sans';
 }
 
 /* Modo selecionado destacado */
@@ -985,7 +1009,7 @@ body {
     }
     
     .cell {
-        font-size: 2.5rem;
+        font-size: 20px;
     }
     
     .score-display {
@@ -1000,7 +1024,7 @@ body {
     }
     
     #game-status {
-        font-size: 1.1rem;
+        font-size: 12px;
         padding: 10px 15px;
     }
 }
@@ -1013,27 +1037,28 @@ body {
     }
     
     .cell {
-        font-size: 2rem;
+        font-size: 16px;
     }
     
     .current-player {
-        font-size: 1.1rem;
+        font-size: 12px;
         padding: 6px 12px;
     }
     
     .score-item {
         min-width: 100px;
         padding: 6px 10px;
-        font-size: 0.9rem;
+        font-size: 10px;
     }
 }
+
 /* Wordle Styles */
 .wordle-board {
     display: grid;
     grid-template-rows: repeat(6, 1fr);
     gap: 5px;
     max-width: 350px;
-    margin: 20px auto;
+    margin: 0px auto;
     padding: 20px;
 }
 
@@ -1052,21 +1077,21 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: normal;
     color: #000000;
     text-transform: uppercase;
-    font-family: 'Courier New', monospace;
+    font-family: 'Pixelify Sans';
 }
 
 .letter-box.correct {
-    background: #00ff00;
-    border-color: #008000;
+    background: #ff0000;
+    border-color: #800000;
 }
 
 .letter-box.present {
-    background: #ffff00;
-    border-color: #808000;
+    background: #ff9191;
+    border-color: #cc5e5e;
 }
 
 .letter-box.absent {
@@ -1087,27 +1112,28 @@ body {
 
 .keyboard {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(13, 1fr);
     gap: 3px;
     max-width: 500px;
-    margin: 20px auto;
+    margin: auto;
     padding: 15px;
 }
 
 .key {
-    padding: 15px 8px;
+    padding: 12px 6px;
     background: #c0c0c0;
     color: #000000;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 0.9rem;
+    font-weight: normal;
+    font-size: 12px;
     text-align: center;
-    min-height: 45px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Pixelify Sans';
 }
 
 .key:hover:not(.disabled) {
@@ -1116,16 +1142,16 @@ body {
 
 .key:active:not(.disabled) {
     border-color: #000000 #ffffff #ffffff #000000;
-    padding: 16px 7px 14px 9px;
+    padding: 13px 5px 11px 7px;
 }
 
 .key.correct {
-    background: #00ff00;
+    background: #ff0000;
     color: #000000;
 }
 
 .key.present {
-    background: #ffff00;
+    background: #ff9191;
     color: #000000;
 }
 
@@ -1136,10 +1162,12 @@ body {
 
 .key.enter {
     grid-column: span 2;
+    font-size: 9px;
 }
 
 .key.backspace {
     grid-column: span 2;
+    font-size: 9px;
 }
 
 .message-box {
@@ -1151,7 +1179,9 @@ body {
     max-width: 400px;
     text-align: center;
     color: #000000;
-    font-weight: bold;
+    font-weight: normal;
+    font-family: 'Pixelify Sans';
+    font-size: 12px;
 }
 
 .message-box.error {
@@ -1159,58 +1189,61 @@ body {
 }
 
 .message-box.success {
-    background: #99ff99;
+    background: #db7373;
 }
 
 /* Hangman Styles */
 .hangman-canvas {
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     margin: 20px auto;
     border: 3px solid;
     border-color: #808080 #ffffff #ffffff #808080;
     background: #ffffff;
     display: block;
+    image-rendering: pixelated;
 }
 
 .word-display {
-    font-size: 3rem;
-    letter-spacing: 20px;
+    font-size: 16px;
+    letter-spacing: 8px;
     text-align: center;
     color: #000000;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    margin: 30px 0;
+    font-family: 'Pixelify Sans';
+    font-weight: normal;
+    margin: 10px 0;
     min-height: 80px;
 }
 
 .category-display {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 13px;
     color: var(--accent);
     margin-bottom: 15px;
-    font-weight: bold;
+    font-weight: normal;
+    font-family: 'Pixelify Sans';
 }
 
 .hangman-keyboard {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
-    gap: 5px;
-    max-width: 650px;
+    grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+    gap: 4px;
+    max-width: 500px;
     margin: 20px auto;
     padding: 15px;
 }
 
 .hangman-key {
-    padding: 15px 10px;
+    padding: 10px 8px;
     background: #c0c0c0;
     color: #000000;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-weight: normal;
+    font-size: 15px;
     text-align: center;
+    font-family: 'Pixelify Sans';
 }
 
 .hangman-key:hover:not(.disabled) {
@@ -1219,7 +1252,7 @@ body {
 
 .hangman-key:active:not(.disabled) {
     border-color: #000000 #ffffff #ffffff #000000;
-    padding: 16px 9px 14px 11px;
+    padding: 11px 7px 9px 9px;
 }
 
 .hangman-key.disabled {
@@ -1238,14 +1271,16 @@ body {
     max-width: 500px;
     text-align: center;
     color: #000000;
+    font-family: 'Pixelify Sans';
+    font-size: 12px;
 }
 
 .hint-box strong {
     color: var(--accent);
 }
 
-/* Memory Game Styles - Atualizado */
-.game-board {
+/* Memory Game Styles */
+.memory-board {
     display: grid;
     gap: 10px;
     margin: 20px auto;
@@ -1253,7 +1288,7 @@ body {
     justify-content: center;
 }
 
-.card {
+.memory-card {
     aspect-ratio: 3/4;
     width: 80px;
     background: #c0c0c0;
@@ -1266,32 +1301,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    image-rendering: pixelated;
 }
 
-.card:hover:not(.flipped):not(.matched) {
+.memory-card:hover:not(.flipped):not(.matched) {
     background: #d4d4d4;
 }
 
-.card:active:not(.flipped):not(.matched) {
+.memory-card:active:not(.flipped):not(.matched) {
     border-color: #808080 #ffffff #ffffff #808080;
 }
 
-.card.flipped {
+.memory-card.flipped {
     background: #ffffff;
     border-color: #808080 #ffffff #ffffff #808080;
     transform: rotateY(180deg);
 }
 
-.card.matched {
-    background: #00ff00;
-    border-color: #008000 #00cc00 #00cc00 #008000;
+.memory-card.matched {
+    background: #ffcccc;
+    border-color: #800000 #ff0000 #ff0000 #800000;
     cursor: default;
     animation: matchPulse 0.6s ease-in-out;
-}
-
-@keyframes matchPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
 }
 
 .card-back, .card-front {
@@ -1302,18 +1333,19 @@ body {
     align-items: center;
     justify-content: center;
     backface-visibility: hidden;
+    font-family: 'Pixelify Sans';
 }
 
 .card-back {
     background: #c0c0c0;
     color: #000000;
-    font-size: 1.5rem;
+    font-size: 18px;
 }
 
 .card-front {
     background: #ffffff;
     color: #000000;
-    font-size: 1.8rem;
+    font-size: 21px;
     transform: rotateY(180deg);
 }
 
@@ -1321,53 +1353,24 @@ body {
     color: #000000;
 }
 
-.card.matched .card-front i {
+.memory-card.matched .card-front i {
     color: #000000;
 }
 
 /* Dificuldades específicas */
-.game-board[style*="grid-template-columns: repeat(4, 1fr)"] {
+.memory-board[style*="grid-template-columns: repeat(4, 1fr)"] {
     max-width: 400px;
 }
 
-.game-board[style*="grid-template-columns: repeat(6, 1fr)"] {
+.memory-board[style*="grid-template-columns: repeat(6, 1fr)"] {
     max-width: 600px;
 }
 
-.game-board[style*="grid-template-columns: repeat(3, 1fr)"] {
+.memory-board[style*="grid-template-columns: repeat(3, 1fr)"] {
     max-width: 300px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .card {
-        width: 60px;
-    }
-    
-    .card-back, .card-front {
-        font-size: 1.2rem;
-    }
-    
-    .game-board[style*="grid-template-columns: repeat(4, 1fr)"] {
-        max-width: 300px;
-    }
-    
-    .game-board[style*="grid-template-columns: repeat(6, 1fr)"] {
-        max-width: 400px;
-    }
-}
-
-@media (max-width: 480px) {
-    .card {
-        width: 50px;
-    }
-    
-    .card-back, .card-front {
-        font-size: 1rem;
-    }
-}
-
-/* Minesweeper Styles - COMPLETO E REVISADO */
+/* Minesweeper Styles */
 .minesweeper-board {
     display: grid;
     gap: 0;
@@ -1390,14 +1393,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 20px;
     cursor: pointer;
     color: #000000;
-    font-weight: bold;
     user-select: none;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Pixelify Sans';
     position: relative;
     transition: all 0.1s ease;
+    image-rendering: pixelated;
 }
 
 .minesweeper-cell:hover:not(.revealed):not(.flagged) {
@@ -1415,7 +1418,7 @@ body {
     background: #e0e0e0;
     border: 1px solid #808080;
     cursor: default;
-    font-weight: 900;
+    font-weight: normal;
 }
 
 .minesweeper-cell.revealed:before {
@@ -1436,7 +1439,7 @@ body {
 .minesweeper-cell.flagged i {
     color: #ff0000;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-    font-size: 0.9rem;
+    font-size: 12px;
 }
 
 .minesweeper-cell.mine {
@@ -1447,7 +1450,7 @@ body {
 .minesweeper-cell.mine i {
     color: #000000;
     text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
-    font-size: 0.9rem;
+    font-size: 12px;
 }
 
 .minesweeper-cell.mine.exploded {
@@ -1456,13 +1459,13 @@ body {
 }
 
 .minesweeper-cell.mine-correct {
-    background: #00ff00;
-    border-color: #008000 #00cc00 #00cc00 #008000;
+    background: #ffcccc;
+    border-color: #800000 #ff0000 #ff0000 #800000;
 }
 
 .minesweeper-cell.mine-wrong {
-    background: #ffff00;
-    border-color: #808000 #cccc00 #cccc00 #808000;
+    background: #ffcccc;
+    border-color: #3f3232 #8b7070 #4d3c3c #1d1818;
 }
 
 .minesweeper-cell.mine-wrong i {
@@ -1475,13 +1478,13 @@ body {
     100% { transform: scale(1); }
 }
 
-/* Número colors - Melhorados para melhor contraste */
-.minesweeper-cell.number-1 { color: #0000ff; }
-.minesweeper-cell.number-2 { color: #008000; }
+/* Número colors */
+.minesweeper-cell.number-1 { color: #ff8282; }
+.minesweeper-cell.number-2 { color: #1b1616; }
 .minesweeper-cell.number-3 { color: #ff0000; }
-.minesweeper-cell.number-4 { color: #000080; }
-.minesweeper-cell.number-5 { color: #800000; }
-.minesweeper-cell.number-6 { color: #008080; }
+.minesweeper-cell.number-4 { color: #882424; }
+.minesweeper-cell.number-5 { color: #3d0000; }
+.minesweeper-cell.number-6 { color: #2e2e2e; }
 .minesweeper-cell.number-7 { color: #000000; }
 .minesweeper-cell.number-8 { color: #808080; }
 
@@ -1498,111 +1501,46 @@ body {
     grid-template-columns: repeat(16, 1fr);
 }
 
-/* Status do jogo visual melhorado */
+/* Status do jogo */
 #game-status {
-    font-size: 1.3rem;
+    font-size: 15px;
     padding: 15px;
-    margin: 15px 0;
-    background: #ffffcc;
+    background: #ebebeb;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     text-align: center;
-    font-weight: bold;
+    font-weight: normal;
     min-height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    font-family: 'Pixelify Sans';
 }
 
 #game-status.win {
-    background: #ccffcc;
-    color: #008000;
-    border-color: #008000 #00ff00 #00ff00 #008000;
-    animation: pulse 0.5s infinite;
-}
-
-#game-status.lose {
     background: #ffcccc;
     color: #800000;
     border-color: #800000 #ff0000 #ff0000 #800000;
 }
 
+#game-status.lose {
+    background: #ffcccc;
+    color: #554444;
+    border-color: #3f3232 #8b7070 #4d3c3c #1d1818;
+}
+
 /* Melhor visibilidade para o contador de bandeiras */
 #flags-count {
-    font-weight: bold;
+    font-weight: normal;
     color: #ff0000;
 }
 
 #mines-count {
-    font-weight: bold;
+    font-weight: normal;
     color: #000000;
 }
 
-/* Efeito de pulso para vitória */
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* Responsive design melhorado */
-@media (max-width: 768px) {
-    .minesweeper-cell {
-        width: 28px;
-        height: 28px;
-        font-size: 1rem;
-    }
-    
-    .minesweeper-board {
-        padding: 6px;
-    }
-    
-    .info-item {
-        min-width: 100px;
-        padding: 6px 10px;
-        font-size: 0.9rem;
-    }
-    
-    #game-status {
-        font-size: 1.1rem;
-        padding: 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .minesweeper-cell {
-        width: 22px;
-        height: 22px;
-        font-size: 0.8rem;
-        border-width: 2px;
-    }
-    
-    .minesweeper-board {
-        padding: 4px;
-    }
-    
-    .game-info {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .info-item {
-        min-width: 140px;
-        width: 100%;
-        max-width: 200px;
-    }
-    
-    .difficulty-selector {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .difficulty-btn {
-        width: 100%;
-        max-width: 200px;
-    }
-}
 /* Pong Styles */
 .pong-info {
     display: flex;
@@ -1620,21 +1558,22 @@ body {
 }
 
 .score-label {
-    font-size: 1rem;
+    font-size: 12px;
     color: var(--secondary);
+    font-family: 'Pixelify Sans';
 }
 
 .score-value {
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: normal;
     color: var(--accent);
-    font-family: 'MS Sans Serif', monospace;
+    font-family: 'Pixelify Sans';
 }
 
 /* Snake Styles */
 .mobile-controls {
     display: none;
-    margin: 20px auto;
+    margin: 0px auto;
     max-width: 300px;
 }
 
@@ -1654,8 +1593,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 12px;
     color: #000000;
+    font-family: 'Pixelify Sans';
 }
 
 .control-btn:active {
@@ -1697,7 +1637,7 @@ body {
     .icon-image {
         width: 40px;
         height: 40px;
-        font-size: 20px;
+        font-size: 16px;
     }
     
     .window {
@@ -1710,7 +1650,7 @@ body {
     }
     
     .taskbar-clock {
-        font-size: 10px;
+        font-size: 12px;
         padding: 4px 8px;
     }
     
@@ -1724,12 +1664,12 @@ body {
     
     .cell {
         min-height: 80px;
-        font-size: 3rem;
+        font-size: 20px;
     }
     
     .letter-box {
         min-height: 50px;
-        font-size: 1.5rem;
+        font-size: 14px;
     }
     
     .hangman-canvas {
@@ -1738,7 +1678,11 @@ body {
     }
     
     .word-display {
-        font-size: 2rem;
-        letter-spacing: 10px;
+        font-size: 14px;
+        letter-spacing: 6px;
+    }
+    
+    body {
+        font-size: 12px;
     }
 }

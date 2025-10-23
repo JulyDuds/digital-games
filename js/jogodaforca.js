@@ -91,6 +91,7 @@ class HangmanGame {
         this.gameActive = true;
         this.hintUsed = false;
         this.hintBox.style.display = 'none';
+        this.hintBtn.disabled = false;
 
         // Resetar teclado
         document.querySelectorAll('.key').forEach(key => {
@@ -101,7 +102,7 @@ class HangmanGame {
         this.categoryDisplay.textContent = this.currentCategory;
         this.updateDisplay();
         this.drawHangman();
-        this.statusDisplay.textContent = 'Adivinhe a palavra!';
+        this.statusDisplay.innerHTML = '<i class="fas fa-search icon-red"></i> Adivinhe a palavra!';
     }
 
     createKeyboard() {
@@ -182,77 +183,75 @@ class HangmanGame {
         ctx.lineWidth = 4;
         ctx.lineCap = 'round';
 
-        // Base (escalado proporcionalmente de 300x300 para 400x400)
+        // Base
         ctx.beginPath();
-        ctx.moveTo(30, 370);
-        ctx.lineTo(240, 370);
+        ctx.moveTo(50, 350);
+        ctx.lineTo(200, 350);
         ctx.stroke();
 
         // Poste vertical
         ctx.beginPath();
-        ctx.moveTo(80, 370);
-        ctx.lineTo(80, 30);
+        ctx.moveTo(100, 350);
+        ctx.lineTo(100, 50);
         ctx.stroke();
 
         // Poste horizontal
         ctx.beginPath();
-        ctx.moveTo(80, 30);
-        ctx.lineTo(270, 30);
+        ctx.moveTo(100, 50);
+        ctx.lineTo(250, 50);
         ctx.stroke();
 
         // Corda
         ctx.beginPath();
-        ctx.moveTo(270, 30);
-        ctx.lineTo(270, 80);
+        ctx.moveTo(250, 50);
+        ctx.lineTo(250, 100);
         ctx.stroke();
 
         // Desenhar partes do boneco baseado nos erros
         if (this.wrongGuesses >= 1) {
             // Cabeça
-            ctx.strokeStyle = '#FD0100';
-            ctx.lineWidth = 5;
             ctx.beginPath();
-            ctx.arc(270, 115, 35, 0, Math.PI * 2);
+            ctx.arc(250, 130, 30, 0, Math.PI * 2);
             ctx.stroke();
         }
 
         if (this.wrongGuesses >= 2) {
             // Corpo
             ctx.beginPath();
-            ctx.moveTo(270, 150);
-            ctx.lineTo(270, 240);
+            ctx.moveTo(250, 160);
+            ctx.lineTo(250, 260);
             ctx.stroke();
         }
 
         if (this.wrongGuesses >= 3) {
             // Braço esquerdo
             ctx.beginPath();
-            ctx.moveTo(270, 175);
-            ctx.lineTo(220, 200);
+            ctx.moveTo(250, 180);
+            ctx.lineTo(220, 220);
             ctx.stroke();
         }
 
         if (this.wrongGuesses >= 4) {
             // Braço direito
             ctx.beginPath();
-            ctx.moveTo(270, 175);
-            ctx.lineTo(320, 200);
+            ctx.moveTo(250, 180);
+            ctx.lineTo(280, 220);
             ctx.stroke();
         }
 
         if (this.wrongGuesses >= 5) {
             // Perna esquerda
             ctx.beginPath();
-            ctx.moveTo(270, 240);
-            ctx.lineTo(230, 310);
+            ctx.moveTo(250, 260);
+            ctx.lineTo(220, 320);
             ctx.stroke();
         }
 
         if (this.wrongGuesses >= 6) {
             // Perna direita
             ctx.beginPath();
-            ctx.moveTo(270, 240);
-            ctx.lineTo(310, 310);
+            ctx.moveTo(250, 260);
+            ctx.lineTo(280, 320);
             ctx.stroke();
         }
     }
@@ -274,7 +273,7 @@ class HangmanGame {
 
         if (allLettersGuessed) {
             this.gameActive = false;
-            this.statusDisplay.textContent = '🎉 Você venceu!';
+            this.statusDisplay.innerHTML = '<i class="fas fa-trophy icon-red"></i> Você venceu!';
             this.stats.wins++;
             this.stats.games++;
             this.saveStats();
@@ -286,7 +285,7 @@ class HangmanGame {
     checkLoss() {
         if (this.wrongGuesses >= this.maxWrongGuesses) {
             this.gameActive = false;
-            this.statusDisplay.textContent = `😢 Perdeu! A palavra era: ${this.currentWord}`;
+            this.statusDisplay.innerHTML = `<i class="fas fa-skull icon-red"></i> Perdeu! A palavra era: ${this.currentWord}`;
             this.stats.games++;
             this.saveStats();
             this.updateDisplay();
@@ -370,4 +369,3 @@ class HangmanGame {
 document.addEventListener('DOMContentLoaded', () => {
     new HangmanGame();
 });
-

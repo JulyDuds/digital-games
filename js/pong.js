@@ -11,9 +11,9 @@ class PongGame {
 
         // Configurações de dificuldade
         this.difficulties = {
-            easy: { aiSpeed: 3, ballSpeed: 5 },
-            medium: { aiSpeed: 5, ballSpeed: 7 },
-            hard: { aiSpeed: 7, ballSpeed: 9 }
+            easy: { aiSpeed: 3, ballSpeed: 4, aiError: 30 },
+            medium: { aiSpeed: 5, ballSpeed: 6, aiError: 20 },
+            hard: { aiSpeed: 7, ballSpeed: 8, aiError: 10 }
         };
 
         this.currentDifficulty = 'medium';
@@ -36,17 +36,17 @@ class PongGame {
 
         // Raquetes
         this.paddleWidth = 15;
-        this.paddleHeight = 100;
-        this.paddleSpeed = 7;
+        this.paddleHeight = 80;
+        this.paddleSpeed = 8;
 
         this.player = {
-            x: 20,
+            x: 30,
             y: this.canvas.height / 2 - this.paddleHeight / 2,
             dy: 0
         };
 
         this.ai = {
-            x: this.canvas.width - 20 - this.paddleWidth,
+            x: this.canvas.width - 30 - this.paddleWidth,
             y: this.canvas.height / 2 - this.paddleHeight / 2,
             dy: 0
         };
@@ -57,7 +57,8 @@ class PongGame {
             y: this.canvas.height / 2,
             radius: 8,
             dx: 0,
-            dy: 0
+            dy: 0,
+            speed: 6
         };
 
         // Controles
@@ -128,7 +129,7 @@ class PongGame {
         
         this.startBtn.disabled = true;
         this.pauseBtn.disabled = false;
-        this.statusDisplay.textContent = 'Jogo em andamento!';
+        this.statusDisplay.innerHTML = '<i class="fas fa-running icon-red"></i> Jogo em andamento!';
 
         this.gameLoop();
     }
@@ -139,11 +140,11 @@ class PongGame {
         this.gamePaused = !this.gamePaused;
 
         if (this.gamePaused) {
-            this.statusDisplay.textContent = 'Jogo pausado';
+            this.statusDisplay.innerHTML = '<i class="fas fa-pause icon-red"></i> Jogo pausado';
             this.pauseBtn.querySelector('i').className = 'fas fa-play';
             this.pauseBtn.innerHTML = '<i class="fas fa-play"></i> Continuar';
         } else {
-            this.statusDisplay.textContent = 'Jogo em andamento!';
+            this.statusDisplay.innerHTML = '<i class="fas fa-running icon-red"></i> Jogo em andamento!';
             this.pauseBtn.querySelector('i').className = 'fas fa-pause';
             this.pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
             this.gameLoop();
@@ -155,13 +156,13 @@ class PongGame {
         
         this.ball.x = this.canvas.width / 2;
         this.ball.y = this.canvas.height / 2;
+        this.ball.speed = config.ballSpeed;
         
-        // Direção aleatória
-        const angle = (Math.random() - 0.5) * Math.PI / 3;
+        const angle = (Math.random() * Math.PI / 2) - Math.PI / 4;
         const direction = Math.random() < 0.5 ? 1 : -1;
         
-        this.ball.dx = direction * config.ballSpeed * Math.cos(angle);
-        this.ball.dy = config.ballSpeed * Math.sin(angle);
+        this.ball.dx = direction * this.ball.speed * Math.cos(angle);
+        this.ball.dy = this.ball.speed * Math.sin(angle);
     }
 
     gameLoop() {
@@ -185,15 +186,18 @@ class PongGame {
         // Limitar movimento do jogador
         this.player.y = Math.max(0, Math.min(this.canvas.height - this.paddleHeight, this.player.y));
 
-        // IA simples - seguir a bola
+        // IA melhorada
         const config = this.difficulties[this.currentDifficulty];
         const aiCenter = this.ai.y + this.paddleHeight / 2;
         const ballCenter = this.ball.y;
+        const error = (Math.random() - 0.5) * config.aiError;
 
-        if (aiCenter < ballCenter - 10) {
-            this.ai.y += config.aiSpeed;
-        } else if (aiCenter > ballCenter + 10) {
-            this.ai.y -= config.aiSpeed;
+        if (this.ball.dx > 0) {
+            if (aiCenter < ballCenter + error - 5) {
+                this.ai.y += config.aiSpeed;
+            } else if (aiCenter > ballCenter + error + 5) {
+                this.ai.y -= config.aiSpeed;
+            }
         }
 
         // Limitar movimento da IA
@@ -211,29 +215,36 @@ class PongGame {
 
         // Colisão com raquete do jogador
         if (this.ball.x - this.ball.radius < this.player.x + this.paddleWidth &&
+            this.ball.x + this.ball.radius > this.player.x &&
             this.ball.y > this.player.y &&
             this.ball.y < this.player.y + this.paddleHeight) {
-            this.ball.dx = Math.abs(this.ball.dx);
-            this.ball.x = this.player.x + this.paddleWidth + this.ball.radius;
             
-            // Adicionar efeito baseado em onde a bola acertou
             const hitPos = (this.ball.y - (this.player.y + this.paddleHeight / 2)) / (this.paddleHeight / 2);
-            this.ball.dy += hitPos * 2;
+            this.ball.dx = Math.abs(this.ball.dx);
+            this.ball.dy = hitPos * this.ball.speed;
             
+            // Aumentar velocidade gradualmente
+            this.ball.speed += 0.2;
+            this.ball.dx *= 1.05;
+            
+            this.ball.x = this.player.x + this.paddleWidth + this.ball.radius;
             this.playSound('paddle');
         }
 
         // Colisão com raquete da IA
         if (this.ball.x + this.ball.radius > this.ai.x &&
+            this.ball.x - this.ball.radius < this.ai.x + this.paddleWidth &&
             this.ball.y > this.ai.y &&
             this.ball.y < this.ai.y + this.paddleHeight) {
-            this.ball.dx = -Math.abs(this.ball.dx);
-            this.ball.x = this.ai.x - this.ball.radius;
             
-            // Adicionar efeito baseado em onde a bola acertou
             const hitPos = (this.ball.y - (this.ai.y + this.paddleHeight / 2)) / (this.paddleHeight / 2);
-            this.ball.dy += hitPos * 2;
+            this.ball.dx = -Math.abs(this.ball.dx);
+            this.ball.dy = hitPos * this.ball.speed;
             
+            this.ball.speed += 0.2;
+            this.ball.dx *= 1.05;
+            
+            this.ball.x = this.ai.x - this.ball.radius;
             this.playSound('paddle');
         }
 
@@ -261,11 +272,11 @@ class PongGame {
             this.pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
 
             if (this.playerScore > this.aiScore) {
-                this.statusDisplay.textContent = '🎉 Você venceu!';
+                this.statusDisplay.innerHTML = '<i class="fas fa-trophy icon-red"></i> Você venceu!';
                 this.stats.wins++;
                 this.playSound('win');
             } else {
-                this.statusDisplay.textContent = '😢 IA venceu!';
+                this.statusDisplay.innerHTML = '<i class="fas fa-robot icon-red"></i> IA venceu!';
                 this.playSound('lose');
             }
 
@@ -401,4 +412,3 @@ class PongGame {
 document.addEventListener('DOMContentLoaded', () => {
     new PongGame();
 });
-

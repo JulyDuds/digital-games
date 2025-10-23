@@ -222,7 +222,7 @@ class TicTacToe {
         this.gameActive = false;
 
         if (result === 'draw') {
-            this.statusDisplay.textContent = 'Empate!';
+            this.statusDisplay.innerHTML = '<i class="fas fa-handshake icon-red"></i> Empate!';
             this.stats.draws++;
             this.playSound('draw');
         } else {
@@ -238,11 +238,11 @@ class TicTacToe {
             }
 
             if (result === 'X') {
-                this.statusDisplay.textContent = 'Jogador X venceu!';
+                this.statusDisplay.innerHTML = '<i class="fas fa-trophy icon-red"></i> Jogador X venceu!';
                 this.stats.xWins++;
                 this.playSound('win');
             } else {
-                this.statusDisplay.textContent = 'Jogador O venceu!';
+                this.statusDisplay.innerHTML = '<i class="fas fa-trophy icon-red"></i> Jogador O venceu!';
                 this.stats.oWins++;
                 this.playSound('lose');
             }
@@ -264,7 +264,7 @@ class TicTacToe {
         });
 
         this.updateDisplay();
-        this.statusDisplay.textContent = this.gameMode === 'ai' ? 'Sua vez!' : 'Vez do jogador X';
+        this.statusDisplay.innerHTML = '<i class="fas fa-chess-board icon-red"></i> ' + (this.gameMode === 'ai' ? 'Sua vez!' : 'Vez do jogador X');
     }
 
     changeMode(mode) {
@@ -286,9 +286,9 @@ class TicTacToe {
         
         if (this.gameActive) {
             if (this.gameMode === 'ai') {
-                this.statusDisplay.textContent = this.currentPlayer === 'X' ? 'Sua vez!' : 'IA está pensando...';
+                this.statusDisplay.innerHTML = '<i class="fas fa-chess-board icon-red"></i> ' + (this.currentPlayer === 'X' ? 'Sua vez!' : 'IA está pensando...');
             } else {
-                this.statusDisplay.textContent = `Vez do jogador ${this.currentPlayer}`;
+                this.statusDisplay.innerHTML = '<i class="fas fa-chess-board icon-red"></i> Vez do jogador ' + this.currentPlayer;
             }
         }
 

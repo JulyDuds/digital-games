@@ -97,7 +97,7 @@ class Minesweeper {
         // Renderizar tabuleiro
         this.renderBoard();
         this.updateDisplay();
-        this.statusDisplay.textContent = 'Clique para começar!';
+        this.statusDisplay.innerHTML = '<i class="fas fa-flag icon-red"></i> Clique para começar!';
         this.statusDisplay.className = '';
     }
 
@@ -211,7 +211,7 @@ class Minesweeper {
             this.gameStarted = true;
             this.placeMines(index);
             this.startTimer();
-            this.statusDisplay.textContent = 'Jogo em andamento...';
+            this.statusDisplay.innerHTML = '<i class="fas fa-running icon-red"></i> Jogo em andamento...';
         }
 
         this.revealed[index] = true;
@@ -326,7 +326,7 @@ class Minesweeper {
         this.revealAllCells();
 
         if (won) {
-            this.statusDisplay.textContent = '🎉 Vitória! Parabéns!';
+            this.statusDisplay.innerHTML = '<i class="fas fa-trophy icon-red"></i> Vitória! Parabéns!';
             this.statusDisplay.classList.add('win');
             this.stats.wins++;
             
@@ -338,7 +338,7 @@ class Minesweeper {
             
             this.playSound('win');
         } else {
-            this.statusDisplay.textContent = '💣 Game Over! Tente novamente.';
+            this.statusDisplay.innerHTML = '<i class="fas fa-bomb icon-red"></i> Game Over! Tente novamente.';
             this.statusDisplay.classList.add('lose');
             this.playSound('lose');
         }

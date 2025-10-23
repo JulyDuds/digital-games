@@ -98,7 +98,7 @@ class MemoryGame {
         this.createCards();
         this.renderBoard();
         this.updateDisplay();
-        this.statusDisplay.textContent = 'Encontre todos os pares!';
+        this.statusDisplay.innerHTML = '<i class="fas fa-brain icon-red"></i> Encontre todos os pares!';
     }
 
     createCards() {
@@ -128,11 +128,12 @@ class MemoryGame {
         const config = this.difficulties[this.currentDifficulty];
         
         this.gameBoard.innerHTML = '';
+        this.gameBoard.className = 'memory-board';
         this.gameBoard.style.gridTemplateColumns = `repeat(${config.cols}, 1fr)`;
 
         this.cards.forEach((icon, index) => {
             const card = document.createElement('div');
-            card.className = 'card';
+            card.className = 'memory-card';
             card.dataset.index = index;
             card.dataset.icon = icon;
 
@@ -221,7 +222,7 @@ class MemoryGame {
             this.gameActive = false;
             clearInterval(this.timerInterval);
             
-            this.statusDisplay.textContent = `🎉 Você venceu em ${this.moves} jogadas!`;
+            this.statusDisplay.innerHTML = `<i class="fas fa-trophy icon-red"></i> Você venceu em ${this.moves} jogadas!`;
             
             // Atualizar melhor pontuação
             if (this.moves < this.stats.bestMoves) {

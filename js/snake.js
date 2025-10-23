@@ -106,7 +106,7 @@ class SnakeGame {
         // Atualizar UI
         this.startBtn.disabled = true;
         this.pauseBtn.disabled = false;
-        this.statusDisplay.textContent = 'Jogo em andamento!';
+        this.statusDisplay.innerHTML = '<i class="fas fa-running icon-red"></i> Jogo em andamento!';
         this.updateDisplay();
 
         // Iniciar loop do jogo
@@ -252,9 +252,9 @@ class SnakeGame {
             this.ctx.stroke();
         }
 
-        // Desenhar cobra
-        this.ctx.fillStyle = '#00ff00';
-        for (let i = 1; i < this.snake.length; i++) {
+        // Desenhar cobra 
+        this.ctx.fillStyle = '#ff0000'; 
+        for (let i = 0; i < this.snake.length; i++) {
             const segment = this.snake[i];
             this.ctx.fillRect(
                 segment.x * this.gridSize + 1, 
@@ -264,27 +264,44 @@ class SnakeGame {
             );
         }
 
-        // Desenhar cabeça (diferente)
+        // Desenhar cabeça
         const head = this.snake[0];
-        this.ctx.fillStyle = '#FD0100';
+        this.ctx.fillStyle = '#fa6a6aff'; 
         this.ctx.fillRect(
             head.x * this.gridSize + 1, 
             head.y * this.gridSize + 1, 
             this.gridSize - 2, 
             this.gridSize - 2
         );
-
-        // Desenhar comida
-        this.ctx.fillStyle = '#ffff00';
-        this.ctx.beginPath();
-        this.ctx.arc(
-            this.food.x * this.gridSize + this.gridSize / 2,
-            this.food.y * this.gridSize + this.gridSize / 2,
-            this.gridSize / 2 - 2,
-            0,
-            Math.PI * 2
+        
+        // Adicionar borda branca na cabeça
+        this.ctx.strokeStyle = '#ff4f4fff';
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeRect(
+            head.x * this.gridSize + 1, 
+            head.y * this.gridSize + 1, 
+            this.gridSize - 2, 
+            this.gridSize - 2
         );
-        this.ctx.fill();
+
+        // Desenhar comida 
+        this.ctx.fillStyle = '#c0c0c0'; // Cinza claro
+        this.ctx.fillRect(
+            this.food.x * this.gridSize + 1, 
+            this.food.y * this.gridSize + 1, 
+            this.gridSize - 2, 
+            this.gridSize - 2
+        );
+        
+        // Borda da comida
+        this.ctx.strokeStyle = '#ffffff';
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeRect(
+            this.food.x * this.gridSize + 1, 
+            this.food.y * this.gridSize + 1, 
+            this.gridSize - 2, 
+            this.gridSize - 2
+        );
     }
 
     togglePause() {
@@ -293,10 +310,10 @@ class SnakeGame {
         this.isPaused = !this.isPaused;
 
         if (this.isPaused) {
-            this.statusDisplay.textContent = 'Jogo pausado';
+            this.statusDisplay.innerHTML = '<i class="fas fa-pause icon-red"></i> Jogo pausado';
             this.pauseBtn.innerHTML = '<i class="fas fa-play"></i> Continuar';
         } else {
-            this.statusDisplay.textContent = 'Jogo em andamento!';
+            this.statusDisplay.innerHTML = '<i class="fas fa-running icon-red"></i> Jogo em andamento!';
             this.pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
         }
     }
@@ -317,7 +334,7 @@ class SnakeGame {
         }
 
         this.stats.games++;
-        this.statusDisplay.textContent = `💀 Game Over! Pontuação: ${this.score}`;
+        this.statusDisplay.innerHTML = `<i class="fas fa-skull icon-red"></i> Game Over! Pontuação: ${this.score}`;
         this.startBtn.disabled = false;
         this.pauseBtn.disabled = true;
         this.pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
@@ -383,4 +400,3 @@ class SnakeGame {
 document.addEventListener('DOMContentLoaded', () => {
     new SnakeGame();
 });
-

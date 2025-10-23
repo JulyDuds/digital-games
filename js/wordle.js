@@ -94,7 +94,7 @@ class WordleGame {
         });
 
         this.updateDisplay();
-        this.statusDisplay.textContent = 'Adivinhe a palavra de 5 letras!';
+        this.statusDisplay.innerHTML = '<i class="fas fa-font icon-red"></i> Adivinhe a palavra de 5 letras!';
         this.messageBox.style.display = 'none';
         this.updateCurrentBox();
     }
@@ -122,7 +122,7 @@ class WordleGame {
         const rows = [
             ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
             ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-            ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '←']
+            [ 'Z', 'X', 'C', 'V', 'B', 'N', 'M','ENTER', '←']
         ];
 
         this.keyboard.innerHTML = '';
@@ -197,7 +197,7 @@ class WordleGame {
 
     submitGuess() {
         if (this.currentCol !== 5) {
-            this.showMessage('Palavra incompleta!', 'error');
+            this.showMessage('<i class="fas fa-exclamation-triangle icon-red"></i> Palavra incompleta!', 'error');
             return;
         }
 
@@ -211,8 +211,8 @@ class WordleGame {
             this.stats.wins++;
             this.stats.streak++;
             this.stats.games++;
-            this.showMessage(`🎉 Parabéns! A palavra era ${this.targetWord}!`, 'success');
-            this.statusDisplay.textContent = '🎉 Você venceu!';
+            this.showMessage(`<i class="fas fa-trophy icon-red"></i> Parabéns! A palavra era ${this.targetWord}!`, 'success');
+            this.statusDisplay.innerHTML = '<i class="fas fa-trophy icon-red"></i> Você venceu!';
             this.playSound('win');
             this.saveStats();
             this.updateDisplay();
@@ -229,8 +229,8 @@ class WordleGame {
             this.gameActive = false;
             this.stats.games++;
             this.stats.streak = 0;
-            this.showMessage(`😢 A palavra era: ${this.targetWord}`, 'error');
-            this.statusDisplay.textContent = `💀 Game Over! Palavra: ${this.targetWord}`;
+            this.showMessage(`<i class="fas fa-skull icon-red"></i> A palavra era: ${this.targetWord}`, 'error');
+            this.statusDisplay.innerHTML = `<i class="fas fa-skull icon-red"></i> Game Over! Palavra: ${this.targetWord}`;
             this.playSound('lose');
             this.saveStats();
             this.updateDisplay();
@@ -320,7 +320,7 @@ class WordleGame {
     }
 
     showMessage(text, type) {
-        this.messageBox.textContent = text;
+        this.messageBox.innerHTML = text;
         this.messageBox.className = 'message-box ' + type;
         this.messageBox.style.display = 'block';
 
@@ -398,4 +398,3 @@ class WordleGame {
 document.addEventListener('DOMContentLoaded', () => {
     new WordleGame();
 });
-

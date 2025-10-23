@@ -41,8 +41,8 @@ const DDGConfig = {
             title: 'Tic-Tac-Toe',
             url: 'tictactoe.html',
             icon: 'fa-times',
-            width: 600,
-            height: 650,
+            width: 700,
+            height: 750,
             description: 'Jogo da Velha contra IA'
         },
         minesweeper: {
