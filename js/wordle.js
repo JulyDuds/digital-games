@@ -94,7 +94,7 @@ class WordleGame {
         });
 
         this.updateDisplay();
-        this.statusDisplay.innerHTML = '<i class="fas fa-font icon-red"></i> Adivinhe a palavra de 5 letras!';
+        this.statusDisplay.innerHTML = '<i class="fa-solid fa-square icon-red"></i> Adivinhe a palavra de 5 letras!';
         this.messageBox.style.display = 'none';
         this.updateCurrentBox();
     }

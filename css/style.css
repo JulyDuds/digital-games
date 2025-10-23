@@ -27,12 +27,14 @@ body {
     background: #030303;
     color: #000000;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* SEM SCROLL */
     font-size: 15px;
     image-rendering: pixelated;
     -webkit-font-smoothing: none;
     font-smoothing: none;
 }
+
+/* ===== SISTEMA COM SCROLL ===== */
 
 /* Desktop Styles */
 .desktop {
@@ -40,6 +42,7 @@ body {
     height: 100vh;
     position: relative;
     background: #CBC1C1;
+    overflow: hidden; /* SEM SCROLL */
 }
 
 .desktop-icons {
@@ -49,7 +52,7 @@ body {
     gap: 30px;
     padding: 15px;
     height: calc(100vh - 50px);
-    overflow-y: auto;
+    overflow: auto; /* COM SCROLL */
     align-content: start;
 }
 
@@ -147,7 +150,7 @@ body {
     display: flex;
     gap: 3px;
     padding: 0 3px;
-    overflow-x: auto;
+    overflow: hidden; /* SEM SCROLL */
 }
 
 .taskbar-app {
@@ -198,7 +201,7 @@ body {
     border-color: #ffffff #000000 #000000 #ffffff;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     z-index: 9999;
-    overflow: hidden;
+    overflow: auto; /* COM SCROLL */
 }
 
 .start-menu.hidden {
@@ -267,7 +270,7 @@ body {
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    overflow: hidden;
+    overflow: hidden; /* SEM SCROLL */
 }
 
 .window.maximized {
@@ -334,7 +337,7 @@ body {
 
 .window-content {
     flex: 1;
-    overflow: auto; /* Alterado de hidden para auto */
+    overflow: auto; /* COM SCROLL */
     background: #ffffff;
     position: relative;
     border: 1px solid;
@@ -424,7 +427,7 @@ body {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    overflow: auto;
+    overflow: auto; /* COM SCROLL */
     height: 100%;
     min-height: 100vh;
 }
@@ -484,6 +487,8 @@ body {
     flex-direction: column;
     padding: 20px;
     background: #c0c0c0;
+    overflow: auto; /* COM SCROLL */
+    min-height: auto;
 }
 
 .btn {
@@ -530,23 +535,112 @@ body {
     display: none !important;
 }
 
-/* Scrollbar Customization */
-::-webkit-scrollbar {
-    width: 10px;
+/* ===== SCROLLBAR WINDOWS 95 ===== */
+.window-content {
+    scrollbar-width: auto;
+    scrollbar-color: #c0c0c0 #ffffff;
 }
 
-::-webkit-scrollbar-track {
-    background: white;
+.window-content::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #B2B2B2;
-    border: 2px solid;
-    border-color: #ffffff #000000 #000000 #ffffff;
+.window-content::-webkit-scrollbar-track {
+    background: #c0c0c0;
+    border: 1px solid #808080;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #B2B2B2;
+.window-content::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 1px solid #808080;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}
+
+.window-content::-webkit-scrollbar-button:vertical:start:decrement,
+.window-content::-webkit-scrollbar-button:vertical:end:increment,
+.window-content::-webkit-scrollbar-button:horizontal:start:decrement,
+.window-content::-webkit-scrollbar-button:horizontal:end:increment {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: #c0c0c0;
+    border: 1px solid #808080;
+}
+
+.window-content::-webkit-scrollbar-button:vertical:start:decrement {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,8 8,0 16,8" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.window-content::-webkit-scrollbar-button:vertical:end:increment {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,0 8,8 16,0" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.window-content::-webkit-scrollbar-button:horizontal:start:decrement {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 0,8 8,16" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.window-content::-webkit-scrollbar-button:horizontal:end:increment {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 16,8 8,16" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Scroll para outros elementos */
+.desktop-icons::-webkit-scrollbar,
+.game-area::-webkit-scrollbar,
+.solitaire-board::-webkit-scrollbar,
+.memory-board::-webkit-scrollbar,
+.minesweeper-board::-webkit-scrollbar,
+.start-menu::-webkit-scrollbar,
+.game-board::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+.desktop-icons::-webkit-scrollbar-track,
+.game-area::-webkit-scrollbar-track,
+.solitaire-board::-webkit-scrollbar-track,
+.memory-board::-webkit-scrollbar-track,
+.minesweeper-board::-webkit-scrollbar-track,
+.start-menu::-webkit-scrollbar-track,
+.game-board::-webkit-scrollbar-track {
+    background: #c0c0c0;
+    border: 1px solid #808080;
+}
+
+.desktop-icons::-webkit-scrollbar-thumb,
+.game-area::-webkit-scrollbar-thumb,
+.solitaire-board::-webkit-scrollbar-thumb,
+.memory-board::-webkit-scrollbar-thumb,
+.minesweeper-board::-webkit-scrollbar-thumb,
+.start-menu::-webkit-scrollbar-thumb,
+.game-board::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 1px solid #808080;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+}
+
+.desktop-icons::-webkit-scrollbar-thumb:hover,
+.game-area::-webkit-scrollbar-thumb:hover,
+.solitaire-board::-webkit-scrollbar-thumb:hover,
+.memory-board::-webkit-scrollbar-thumb:hover,
+.minesweeper-board::-webkit-scrollbar-thumb:hover,
+.start-menu::-webkit-scrollbar-thumb:hover,
+.game-board::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
 }
 
 /* Animations */
@@ -565,12 +659,12 @@ body {
     animation: fadeIn 0.3s ease-out;
 }
 
-
-
 /* Common Game Styles */
 .game-board {
     margin: 20px auto;
     padding: 20px;
+    overflow: auto; /* COM SCROLL */
+    max-width: 100%;
 }
 
 .game-info {
@@ -679,12 +773,15 @@ body {
 }
 .icon-red {
     color: #ff0000;
+    margin-right: 5px;
 }
 
 /* Solitaire Styles */
 .solitaire-board {
     padding: 20px;
     min-height: 600px;
+    overflow: auto; /* COM SCROLL */
+    max-width: 100%;
 }
 
 .top-area {
@@ -1001,57 +1098,6 @@ body {
     background: #d4d4d4;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .tictactoe-board {
-        width: 280px;
-        height: 280px;
-    }
-    
-    .cell {
-        font-size: 20px;
-    }
-    
-    .score-display {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .score-item {
-        width: 100%;
-        max-width: 200px;
-    }
-    
-    #game-status {
-        font-size: 12px;
-        padding: 10px 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .tictactoe-board {
-        width: 250px;
-        height: 250px;
-        padding: 10px;
-    }
-    
-    .cell {
-        font-size: 16px;
-    }
-    
-    .current-player {
-        font-size: 12px;
-        padding: 6px 12px;
-    }
-    
-    .score-item {
-        min-width: 100px;
-        padding: 6px 10px;
-        font-size: 10px;
-    }
-}
-
 /* Wordle Styles */
 .wordle-board {
     display: grid;
@@ -1286,6 +1332,8 @@ body {
     margin: 20px auto;
     padding: 20px;
     justify-content: center;
+    overflow: auto; /* COM SCROLL */
+    max-width: 100%;
 }
 
 .memory-card {
@@ -1381,6 +1429,8 @@ body {
     border-color: #808080 #ffffff #ffffff #808080;
     width: fit-content;
     box-shadow: inset 2px 2px 0px #000000, inset -2px -2px 0px #ffffff;
+    overflow: auto; /* COM SCROLL */
+    max-width: 100%;
 }
 
 .minesweeper-cell {
@@ -1626,7 +1676,8 @@ body {
     grid-row: 3;
 }
 
-/* Responsive */
+/* ===== RESPONSIVIDADE COM SCROLL ===== */
+
 @media (max-width: 768px) {
     .desktop-icons {
         grid-template-columns: repeat(auto-fill, 80px);
@@ -1684,5 +1735,56 @@ body {
     
     body {
         font-size: 12px;
+    }
+    
+    /* COM SCROLL em mobile */
+    .container {
+        overflow: auto; /* COM SCROLL */
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .game-area {
+        padding: 10px;
+        overflow: auto; /* COM SCROLL */
+    }
+    
+    .desktop-icons {
+        grid-template-columns: repeat(auto-fill, 70px);
+        grid-auto-rows: 80px;
+        gap: 15px;
+        padding: 10px;
+    }
+    
+    /* Tabuleiros em mobile - COM SCROLL */
+    .minesweeper-board,
+    .memory-board,
+    .solitaire-board {
+        overflow: auto; /* COM SCROLL */
+        max-width: 100vw;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .tictactoe-board {
+        width: 250px;
+        height: 250px;
+        padding: 10px;
+    }
+    
+    .cell {
+        font-size: 16px;
+    }
+    
+    .current-player {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .score-item {
+        min-width: 100px;
+        padding: 6px 10px;
+        font-size: 10px;
     }
 }
