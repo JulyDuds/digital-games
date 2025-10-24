@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Detective Games - Login</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Estilos específicos para a página de login */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #008080 0%, #004040 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .login-window {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 0;
+            width: 400px;
+            max-width: 90vw;
+        }
+
+        .login-titlebar {
+            background: linear-gradient(90deg, #000080 0%, #0000ff 100%);
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #808080;
+        }
+
+        .login-titlebar .title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-titlebar .title i {
+            font-size: 14px;
+        }
+
+        .login-titlebar .close-btn {
+            background: #c0c0c0;
+            border: 1px solid #808080;
+            color: #000;
+            width: 16px;
+            height: 14px;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-titlebar .close-btn:hover {
+            background: #ff0000;
+            color: white;
+        }
+
+        .login-content {
+            padding: 20px;
+            background: #c0c0c0;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-header img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 10px;
+        }
+
+        .login-header h1 {
+            font-size: 18px;
+            color: #000080;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .login-header p {
+            font-size: 12px;
+            color: #000;
+            margin: 5px 0 0 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: #000;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 6px 8px;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            background: white;
+            font-size: 12px;
+            font-family: 'MS Sans Serif', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #000080;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 6px 20px;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            background: #c0c0c0;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'MS Sans Serif', sans-serif;
+            flex: 1;
+        }
+
+        .btn:hover {
+            background: #e0e0e0;
+        }
+
+        .btn:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .btn-primary {
+            background: #000080;
+            color: white;
+            border-color: #000080;
+        }
+
+        .btn-primary:hover {
+            background: #0000ff;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 10px;
+            color: #808080;
+        }
+
+        .error-message {
+            background: #ff0000;
+            color: white;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            border: 1px solid #800000;
+            display: none;
+        }
+
+        .success-message {
+            background: #00ff00;
+            color: #000;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            border: 1px solid #008000;
+            display: none;
+        }
+
+        /* Animação de entrada */
+        .login-window {
+            animation: loginSlideIn 0.5s ease-out;
+        }
+
+        @keyframes loginSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Efeito de digitação */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #000080;
+            white-space: nowrap;
+            animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #000080; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-window">
+            <div class="login-titlebar">
+                <div class="title">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Digital Detective Games - Login</span>
+                </div>
+                <button class="close-btn" onclick="window.close()" title="Fechar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="login-content">
+                <div class="login-header">
+                    <img src="assets/img/DigitalDetective.svg" alt="Digital Detective Games">
+                    <h1>Digital Detective Games</h1>
+                    <p>Bem-vindo ao sistema de jogos retro!</p>
+                </div>
+
+                <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
+
+                <form id="loginForm" method="POST" action="login.php">
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i> Nome de Usuário:
+                        </label>
+                        <input type="text" id="username" name="username" required 
+                               placeholder="Digite seu nome de usuário" autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i> Senha:
+                        </label>
+                        <input type="password" id="password" name="password" required 
+                               placeholder="Digite sua senha" autocomplete="current-password">
+                    </div>
+
+                    <div class="login-buttons">
+                        <button type="button" class="btn" onclick="showHelp()">
+                            <i class="fas fa-question-circle"></i> Ajuda
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Entrar
+                        </button>
+                    </div>
+                </form>
+
+                <div class="login-footer">
+                    <p>© 2024 Digital Detective Games. Todos os direitos reservados.</p>
+                    <p>Versão 1.0.0 - Sistema Windows 98 Style</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Efeitos sonoros do Windows 98
+        function playSound(frequency, duration, gain = 0.1) {
+            if (!DDGConfig.audio.enabled) return;
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(gain, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        // Configurações globais (simplificadas para login)
+        const DDGConfig = {
+            audio: {
+                enabled: true,
+                sounds: {
+                    click: { frequency: 600, duration: 0.1, gain: 0.15 },
+                    error: { frequency: 200, duration: 0.3, gain: 0.2 },
+                    success: { frequency: 800, duration: 0.4, gain: 0.25 }
+                }
+            }
+        };
+
+        // Efeitos de interação
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar efeitos sonoros aos botões
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => playSound(600, 0.1, 0.15));
+            });
+
+            // Efeito de foco nos inputs
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => playSound(400, 0.05, 0.1));
+            });
+
+            // Validação do formulário
+            const form = document.getElementById('loginForm');
+            form.addEventListener('submit', function(e) {
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+
+                if (username.length < 3) {
+                    e.preventDefault();
+                    showError('Nome de usuário deve ter pelo menos 3 caracteres');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                if (password.length < 4) {
+                    e.preventDefault();
+                    showError('Senha deve ter pelo menos 4 caracteres');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                // Sucesso - som de confirmação
+                playSound(800, 0.4, 0.25);
+            });
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function showHelp() {
+            playSound(600, 0.1, 0.15);
+            alert('Ajuda do Sistema:\n\n' +
+                  '• Nome de usuário: Digite seu nome (mínimo 3 caracteres)\n' +
+                  '• Senha: Digite sua senha (mínimo 4 caracteres)\n\n' +
+                  'Usuários padrão:\n' +
+                  '• admin / admin123\n' +
+                  '• user / user123\n' +
+                  '• guest / guest123\n\n' +
+                  'Pressione Enter para confirmar o login.');
+        }
+    </script>
+</body>
+</html>

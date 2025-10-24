@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="score">
+                <div class="wins"><i class="fas fa-trophy"></i> <span id="best-moves">∞</span></div>
+                <div class="losses"><i class="fas fa-gamepad"></i> <span id="games">0</span></div>
+            </div>
+        </header>
+
+        <main class="game-area memory-container">
+            <div class="difficulty-selector">
+                <button class="difficulty-btn" data-difficulty="easy">Fácil (4x3)</button>
+                <button class="difficulty-btn active" data-difficulty="medium">Médio (4x4)</button>
+                <button class="difficulty-btn" data-difficulty="hard">Difícil (6x4)</button>
+            </div>
+
+            <div class="game-info">
+                <div class="info-item">
+                    <i class="fas fa-hand-pointer"></i>
+                    <span>Jogadas: <span id="moves">0</span></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check-double"></i>
+                    <span>Pares: <span id="pairs">0</span> / <span id="total-pairs">0</span></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Tempo: <span id="timer">0</span>s</span>
+                </div>
+            </div>
+
+            <div class="game-status" id="game-status">
+                <i class="fas fa-brain icon-red"></i> Encontre todos os pares!
+            </div>
+
+            <div class="game-board" id="game-board"></div>
+
+            <div class="controls">
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-sync-alt"></i> Novo Jogo
+                </button>
+                <button class="btn" id="sound-btn">
+                    <i class="fas fa-volume-up"></i> Som
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="../assets/js/footer.js"></script>
+    <script src="../assets/js/memory.js"></script>
+</body>
+</html>

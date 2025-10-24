@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="score">
+                <div class="wins"><i class="fas fa-trophy"></i> <span id="wins">0</span></div>
+                <div class="losses"><i class="fas fa-gamepad"></i> <span id="games">0</span></div>
+            </div>
+        </header>
+
+        <main class="game-area tictactoe-container">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="ai">vs IA</button>
+                <button class="mode-btn" data-mode="player">2 Jogadores</button>
+            </div>
+
+            <div class="game-info">
+                <div class="current-player">
+                    Jogador Atual: <span id="current-player">X</span>
+                </div>
+                <div class="game-status" id="game-status">
+                    <i class="fas fa-chess-board icon-red"></i> Faça sua jogada!
+                </div>
+            </div>
+
+            <div class="tictactoe-board" id="game-board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+
+            <div class="score-display">
+                <div class="score-item score-x">
+                    <i class="fas fa-times"></i>
+                    <span>X: <span id="score-x">0</span></span>
+                </div>
+                <div class="score-item score-draw">
+                    <i class="fas fa-equals"></i>
+                    <span>Empates: <span id="score-draw">0</span></span>
+                </div>
+                <div class="score-item score-o">
+                    <i class="fas fa-circle"></i>
+                    <span>O: <span id="score-o">0</span></span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-sync-alt"></i> Reiniciar
+                </button>
+                <button class="btn" id="sound-btn">
+                    <i class="fas fa-volume-up"></i> Som
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="../assets/js/footer.js"></script>
+    <script src="../assets/js/tictactoe.js"></script>
+</body>
+</html>

@@ -1,139 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt-PT">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Detective Games</title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="desktop">
-        <div class="desktop-icons">
-            <div class="desktop-icon" data-game="tictactoe">
-                <div class="icon-image">
-                    <img src="img/tictactoe.png" alt="Tic-Tac-Toe Game" style="width: 40px; height: 40x;">
-                </div>
-                <div class="icon-label">Tic-Tac-Toe</div>
-            </div>
-            
-            <div class="desktop-icon" data-game="minesweeper">
-                <div class="icon-image">
-                    <img src="img/minesweeper.png" alt="Memory Game" style="width: 40px; height: 40x;">
-                </div>
-                <div class="icon-label">Campo Minado</div>
-            </div>
-            
-            <div class="desktop-icon" data-game="jogodaforca">
-                <div class="icon-image">
-                    <img src="img/forca.png" alt="Jogo da Forca" style="width: 40px; height: 40x;">
-                </div>
-                <div class="icon-label">Jogo da Forca</div>
-            </div>
-            
-            <div class="desktop-icon" data-game="pong">
-                <div class="icon-image">
-                    <img src="img/pingpong.png" alt="Pong" style="width: 48px; height: 48px;">
-                </div>
-                <div class="icon-label">Pong</div>
-            </div>
-            
-            <div class="desktop-icon" data-game="memory">
-                <div class="icon-image">
-                    <img src="img/memory.png" alt="Memory Game" style="width: 40px; height: 40x;">
-                </div>
-                <div class="icon-label">Memory Game</div>
-            </div>
-            
-            <div class="desktop-icon" data-game="snake">
-                <div class="icon-image">
-                    <img src="img/snake.png" alt="Snake Game" style="width: 40px; height: 40x;">
-                </div>
-                <div class="icon-label">Snake</div>
-            </div>
-            
-            <div class="desktop-icon" data-game="wordle">
-                <div class="icon-image">
-                    <img src="img/wordle.png" alt="Wordle Game" style="width: 40px; height: 40x;">
-                </div>
-                <div class="icon-label">Wordle</div>
-            </div>
-            
-            <div class="desktop-icon" data-game="solitaire">
-                <div class="icon-image">
-                    <img src="img/solitaire.png" alt="Solitaire Game" style="width: 40px; height: 40x;">
-                </div>
-                <div class="icon-label">Paciência</div>
-            </div>
-        </div>
-        
-        <!-- Start Menu -->
-        <div class="start-menu hidden" id="start-menu">
-            <div class="start-menu-header">
-                
-            </div>
-            <div class="start-menu-items">
-                <div class="start-menu-item" data-action="about">
-                    <i class="fas fa-info-circle"></i>
-                    <span>Sobre</span>
-                </div>
-                <div class="start-menu-item" data-action="demo">
-                    <i class="fas fa-tv"></i>
-                    <span>Demonstração</span>
-                </div>
-                <div class="start-menu-separator"></div>
-                <div class="start-menu-item" data-action="help">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Ajuda</span>
-                </div>
-                <div class="start-menu-item" data-action="reset">
-                    <i class="fas fa-redo"></i>
-                    <span>Resetar Estatísticas</span>
-                </div>
-            </div>
-        </div>
+<?php
+/**
+ * Redirecionamento Principal - Digital Detective Games
+ * Redireciona usuários não autenticados para o login
+ */
 
-        <!-- Barra de Tarefas -->
-        <div class="taskbar">
-            <div class="start-button" id="start-button">
-                
-                <span>Menu</span>
-            </div>
-            <div class="taskbar-apps" id="taskbar-apps"></div>
-            <div class="taskbar-clock">
-                <span id="clock"></span>
-            </div>
-        </div>
-    </div>
+require_once 'config.php';
 
-    <!-- Template de Janela Modal -->
-    <template id="window-template">
-        <div class="window">
-            <div class="window-titlebar">
-                <span class="window-title"></span>
-                <div class="window-controls">
-                    <button class="window-btn minimize-btn"><i class="fas fa-window-minimize"></i></button>
-                    <button class="window-btn maximize-btn"><i class="fas fa-window-maximize"></i></button>
-                    <button class="window-btn close-btn"><i class="fas fa-times"></i></button>
-                </div>
-            </div>
-            <div class="window-content">
-                <iframe></iframe>
-            </div>
-            <div class="resize-handle resize-n"></div>
-            <div class="resize-handle resize-s"></div>
-            <div class="resize-handle resize-e"></div>
-            <div class="resize-handle resize-w"></div>
-            <div class="resize-handle resize-ne"></div>
-            <div class="resize-handle resize-nw"></div>
-            <div class="resize-handle resize-se"></div>
-            <div class="resize-handle resize-sw"></div>
-        </div>
-    </template>
+// Se o usuário não estiver logado, redirecionar para login
+if (!isLoggedIn()) {
+    header('Location: login.html');
+    exit;
+}
 
-    <script src="js/footer.js"></script>
-    <script src="js/windows.js"></script>
-</body>
-</html>
-
+// Se estiver logado, redirecionar para o sistema principal
+header('Location: index.php');
+exit;
+?>

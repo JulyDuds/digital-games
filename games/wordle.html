@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle | Digital Detective Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="score">
+                <div class="wins"><i class="fas fa-trophy"></i> <span id="wins">0</span></div>
+                <div class="losses"><i class="fas fa-gamepad"></i> <span id="games">0</span></div>
+            </div>
+        </header>
+
+        <main class="game-area wordle-container">
+            <div class="game-info">
+                <div class="info-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Tentativa: <span id="current-row">1</span>/6</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Sequência: <span id="streak">0</span></span>
+                </div>
+            </div>
+
+            <div class="game-status" id="game-status">
+                Adivinhe a palavra de 5 letras!
+            </div>
+
+            <div class="message-box" id="message-box" style="display: none;"></div>
+
+            <div class="wordle-board" id="wordle-board"></div>
+
+            <div class="keyboard" id="keyboard"></div>
+
+            <div class="controls">
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-sync-alt"></i> Nova Palavra
+                </button>
+                <button class="btn" id="sound-btn">
+                    <i class="fas fa-volume-up"></i> Som
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="../assets/js/footer.js"></script>
+    <script src="../assets/js/wordle.js"></script>
+</body>
+</html>
+

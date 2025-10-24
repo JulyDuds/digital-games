@@ -1,0 +1,42 @@
+# Digital Detective Games - Configuração Apache Simplificada
+# Arquivo .htaccess compatível com XAMPP
+
+# Habilitar rewrite engine
+RewriteEngine On
+
+# Proteger arquivos sensíveis
+<Files "config.php">
+    Require all denied
+</Files>
+
+<Files "includes.php">
+    Require all denied
+</Files>
+
+# Proteger pastas de logs e dados
+RewriteRule ^logs/ - [F,L]
+RewriteRule ^data/ - [F,L]
+
+# Proteger arquivos de configuração
+<FilesMatch "\.(log|json|txt)$">
+    Require all denied
+</FilesMatch>
+
+# Página de erro personalizada
+ErrorDocument 404 /digital-games/admin/404.php
+ErrorDocument 403 /digital-games/admin/403.php
+ErrorDocument 500 /digital-games/admin/500.php
+
+# Redirecionamentos amigáveis
+RewriteRule ^login$ login.html [L]
+RewriteRule ^logout$ logout.php [L]
+
+# Proteger contra hotlinking de imagens
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?localhost [NC]
+RewriteRule \.(jpg|jpeg|png|gif|svg)$ - [F]
+
+# Configurações de sessão PHP
+php_value session.cookie_httponly 1
+php_value session.cookie_secure 0
+php_value session.use_strict_mode 1

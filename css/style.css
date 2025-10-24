@@ -25,7 +25,7 @@
 
 body {
     font-family: 'Pixelify Sans', 'MS Sans Serif', 'Microsoft Sans Serif';
-    background: #030303;
+    background: #ffffff;
     color: #000000;
     min-height: 100vh;
     max-height: 100vh; /* Limita altura para evitar scroll do body */
@@ -344,6 +344,9 @@ body {
     position: relative;
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
+    overflow: auto;
+    max-height: calc(100% - 30px);
+    height: calc(100% - 30px);
 }
 
 .window-content iframe {
@@ -351,6 +354,9 @@ body {
     height: 100%;
     border: none;
     background: #ffffff;
+    min-height: 100%;
+    display: block;
+    overflow: hidden;
 }
 
 /* Resize Handles */
@@ -429,7 +435,12 @@ body {
     width: 100%;
     max-width: 100%;
     margin: 0;
-   
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -487,6 +498,10 @@ body {
     flex-direction: column;
     padding: 20px;
     background: #c0c0c0;
+    min-height: 0;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
 }
 
 .btn {
@@ -526,6 +541,8 @@ body {
     border-color: #ffffff #000000 #000000 #ffffff;
     color: #000000;
     font-family: 'Pixelify Sans';
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 /* Utility Classes */
@@ -608,7 +625,13 @@ body {
 .hangman-keyboard::-webkit-scrollbar,
 .pong-container::-webkit-scrollbar,
 .memory-container::-webkit-scrollbar,
-.wordle-container::-webkit-scrollbar {
+.wordle-container::-webkit-scrollbar,
+.snake-container::-webkit-scrollbar,
+.tictactoe-container::-webkit-scrollbar,
+.minesweeper-container::-webkit-scrollbar,
+.hangman-container::-webkit-scrollbar,
+.solitaire-container::-webkit-scrollbar,
+.window-content::-webkit-scrollbar {
     width: 16px;
     height: 16px;
 }
@@ -625,7 +648,13 @@ body {
 .hangman-keyboard::-webkit-scrollbar-track,
 .pong-container::-webkit-scrollbar-track,
 .memory-container::-webkit-scrollbar-track,
-.wordle-container::-webkit-scrollbar-track {
+.wordle-container::-webkit-scrollbar-track,
+.snake-container::-webkit-scrollbar-track,
+.tictactoe-container::-webkit-scrollbar-track,
+.minesweeper-container::-webkit-scrollbar-track,
+.hangman-container::-webkit-scrollbar-track,
+.solitaire-container::-webkit-scrollbar-track,
+.window-content::-webkit-scrollbar-track {
     background: #c0c0c0;
     border: 1px solid #808080;
 }
@@ -642,7 +671,13 @@ body {
 .hangman-keyboard::-webkit-scrollbar-thumb,
 .pong-container::-webkit-scrollbar-thumb,
 .memory-container::-webkit-scrollbar-thumb,
-.wordle-container::-webkit-scrollbar-thumb {
+.wordle-container::-webkit-scrollbar-thumb,
+.snake-container::-webkit-scrollbar-thumb,
+.tictactoe-container::-webkit-scrollbar-thumb,
+.minesweeper-container::-webkit-scrollbar-thumb,
+.hangman-container::-webkit-scrollbar-thumb,
+.solitaire-container::-webkit-scrollbar-thumb,
+.window-content::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border: 1px solid #808080;
     border-top: 1px solid #ffffff;
@@ -661,7 +696,13 @@ body {
 .hangman-keyboard::-webkit-scrollbar-thumb:hover,
 .pong-container::-webkit-scrollbar-thumb:hover,
 .memory-container::-webkit-scrollbar-thumb:hover,
-.wordle-container::-webkit-scrollbar-thumb:hover {
+.wordle-container::-webkit-scrollbar-thumb:hover,
+.snake-container::-webkit-scrollbar-thumb:hover,
+.tictactoe-container::-webkit-scrollbar-thumb:hover,
+.minesweeper-container::-webkit-scrollbar-thumb:hover,
+.hangman-container::-webkit-scrollbar-thumb:hover,
+.solitaire-container::-webkit-scrollbar-thumb:hover,
+.window-content::-webkit-scrollbar-thumb:hover {
     background: #a0a0a0;
 }
 
@@ -798,6 +839,13 @@ body {
 }
 
 /* Solitaire Styles */
+.solitaire-container {
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
+}
 .solitaire-board {
     padding: 20px;
     min-height: 600px;
@@ -956,6 +1004,13 @@ body {
 }
 
 /* Tic-Tac-Toe Styles */
+.tictactoe-container {
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
+}
 .tictactoe-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1122,9 +1177,11 @@ body {
 
 /* Wordle Styles */
 .wordle-container {
-    overflow: auto;
-    max-height: 80vh;
-    padding: 20px;
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
 }
 
 .wordle-board {
@@ -1269,6 +1326,13 @@ body {
 }
 
 /* Hangman Styles */
+.hangman-container {
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
+}
 .hangman-canvas {
     width: 200px;
     height: 200px;
@@ -1359,9 +1423,11 @@ body {
 
 /* Memory Game Styles */
 .memory-container {
-    overflow: auto;
-    max-height: 80vh;
-    padding: 20px;
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
 }
 
 .memory-board {
@@ -1456,6 +1522,13 @@ body {
 }
 
 /* Minesweeper Styles */
+.minesweeper-container {
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
+}
 .minesweeper-board {
     display: grid;
     gap: 0;
@@ -1629,9 +1702,11 @@ body {
 
 /* Pong Styles */
 .pong-container {
-    overflow: auto;
-    max-height: 80vh;
-    padding: 20px;
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
 }
 
 .pong-info {
@@ -1663,6 +1738,13 @@ body {
 }
 
 /* Snake Styles */
+.snake-container {
+    overflow: auto !important;
+    max-height: 100vh !important;
+    padding: 20px !important;
+    height: 100% !important;
+    min-height: 100% !important;
+}
 .mobile-controls {
     display: none;
     margin: 0px auto;
@@ -1880,7 +1962,12 @@ footer::-webkit-scrollbar {
 .hangman-keyboard,
 .pong-container,
 .memory-container,
-.wordle-container {
+.wordle-container,
+.snake-container,
+.tictactoe-container,
+.minesweeper-container,
+.hangman-container,
+.solitaire-container {
     scrollbar-width: auto !important;
     -ms-overflow-style: auto !important;
 }
@@ -1895,7 +1982,12 @@ footer::-webkit-scrollbar {
 .hangman-keyboard::-webkit-scrollbar,
 .pong-container::-webkit-scrollbar,
 .memory-container::-webkit-scrollbar,
-.wordle-container::-webkit-scrollbar {
+.wordle-container::-webkit-scrollbar,
+.snake-container::-webkit-scrollbar,
+.tictactoe-container::-webkit-scrollbar,
+.minesweeper-container::-webkit-scrollbar,
+.hangman-container::-webkit-scrollbar,
+.solitaire-container::-webkit-scrollbar {
     display: block !important;
     width: 16px !important;
     height: 16px !important;
