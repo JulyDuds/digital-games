@@ -175,7 +175,8 @@ function renderWelcomeMessage() {
                 <i class="fas fa-check-circle"></i>
                 <h3>Login realizado com sucesso!</h3>
                 <p>Bem-vindo de volta, <?php echo htmlspecialchars($user['name']); ?>!</p>
-                <button onclick="closeWelcome()" class="btn btn-primary">Continuar</button>
+                <br>
+                <center><button onclick="closeWelcome()" class="btn btn-primary">Continuar</button></center>
             </div>
         </div>
         <style>
@@ -203,16 +204,20 @@ function renderWelcomeMessage() {
             }
             .welcome-content i {
                 font-size: 48px;
-                color: #00ff00;
+                color: #FD0100;
                 margin-bottom: 15px;
             }
             .welcome-content h3 {
-                color: #000080;
+                color: #FD0100;
                 margin-bottom: 10px;
+
             }
             @keyframes slideIn {
                 from { transform: scale(0.8); opacity: 0; }
                 to { transform: scale(1); opacity: 1; }
+            }
+            .btn btn-primary {
+                margin-top: 10px;
             }
         </style>
         <script>

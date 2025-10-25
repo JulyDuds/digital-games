@@ -188,7 +188,6 @@ JOGOS DISPONÍVEIS:
 ATALHOS:
 • F1: Ajuda
 • F5: Atualizar página
-• Ctrl+R: Resetar estatísticas
 • Alt+F4: Fechar janela ativa
 
 Para mais informações, consulte o menu Sobre.
