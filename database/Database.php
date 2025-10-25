@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de Conexão com Banco de Dados - Digital Detective Games
+ * Classe de Conexão com Banco de Dados - DigitalGames
  * Gerencia conexões MySQL e operações do banco
  */
 

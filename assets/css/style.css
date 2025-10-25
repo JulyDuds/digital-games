@@ -437,11 +437,13 @@ body {
     max-width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
 
 .header {
     background: #c0c0c0;
@@ -549,28 +551,29 @@ body {
 }
 
 /* ===== SCROLLBAR WINDOWS 95 ===== */
+.container::-webkit-scrollbar-thumb,
 .window-content {
     scrollbar-width: auto;
     scrollbar-color: #c0c0c0 #ffffff;
 }
-
+.container::-webkit-scrollbar-thumb,
 .window-content::-webkit-scrollbar {
     width: 16px;
     height: 16px;
 }
-
+.container::-webkit-scrollbar-thumb,
 .window-content::-webkit-scrollbar-track {
     background: #c0c0c0;
     border: 1px solid #808080;
 }
-
+.container::-webkit-scrollbar-thumb,
 .window-content::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border: 1px solid #808080;
     border-top: 1px solid #ffffff;
     border-left: 1px solid #ffffff;
 }
-
+.container::-webkit-scrollbar-thumb,
 .window-content::-webkit-scrollbar-thumb:hover {
     background: #a0a0a0;
 }
@@ -621,7 +624,6 @@ body {
 .wordle-board::-webkit-scrollbar,
 .keyboard::-webkit-scrollbar,
 .hangman-keyboard::-webkit-scrollbar,
-.pong-container::-webkit-scrollbar,
 .memory-container::-webkit-scrollbar,
 .wordle-container::-webkit-scrollbar,
 .snake-container::-webkit-scrollbar,
@@ -644,7 +646,6 @@ body {
 .wordle-board::-webkit-scrollbar-track,
 .keyboard::-webkit-scrollbar-track,
 .hangman-keyboard::-webkit-scrollbar-track,
-.pong-container::-webkit-scrollbar-track,
 .memory-container::-webkit-scrollbar-track,
 .wordle-container::-webkit-scrollbar-track,
 .snake-container::-webkit-scrollbar-track,
@@ -667,7 +668,6 @@ body {
 .wordle-board::-webkit-scrollbar-thumb,
 .keyboard::-webkit-scrollbar-thumb,
 .hangman-keyboard::-webkit-scrollbar-thumb,
-.pong-container::-webkit-scrollbar-thumb,
 .memory-container::-webkit-scrollbar-thumb,
 .wordle-container::-webkit-scrollbar-thumb,
 .snake-container::-webkit-scrollbar-thumb,
@@ -692,7 +692,6 @@ body {
 .wordle-board::-webkit-scrollbar-thumb:hover,
 .keyboard::-webkit-scrollbar-thumb:hover,
 .hangman-keyboard::-webkit-scrollbar-thumb:hover,
-.pong-container::-webkit-scrollbar-thumb:hover,
 .memory-container::-webkit-scrollbar-thumb:hover,
 .wordle-container::-webkit-scrollbar-thumb:hover,
 .snake-container::-webkit-scrollbar-thumb:hover,
@@ -1695,10 +1694,19 @@ body {
 
 /* Pong Styles */
 .pong-container {
-    overflow: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     max-height: 100vh !important;
     padding: 20px !important;
     height: 100vh !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+.pong-container::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 .pong-info {
@@ -1914,6 +1922,12 @@ html, body, .desktop, .container, .window {
     -ms-overflow-style: none !important;
 }
 
+/* Container precisa ter scroll funcional mas invisível */
+.container {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
 /* EXCEÇÃO PARA PÁGINA DEMO */
 .demo-page html,
 .demo-page body {
@@ -1968,7 +1982,6 @@ footer::-webkit-scrollbar {
 .wordle-board,
 .keyboard,
 .hangman-keyboard,
-.pong-container,
 .memory-container,
 .wordle-container,
 .snake-container,
@@ -1976,7 +1989,7 @@ footer::-webkit-scrollbar {
 .minesweeper-container,
 .hangman-container,
 .solitaire-container {
-    scrollbar-width: auto !important;
+    scrollbar-width: thin !important;
     -ms-overflow-style: auto !important;
 }
 
@@ -1988,7 +2001,6 @@ footer::-webkit-scrollbar {
 .wordle-board::-webkit-scrollbar,
 .keyboard::-webkit-scrollbar,
 .hangman-keyboard::-webkit-scrollbar,
-.pong-container::-webkit-scrollbar,
 .memory-container::-webkit-scrollbar,
 .wordle-container::-webkit-scrollbar,
 .snake-container::-webkit-scrollbar,
@@ -2020,30 +2032,30 @@ footer::-webkit-scrollbar {
     scroll-behavior: smooth;
 }
 
-/* Scrollbar personalizada para demo */
+/* Scrollbar personalizada para demo - CINZA */
 .demo-page ::-webkit-scrollbar {
     width: 12px;
 }
 
 .demo-page ::-webkit-scrollbar-track {
-    background: #1a1a1a;
-    border-radius: 6px;
+    background: #c0c0c0;
+    border-radius: 0;
 }
 
 .demo-page ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #FD0100 0%, #ff8080 100%);
-    border-radius: 6px;
-    border: 2px solid #1a1a1a;
+    background: #808080;
+    border-radius: 0;
+    border: 1px solid #000000;
 }
 
 .demo-page ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #ff8080 0%, #FD0100 100%);
+    background: #909090;
 }
 
 /* Para Firefox */
 .demo-page html {
     scrollbar-width: thin;
-    scrollbar-color: #FD0100 #1a1a1a;
+    scrollbar-color: #808080 #c0c0c0;
 }
 
 /* Indicador de scroll */
@@ -2059,7 +2071,7 @@ footer::-webkit-scrollbar {
 
 .scroll-progress {
     height: 100%;
-    background: linear-gradient(90deg, #FD0100 0%, #ff8080 50%, #FD0100 100%);
+    background: linear-gradient(90deg, #808080 0%, #909090 50%, #808080 100%);
     width: 0%;
     transition: width 0.1s ease;
 }
@@ -2195,4 +2207,198 @@ footer::-webkit-scrollbar {
     overflow-x: hidden !important;
     height: auto !important;
     max-height: none !important;
+}
+
+/* ============================================
+   ESTILOS DA PÁGINA ABOUT
+   ============================================ */
+
+/* Scrollbar customizada global - CINZA */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #808080 #c0c0c0;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c0c0c0;
+    border-left: 1px solid #808080;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #808080;
+    border-radius: 0;
+    border: 1px solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #909090;
+}
+
+/* Estilos específicos para página About */
+html.about-page {
+    scroll-behavior: smooth;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    height: 100% !important;
+    max-height: none !important;
+}
+
+body.about-page {
+    background: linear-gradient(135deg, var(--primary), var(--dark)) !important;
+    background-attachment: fixed;
+    min-height: 100vh !important;
+    max-height: none !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 20px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    margin: 0;
+    position: static !important;
+}
+
+/* Desabilitar estilos do desktop na página About */
+body.about-page .desktop {
+    display: none !important;
+}
+
+.about-container {
+    max-width: 1000px;
+    width: 100%;
+    background: rgba(36, 36, 36, 0.95);
+    border: 2px solid var(--accent);
+    border-radius: 15px;
+    padding: 40px;
+    margin: 20px auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow: visible;
+    position: relative;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.about-logo {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-family: 'Fira Code', monospace;
+}
+
+.about-version {
+    color: var(--secondary);
+    font-size: 1.2rem;
+}
+
+.about-section {
+    margin: 30px 0;
+    padding: 25px;
+    background: var(--dark);
+    border-left: 5px solid var(--accent);
+    border-radius: 8px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: var(--light);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--accent);
+}
+
+.section-content {
+    color: var(--light);
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+.tech-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.tech-item {
+    background: var(--primary);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.tech-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.tech-item i {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.back-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.credits {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid var(--secondary);
+    text-align: center;
+    color: var(--light);
+}
+
+.credits p {
+    margin: 10px 0;
+    opacity: 0.8;
+}
+
+.highlight {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Responsivo para About */
+@media (max-width: 768px) {
+    .about-container {
+        padding: 20px;
+    }
+    
+    body.about-page {
+        padding: 10px;
+    }
+    
+    .about-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Configurações Globais - Digital Detective Games
+ * Configurações Globais - DigitalGames
  * Arquivo de configuração centralizado para o sistema PHP
  */
 
@@ -15,9 +15,9 @@ define('DB_NAME', 'digital_detective_games');
 define('DB_CHARSET', 'utf8mb4');
 
 // Configurações do sistema
-define('SYSTEM_NAME', 'Digital Detective Games');
+define('SYSTEM_NAME', 'DigitalGames');
 define('VERSION', '1.0.0');
-define('AUTHOR', 'Digital Detective Team');
+define('AUTHOR', 'DigitalGames Team');
 define('YEAR', date('Y'));
 
 // Configurações de sessão

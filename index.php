@@ -32,7 +32,7 @@ try {
 logActivity('page_access', 'index.php');
 
 // Incluir header
-includeHeader('Digital Detective Games');
+includeHeader('DigitalGames');
 ?>
 
 <div class="desktop">
@@ -167,7 +167,7 @@ function showStats() {
 // Função para mostrar ajuda
 function showHelp() {
     const help = `
-Digital Detective Games - Ajuda
+DigitalGames - Ajuda
 
 CONTROLES:
 • Clique duplo nos ícones para abrir jogos
@@ -223,34 +223,8 @@ function showAdmin() {
 
 // Event listeners para o menu inicial
 document.addEventListener('DOMContentLoaded', function() {
-    // Configurar ações do menu
-    const menuItems = document.querySelectorAll('.start-menu-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const action = this.dataset.action;
-            
-            switch(action) {
-                case 'about':
-                    showSystemInfo();
-                    break;
-                case 'demo':
-                    showDemo();
-                    break;
-                case 'stats':
-                    showStats();
-                    break;
-                case 'help':
-                    showHelp();
-                    break;
-                case 'admin':
-                    showAdmin();
-                    break;
-                case 'reset':
-                    resetStats();
-                    break;
-            }
-        });
-    });
+    // Nota: Os event listeners do menu são configurados no windows.js
+    // para evitar duplicação de código
 
     // Atalhos de teclado
     document.addEventListener('keydown', function(e) {
@@ -277,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isFirstVisit) {
         DDGConfig.utils.save('visited', true);
         setTimeout(() => {
-            alert('Bem-vindo ao Digital Detective Games!\n\nClique duplo nos ícones para jogar.\nUse o menu para mais opções.\n\nDivirta-se!');
+            alert('Bem-vindo ao DigitalGames!\n\nClique duplo nos ícones para jogar.\nUse o menu para mais opções.\n\nDivirta-se!');
         }, 1000);
     }
 });

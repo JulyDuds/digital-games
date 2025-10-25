@@ -1,5 +1,5 @@
 /**
- * Minesweeper Game - Digital Detective Games
+ * Minesweeper Game - DigitalGames
  * Campo Minado clássico com diferentes níveis de dificuldade
  */
 

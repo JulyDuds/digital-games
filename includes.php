@@ -1,6 +1,6 @@
 <?php
 /**
- * Includes e Componentes - Digital Detective Games
+ * Includes e Componentes - DigitalGames
  * Componentes reutilizáveis para o sistema
  */
 
@@ -81,7 +81,7 @@ function renderStartMenu() {
         </div>
         <div class="start-menu-items">
             <?php if (isLoggedIn()): ?>
-                <div class="start-menu-item" onclick="window.location.href='profile.php'">
+                <div class="start-menu-item" data-action="profile">
                     <i class="fas fa-user-circle"></i>
                     <span>Meu Perfil</span>
                 </div>

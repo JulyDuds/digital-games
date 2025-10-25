@@ -1,5 +1,5 @@
 /**
- * Pong Game - Digital Detective Games
+ * Pong Game - DigitalGames
  * Jogo clássico Pong com IA e diferentes níveis de dificuldade
  */
 

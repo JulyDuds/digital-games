@@ -1,4 +1,4 @@
-// Gerenciador de Janelas - Digital Detective Games
+// Gerenciador de Janelas - DigitalGames
 class WindowManager {
     constructor() {
         this.windows = new Map();
@@ -47,15 +47,27 @@ class WindowManager {
     }
 
     handleMenuAction(action) {
+        console.log('Menu action:', action); // Debug
+        
         switch(action) {
+            case 'profile':
+                window.location.href = 'profile.php';
+                break;
             case 'about':
+                console.log('Opening about page: about.html');
                 window.open('about.html', '_blank');
                 break;
             case 'demo':
                 window.open('demo.html', '_blank');
                 break;
+            case 'stats':
+                window.location.href = 'profile.php';
+                break;
             case 'help':
                 window.open('INSTALL.md', '_blank');
+                break;
+            case 'admin':
+                window.location.href = 'admin/diagnostico.php';
                 break;
             case 'reset':
                 if (confirm('Tem certeza que deseja resetar todas as estatísticas? Esta ação não pode ser desfeita.')) {

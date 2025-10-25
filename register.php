@@ -1,6 +1,6 @@
 <?php
 /**
- * Sistema de Registro - Digital Detective Games
+ * Sistema de Registro - DigitalGames
  * Processa registro de novos usuários
  */
 

@@ -1,11 +1,11 @@
 /**
- * Configurações Globais - Digital Detective Games
+ * Configurações Globais - DigitalGames
  * Centralize todas as configurações do projeto aqui
  */
 
 const DDGConfig = {
     // Informações do projeto
-    projectName: 'Digital Detective Games',
+    projectName: 'DigitalGames',
     version: '1.0.0',
     year: new Date().getFullYear(),
 

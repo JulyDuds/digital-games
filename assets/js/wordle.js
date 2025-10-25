@@ -1,5 +1,5 @@
 /**
- * Wordle Game - Digital Detective Games
+ * Wordle Game - DigitalGames
  * Jogo de adivinhar palavras de 5 letras
  */
 

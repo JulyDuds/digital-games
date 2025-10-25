@@ -1,6 +1,6 @@
 <?php
 /**
- * API para Obter Estatísticas - Digital Detective Games
+ * API para Obter Estatísticas - DigitalGames
  * Endpoint para obter estatísticas dos jogos do banco de dados
  */
 

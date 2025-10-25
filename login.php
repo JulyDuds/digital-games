@@ -1,6 +1,6 @@
 <?php
 /**
- * Sistema de Login - Digital Detective Games
+ * Sistema de Login - DigitalGames
  * Processa autenticação de usuários no estilo Windows 98
  */
 

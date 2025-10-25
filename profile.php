@@ -1,6 +1,6 @@
 <?php
 /**
- * Página de Perfil - Digital Detective Games
+ * Página de Perfil - DigitalGames
  * Exibe estatísticas e informações do usuário
  */
 

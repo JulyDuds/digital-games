@@ -1,5 +1,5 @@
 /**
- * Memory Game - Digital Detective Games
+ * Memory Game - DigitalGames
  * Jogo da memória com diferentes níveis de dificuldade
  */
 

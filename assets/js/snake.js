@@ -1,5 +1,5 @@
 /**
- * Snake Game - Digital Detective Games
+ * Snake Game - DigitalGames
  * Jogo clássico da cobrinha
  */
 

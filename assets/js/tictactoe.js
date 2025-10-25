@@ -1,5 +1,5 @@
 /**
- * Tic-Tac-Toe Game - Digital Detective Games
+ * Tic-Tac-Toe Game - DigitalGames
  * Jogo da Velha com IA acessível
  */
 

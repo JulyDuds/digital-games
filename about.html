@@ -1,138 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" class="about-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre | Digital Detective Games</title>
+    <title>Sobre | DigitalGames</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .about-container {
-            max-width: 1000px;
-            background: rgba(36, 36, 36, 0.95);
-            border: 2px solid var(--accent);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .about-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .about-logo {
-            max-width: 400px;
-            margin-bottom: 20px;
-        }
-
-        .about-title {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-family: 'Fira Code', monospace;
-        }
-
-        .about-version {
-            color: var(--secondary);
-            font-size: 1.2rem;
-        }
-
-        .about-section {
-            margin: 30px 0;
-            padding: 25px;
-            background: var(--dark);
-            border-left: 5px solid var(--accent);
-            border-radius: 8px;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--light);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--accent);
-        }
-
-        .section-content {
-            color: var(--light);
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        .tech-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .tech-item {
-            background: var(--primary);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-        }
-
-        .tech-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .tech-item i {
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-        .back-link {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .credits {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 2px solid var(--secondary);
-            text-align: center;
-            color: var(--light);
-        }
-
-        .credits p {
-            margin: 10px 0;
-            opacity: 0.8;
-        }
-
-        .highlight {
-            color: var(--accent);
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="about-page">
     <div class="about-container">
         <div class="about-header">
-            <img src="img/DigitalDetective.svg" alt="Digital Detective Games" class="about-logo">
-            <h1 class="about-title">DIGITAL DETECTIVE GAMES</h1>
+            <img src="assets/img/DigitalDetective.svg" alt="DigitalGames" class="about-logo">
+            <h1 class="about-title">DIGITALGAMES</h1>
             <p class="about-version">Versão 1.0.0</p>
         </div>
 
@@ -144,7 +23,7 @@
             <div class="section-content">
                 <p>
                     O <span class="highlight">Digital Detective Games</span> é uma plataforma de jogos clássicos 
-                    desenvolvida como refatoração do projeto GameLab original. O objetivo é demonstrar habilidades 
+                    . O objetivo é demonstrar habilidades 
                     em desenvolvimento web através de uma interface nostálgica inspirada no Windows 98, combinada 
                     com uma paleta de cores moderna e corporativa.
                 </p>
@@ -261,9 +140,9 @@
         </div>
 
         <div class="credits">
-            <p><strong>Baseado no projeto GameLab - IEFP Leiria</strong></p>
-            <p>Refatorado e redesenhado para Digital Detective Games</p>
-            <p>&copy; <span id="current-year"></span> Digital Detective Games. Todos os direitos reservados.</p>
+            <p><strong>IEFP Leiria</strong></p>
+            <p>Refatorado e redesenhado para DigitalGames</p>
+            <p>&copy; <span id="current-year"></span> DigitalGames. Todos os direitos reservados.</p>
         </div>
 
         <div class="back-link">
