@@ -98,6 +98,9 @@ includeHeader('Perfil de ' . $user['name']);
         border: 2px solid;
         border-color: #ffffff #808080 #808080 #ffffff;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        max-height: calc(100vh - 40px);
+        display: flex;
+        flex-direction: column;
     }
 
     .profile-titlebar {
@@ -133,6 +136,46 @@ includeHeader('Perfil de ' . $user['name']);
 
     .profile-content {
         padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+        max-height: calc(100vh - 100px);
+    }
+
+    /* Custom scrollbar estilo Windows 98 */
+    .profile-content::-webkit-scrollbar {
+        width: 16px;
+    }
+
+    .profile-content::-webkit-scrollbar-track {
+        background: #c0c0c0;
+        border: 2px inset #c0c0c0;
+    }
+
+    .profile-content::-webkit-scrollbar-thumb {
+        background: #e0e0e0;
+        border: 2px outset #808080;
+    }
+
+    .profile-content::-webkit-scrollbar-thumb:hover {
+        background: #c0c0c0;
+    }
+
+    .profile-content::-webkit-scrollbar-button {
+        background: #c0c0c0;
+        border: 1px solid #808080;
+        height: 16px;
+    }
+
+    .profile-content::-webkit-scrollbar-button:vertical:decrement {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,4 3,9 13,9" fill="black"/></svg>');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .profile-content::-webkit-scrollbar-button:vertical:increment {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,12 3,7 13,7" fill="black"/></svg>');
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     .profile-header {
@@ -502,6 +545,108 @@ includeHeader('Perfil de ' . $user['name']);
                 <?php endif; ?>
             </div>
 
+            <?php if (hasPermission('admin')): ?>
+                <!-- Seção de Regras Administrativas -->
+                <div class="admin-section" style="background: #ffffff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; padding: 20px; margin-bottom: 20px;">
+                    <h2 style="color: #800080; margin-bottom: 15px;">
+                        <i class="fas fa-cog"></i> Configurações Administrativas
+                    </h2>
+                    <p style="color: #808080; font-size: 12px; margin-bottom: 15px;">
+                        Gerencie as regras do sistema. Alterações são salvas automaticamente.
+                    </p>
+                    
+                    <div id="admin-rules-container">
+                        <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
+                                        <i class="fas fa-sliders-h"></i> Manutenção
+                                    </h4>
+                                    <p style="margin: 0; color: #666; font-size: 11px;">
+                                        Ativa/desativa o modo de manutenção do sistema
+                                    </p>
+                                </div>
+                                <label class="switch" style="cursor: pointer;">
+                                    <input type="checkbox" 
+                                           id="rule_maintenance" 
+                                           onchange="updateRule('maintenance_mode', this.checked ? '1' : '0')">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
+                                        <i class="fas fa-user-plus"></i> Registro de Usuários
+                                    </h4>
+                                    <p style="margin: 0; color: #666; font-size: 11px;">
+                                        Permite ou bloqueia registro de novos usuários
+                                    </p>
+                                </div>
+                                <label class="switch" style="cursor: pointer;">
+                                    <input type="checkbox" 
+                                           id="rule_registration" 
+                                           checked 
+                                           onchange="updateRule('registration_enabled', this.checked ? '1' : '0')">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
+                                        <i class="fas fa-trophy"></i> Ranking Público
+                                    </h4>
+                                    <p style="margin: 0; color: #666; font-size: 11px;">
+                                        Exibe ranking global de jogadores
+                                    </p>
+                                </div>
+                                <label class="switch" style="cursor: pointer;">
+                                    <input type="checkbox" 
+                                           id="rule_leaderboard" 
+                                           checked 
+                                           onchange="updateRule('leaderboard_enabled', this.checked ? '1' : '0')">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
+                                        <i class="fas fa-bell"></i> Notificações
+                                    </h4>
+                                    <p style="margin: 0; color: #666; font-size: 11px;">
+                                        Habilita notificações para usuários
+                                    </p>
+                                </div>
+                                <label class="switch" style="cursor: pointer;">
+                                    <input type="checkbox" 
+                                           id="rule_notifications" 
+                                           checked 
+                                           onchange="updateRule('notifications_enabled', this.checked ? '1' : '0')">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #808080;">
+                        <a href="admin_users.php" class="btn" style="text-decoration: none; display: inline-block; margin-right: 10px;">
+                            <i class="fas fa-users"></i> Gerenciar Usuários
+                        </a>
+                        <a href="admin_logs.php" class="btn" style="text-decoration: none; display: inline-block;">
+                            <i class="fas fa-history"></i> Ver Logs
+                        </a>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <!-- Ações -->
             <div class="profile-actions">
                 <a href="index.php" class="btn btn-primary">
@@ -515,7 +660,117 @@ includeHeader('Perfil de ' . $user['name']);
     </div>
 </div>
 
+<style>
+    /* Estilos para switches administrativos */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .switch .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border: 2px solid #808080;
+    }
+
+    .switch .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 1px;
+        background-color: white;
+        transition: .4s;
+        border: 1px solid #808080;
+    }
+
+    .switch input:checked + .slider {
+        background-color: #008000;
+    }
+
+    .switch input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+</style>
+
 <script>
+    // Função para atualizar regras administrativas
+    function updateRule(ruleKey, value) {
+        // Efeito sonoro
+        playSound(400, 0.1, 0.1);
+        
+        // Salvar no localStorage como cache
+        localStorage.setItem('admin_rule_' + ruleKey, value);
+        
+        // Atualizar no banco de dados
+        fetch('api/update_rule.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rule_key: ruleKey,
+                rule_value: value
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Regra atualizada:', ruleKey, '=', value);
+                // Feedback visual
+                playSound(600, 0.2, 0.15);
+            } else {
+                console.error('Erro ao atualizar regra:', data.error);
+                alert('Erro ao atualizar regra: ' + data.error);
+                // Reverter checkbox
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao atualizar regra');
+            // Reverter checkbox
+            location.reload();
+        });
+    }
+
+    // Carregar valores das regras ao carregar a página
+    document.addEventListener('DOMContentLoaded', function() {
+        // Carregar regras do localStorage
+        const maintenanceRule = localStorage.getItem('admin_rule_maintenance_mode');
+        const registrationRule = localStorage.getItem('admin_rule_registration_enabled');
+        const leaderboardRule = localStorage.getItem('admin_rule_leaderboard_enabled');
+        const notificationsRule = localStorage.getItem('admin_rule_notifications_enabled');
+        
+        if (maintenanceRule) {
+            document.getElementById('rule_maintenance').checked = maintenanceRule === '1';
+        }
+        if (registrationRule) {
+            document.getElementById('rule_registration').checked = registrationRule === '1';
+        }
+        if (leaderboardRule) {
+            document.getElementById('rule_leaderboard').checked = leaderboardRule === '1';
+        }
+        if (notificationsRule) {
+            document.getElementById('rule_notifications').checked = notificationsRule === '1';
+        }
+    });
+
     // Efeitos sonoros
     function playSound(frequency, duration, gain = 0.1) {
         try {

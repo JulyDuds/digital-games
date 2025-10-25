@@ -123,8 +123,8 @@ const DDGConfig = {
 
     // API endpoints
     api: {
-        saveStats: '../api/save_stats.php',
-        getStats: '../api/get_stats.php'
+        saveStats: '/digital-games/api/save_stats.php',
+        getStats: '/digital-games/api/get_stats.php'
     },
 
     // Utilitários

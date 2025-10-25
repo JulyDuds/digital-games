@@ -14,17 +14,18 @@
     --window-titlebar-text: #ffffff;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Press Start 2P', 'MS Sans Serif', monospace;
 }
 
 
 body {
-    font-family: 'Pixelify Sans', 'MS Sans Serif', 'Microsoft Sans Serif';
+    font-family: 'Press Start 2P', 'MS Sans Serif', monospace;
     background: #ffffff;
     color: #000000;
     min-height: 100vh;
@@ -102,7 +103,7 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
     font-weight: normal;
     line-height: 1.2;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     word-break: break-word;
 }
 
@@ -137,7 +138,7 @@ body {
     font-weight: normal;
     font-size: 13px;
     min-width: 70px;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .start-button:hover {
@@ -170,7 +171,7 @@ body {
     max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .taskbar-app:hover {
@@ -187,7 +188,7 @@ body {
     padding: 4px 8px;
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     font-size: 12px;
     color: #000000;
     min-width: 80px;
@@ -222,7 +223,7 @@ body {
     float: left;
     height: 100%;
     min-height: 200px;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     writing-mode: vertical-rl;
     text-orientation: mixed;
 }
@@ -241,7 +242,7 @@ body {
     color: #000000;
     font-size: 12px;
     min-height: 32px;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .start-menu-item:hover {
@@ -303,7 +304,7 @@ body {
 .window-title {
     font-weight: normal;
     font-size: 12px;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .window-controls {
@@ -324,7 +325,7 @@ body {
     justify-content: center;
     font-size: 9px;
     padding: 0;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .window-btn:hover {
@@ -462,7 +463,7 @@ body {
     align-items: center;
     gap: 10px;
     color: #000000;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .header h1 span {
@@ -488,7 +489,7 @@ body {
     padding: 3px 8px;
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .wins i, .losses i {
@@ -516,7 +517,7 @@ body {
     align-items: center;
     gap: 5px;
     color: #000000;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .btn:hover {
@@ -540,7 +541,7 @@ body {
     border-top: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     color: #000000;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     margin-top: auto;
     flex-shrink: 0;
 }
@@ -744,7 +745,7 @@ body {
     padding: 5px 12px;
     border: 2px solid;
     border-color: #808080 #ffffff #ffffff #808080;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .info-item i {
@@ -758,7 +759,7 @@ body {
     padding: 15px;
     color: var(--accent);
     font-weight: normal;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .controls {
@@ -786,7 +787,7 @@ body {
     cursor: pointer;
     font-weight: normal;
     font-size: 12px;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .difficulty-btn:hover, .mode-btn:hover {
@@ -823,7 +824,7 @@ body {
     text-align: center;
     color: #000000;
     font-size: 12px;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     line-height: 1.5;
 }
 
@@ -899,7 +900,7 @@ body {
     user-select: none;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transition: opacity 0.2s;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .card:active {
@@ -979,7 +980,7 @@ body {
     text-align: center;
     font-size: 12px;
     color: #800000;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .foundation .suit-symbol {
@@ -1032,7 +1033,7 @@ body {
     cursor: pointer;
     color: #000000;
     font-weight: normal;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     transition: all 0.1s ease;
 }
 
@@ -1088,7 +1089,7 @@ body {
     border: 2px solid;
     border-color: #808080 #ffffff #ffffff #808080;
     display: inline-block;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .current-player.x {
@@ -1120,7 +1121,7 @@ body {
     border-color: #808080 #ffffff #ffffff #808080;
     min-width: 120px;
     justify-content: center;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .score-item i {
@@ -1155,7 +1156,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 /* Modo selecionado destacado */
@@ -1206,7 +1207,7 @@ body {
     font-weight: normal;
     color: #000000;
     text-transform: uppercase;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .letter-box.correct {
@@ -1260,7 +1261,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .key:hover:not(.disabled) {
@@ -1307,7 +1308,7 @@ body {
     text-align: center;
     color: #000000;
     font-weight: normal;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     font-size: 12px;
 }
 
@@ -1343,7 +1344,7 @@ body {
     letter-spacing: 8px;
     text-align: center;
     color: #000000;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     font-weight: normal;
     margin: 10px 0;
     min-height: 80px;
@@ -1355,7 +1356,7 @@ body {
     color: var(--accent);
     margin-bottom: 15px;
     font-weight: normal;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .hangman-keyboard {
@@ -1379,7 +1380,7 @@ body {
     font-weight: normal;
     font-size: 15px;
     text-align: center;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .hangman-key:hover:not(.disabled) {
@@ -1407,7 +1408,7 @@ body {
     max-width: 500px;
     text-align: center;
     color: #000000;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     font-size: 12px;
 }
 
@@ -1477,7 +1478,7 @@ body {
     align-items: center;
     justify-content: center;
     backface-visibility: hidden;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .card-back {
@@ -1548,7 +1549,7 @@ body {
     cursor: pointer;
     color: #000000;
     user-select: none;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
     position: relative;
     transition: all 0.1s ease;
     image-rendering: pixelated;
@@ -1666,7 +1667,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 #game-status.win {
@@ -1727,14 +1728,14 @@ body {
 .score-label {
     font-size: 12px;
     color: var(--secondary);
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .score-value {
     font-size: 20px;
     font-weight: normal;
     color: var(--accent);
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 /* Snake Styles */
@@ -1769,7 +1770,7 @@ body {
     justify-content: center;
     font-size: 12px;
     color: #000000;
-    font-family: 'Pixelify Sans';
+    font-family: 'Press Start 2P';
 }
 
 .control-btn:active {

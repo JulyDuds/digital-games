@@ -246,8 +246,10 @@ function saveGameStats($gameId, $stats) {
     $user = getCurrentUser();
     
     if ($db && $user) {
-        $db->updateGameStats($user['id'], $gameId, $stats);
+        return $db->updateGameStats($user['id'], $gameId, $stats);
     }
+    
+    return false;
 }
 
 function authenticateUser($username, $password) {
@@ -324,6 +326,23 @@ function getSystemStats() {
     ];
 }
 
+function isMaintenanceMode() {
+    $db = getDatabase();
+    if ($db) {
+        // Tentar buscar da tabela system_rules primeiro
+        $maintenance = $db->selectOne("SELECT rule_value FROM system_rules WHERE rule_key = 'maintenance_mode'");
+        if ($maintenance) {
+            return $maintenance['rule_value'] == '1';
+        }
+        // Se não existir, buscar de system_settings
+        $maintenance = $db->selectOne("SELECT setting_value FROM system_settings WHERE setting_key = 'maintenance_mode'");
+        if ($maintenance) {
+            return $maintenance['setting_value'] == '1';
+        }
+    }
+    return false;
+}
+
 // Inicializar sessão se não estiver iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_name(SESSION_NAME);
@@ -338,5 +357,118 @@ if (isLoggedIn()) {
         header('Location: login.html?error=' . urlencode('Sessão expirada. Faça login novamente.'));
         exit;
     }
+}
+
+// Verificar modo de manutenção
+// Permitir acesso apenas para páginas de login, API e admin
+$maintenanceMode = isMaintenanceMode();
+$currentPage = basename($_SERVER['PHP_SELF']);
+$allowedPages = ['login.php', 'login.html', 'logout.php', 'index.php', 'profile.php'];
+$isApi = strpos($_SERVER['PHP_SELF'], '/api/') !== false;
+
+if ($maintenanceMode && !in_array($currentPage, $allowedPages) && !$isApi && !hasPermission('admin')) {
+    // Redirecionar para página de manutenção ou mostrar mensagem
+    header('Content-Type: text/html; charset=UTF-8');
+    ?>
+    <!DOCTYPE html>
+    <html lang="pt-PT">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modo de Manutenção - DigitalGames</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body {
+                font-family: 'MS Sans Serif', sans-serif;
+                background: linear-gradient(135deg, #008080 0%, #004040 100%);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                padding: 20px;
+            }
+            .maintenance-window {
+                background: #c0c0c0;
+                border: 3px solid;
+                border-color: #ffffff #000000 #000000 #ffffff;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+                max-width: 500px;
+                width: 100%;
+            }
+            .maintenance-titlebar {
+                background: linear-gradient(90deg, #ff0000 0%, #ff8080 100%);
+                color: white;
+                padding: 8px 12px;
+                font-size: 14px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .maintenance-content {
+                padding: 40px 30px;
+                text-align: center;
+            }
+            .maintenance-icon {
+                font-size: 64px;
+                color: #ff0000;
+                margin-bottom: 20px;
+            }
+            .maintenance-content h1 {
+                color: #000080;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            .maintenance-content p {
+                color: #000;
+                font-size: 14px;
+                line-height: 1.6;
+                margin-bottom: 10px;
+            }
+            .btn {
+                display: inline-block;
+                margin-top: 20px;
+                padding: 10px 30px;
+                background: #c0c0c0;
+                border: 2px solid;
+                border-color: #ffffff #808080 #808080 #ffffff;
+                color: #000;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            .btn:hover {
+                background: #e0e0e0;
+            }
+            .btn:active {
+                border-color: #808080 #ffffff #ffffff #808080;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="maintenance-window">
+            <div class="maintenance-titlebar">
+                <i class="fas fa-tools"></i>
+                <span>Modo de Manutenção</span>
+            </div>
+            <div class="maintenance-content">
+                <i class="fas fa-wrench maintenance-icon"></i>
+                <h1>Sistema em Manutenção</h1>
+                <p>O sistema está temporariamente indisponível para manutenção programada.</p>
+                <p>Nossa equipe está trabalhando para restaurar o acesso o mais rápido possível.</p>
+                <p style="color: #808080; font-size: 12px; margin-top: 20px;">
+                    <i class="fas fa-clock"></i> Por favor, tente novamente em breve.
+                </p>
+                <a href="index.php" class="btn">
+                    <i class="fas fa-home"></i> Voltar para Home
+                </a>
+            </div>
+        </div>
+    </body>
+    </html>
+    <?php
+    exit;
 }
 ?>
