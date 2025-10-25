@@ -47,8 +47,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background: #CBC1C1;
- 
+    background: #CBC1C1 url('../img/fundo.png') center center / cover no-repeat;
 }
 
 .desktop-icons {
@@ -199,7 +198,6 @@ body {
 .start-menu {
     position: fixed;
     bottom: 42px;
-    left: 3px;
     width: 250px;
     background: #c0c0c0;
     border: 2px solid;
@@ -215,22 +213,17 @@ body {
 
 .start-menu-header {
     background: linear-gradient(90deg, #800000 0%, #c76161 100%);
-    padding: 20px 10px;
+    padding: 10px;
     color: #ffffff;
     font-weight: normal;
     font-size: 18px;
-    text-orientation: mixed;
-    float: left;
-    height: 100%;
-    min-height: 200px;
-    font-family: 'Press Start 2P';
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
+   
+   
 }
 
 .start-menu-items {
-    padding: 2px;
-    margin-left: 30px;
+    padding: 0px;
+    margin-left: 0px;
 }
 
 .start-menu-item {
@@ -346,7 +339,7 @@ body {
     position: relative;
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
-    overflow: auto;
+    overflow: hidden;
     max-height: calc(100% - 30px);
     height: calc(100% - 30px);
 }
@@ -356,9 +349,7 @@ body {
     height: 100%;
     border: none;
     background: #ffffff;
-    min-height: 100%;
     display: block;
-    overflow: hidden;
 }
 
 /* Resize Handles */
@@ -438,9 +429,8 @@ body {
     max-width: 100%;
     margin: 0;
     padding: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 100vh;
+    overflow: hidden;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -501,8 +491,11 @@ body {
     flex-direction: column;
     padding: 20px;
     background: #c0c0c0;
-    min-height: 0;
     flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+    max-height: 100%;
 }
 
 .btn {
@@ -1243,8 +1236,8 @@ body {
     max-width: 500px;
     margin: auto;
     padding: 15px;
-    overflow: auto; /* COM SCROLL */
-    max-height: 30vh; /* Limita altura para forçar scroll */
+    overflow: 100%;
+    
 }
 
 .key {

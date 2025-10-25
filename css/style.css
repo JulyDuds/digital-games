@@ -47,8 +47,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background: #CBC1C1;
- 
+    background: #CBC1C1 url('../assets/img/fundo.png') center center / cover no-repeat;
 }
 
 .desktop-icons {
@@ -345,7 +344,7 @@ body {
     position: relative;
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
-    overflow: auto;
+    overflow: hidden;
     max-height: calc(100% - 30px);
     height: calc(100% - 30px);
 }
@@ -355,9 +354,7 @@ body {
     height: 100%;
     border: none;
     background: #ffffff;
-    min-height: 100%;
     display: block;
-    overflow: hidden;
 }
 
 /* Resize Handles */
@@ -439,7 +436,6 @@ body {
     padding: 0;
     overflow: hidden;
     height: 100vh;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -499,10 +495,11 @@ body {
     flex-direction: column;
     padding: 20px;
     background: #c0c0c0;
-    min-height: 0;
     flex: 1;
-    height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+    max-height: 100%;
 }
 
 .btn {
@@ -1249,8 +1246,8 @@ body {
     max-width: 500px;
     margin: auto;
     padding: 15px;
-    overflow: auto; /* COM SCROLL */
-    max-height: 30vh; /* Limita altura para forçar scroll */
+    overflow: auto;
+    max-height: 30vh;
 }
 
 .key {

@@ -90,29 +90,12 @@ function renderStartMenu() {
                 <i class="fas fa-info-circle"></i>
                 <span>Sobre</span>
             </div>
-            <div class="start-menu-item" data-action="demo">
-                <i class="fas fa-tv"></i>
-                <span>Demonstração</span>
-            </div>
             <div class="start-menu-item" data-action="stats">
                 <i class="fas fa-chart-bar"></i>
                 <span>Estatísticas</span>
             </div>
-            <div class="start-menu-separator"></div>
-            <div class="start-menu-item" data-action="help">
-                <i class="fas fa-question-circle"></i>
-                <span>Ajuda</span>
-            </div>
-            <?php if (hasPermission('admin')): ?>
-                <div class="start-menu-item" data-action="admin">
-                    <i class="fas fa-cog"></i>
-                    <span>Administração</span>
-                </div>
-            <?php endif; ?>
-            <div class="start-menu-item" data-action="reset">
-                <i class="fas fa-redo"></i>
-                <span>Resetar Estatísticas</span>
-            </div>
+           
+
         </div>
     </div>
     <?php
@@ -128,10 +111,16 @@ function renderDesktopIcons() {
                 <div class="desktop-icon" data-game="<?php echo $gameId; ?>">
                     <div class="icon-image">
                         <?php 
-                        // Mapear nomes dos jogos para nomes das imagens
+                        // Mapear nomes dos jogos para nomes das imagens em português
                         $imageMap = [
+                            'tictactoe' => 'jogo-da-velha',
+                            'minesweeper' => 'campo-minado',
                             'jogodaforca' => 'forca',
-                            'pong' => 'pingpong'
+                            'pong' => 'pong',
+                            'memory' => 'memoria',
+                            'snake' => 'cobrinha',
+                            'wordle' => 'wordle',
+                            'solitaire' => 'paciencia'
                         ];
                         $imageName = $imageMap[$gameId] ?? $gameId;
                         ?>
