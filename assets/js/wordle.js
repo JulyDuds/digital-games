@@ -214,7 +214,7 @@ class WordleGame {
             this.showMessage(`<i class="fas fa-trophy icon-red"></i> Parabéns! A palavra era ${this.targetWord}!`, 'success');
             this.statusDisplay.innerHTML = '<i class="fas fa-trophy icon-red"></i> Você venceu!';
             this.playSound('win');
-            this.saveStats();
+            this.saveStats(true);
             this.updateDisplay();
             return;
         }
@@ -232,7 +232,7 @@ class WordleGame {
             this.showMessage(`<i class="fas fa-skull icon-red"></i> A palavra era: ${this.targetWord}`, 'error');
             this.statusDisplay.innerHTML = `<i class="fas fa-skull icon-red"></i> Game Over! Palavra: ${this.targetWord}`;
             this.playSound('lose');
-            this.saveStats();
+            this.saveStats(false);
             this.updateDisplay();
         } else {
             this.updateBoard();
@@ -382,8 +382,20 @@ class WordleGame {
         }
     }
 
-    saveStats() {
+    saveStats(won = false) {
+        // Salvar no localStorage
         localStorage.setItem('wordle-stats', JSON.stringify(this.stats));
+        
+        // Salvar no banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            DDGConfig.utils.saveGameStats('wordle', {
+                score: this.currentRow, // Número de tentativas
+                won: won,
+                time: 0 // Wordle não rastreia tempo
+            }).catch(err => {
+                console.log('Estatísticas salvas localmente, mas falhou no banco de dados');
+            });
+        }
     }
 
     loadStats() {

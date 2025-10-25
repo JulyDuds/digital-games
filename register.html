@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Detective Games - Registro</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Estilos específicos para a página de registro */
+        .register-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #008080 0%, #004040 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .register-window {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 0;
+            width: 450px;
+            max-width: 90vw;
+            margin: auto;
+        }
+
+        .register-titlebar {
+            background: linear-gradient(90deg, #000080 0%, #0000ff 100%);
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #808080;
+        }
+
+        .register-titlebar .title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .register-titlebar .title i {
+            font-size: 14px;
+        }
+
+        .register-titlebar .close-btn {
+            background: #c0c0c0;
+            border: 1px solid #808080;
+            color: #000;
+            width: 16px;
+            height: 14px;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-titlebar .close-btn:hover {
+            background: #ff0000;
+            color: white;
+        }
+
+        .register-content {
+            padding: 20px;
+            background: #c0c0c0;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .register-header img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 10px;
+        }
+
+        .register-header h1 {
+            font-size: 18px;
+            color: #000080;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .register-header p {
+            font-size: 12px;
+            color: #000;
+            margin: 5px 0 0 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: #000;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 6px 8px;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            background: white;
+            font-size: 12px;
+            font-family: 'MS Sans Serif', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #000080;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 3px;
+            font-size: 10px;
+            color: #808080;
+        }
+
+        .register-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 6px 20px;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            background: #c0c0c0;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'MS Sans Serif', sans-serif;
+            flex: 1;
+        }
+
+        .btn:hover {
+            background: #e0e0e0;
+        }
+
+        .btn:active {
+            border-color: #808080 #ffffff #ffffff #808080;
+        }
+
+        .btn-primary {
+            background: #000080;
+            color: white;
+            border-color: #000080;
+        }
+
+        .btn-primary:hover {
+            background: #0000ff;
+        }
+
+        .register-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 10px;
+            color: #808080;
+        }
+
+        .register-footer a {
+            color: #000080;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .register-footer a:hover {
+            color: #0000ff;
+        }
+
+        .error-message {
+            background: #ff0000;
+            color: white;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            border: 1px solid #800000;
+            display: none;
+        }
+
+        .success-message {
+            background: #00ff00;
+            color: #000;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            border: 1px solid #008000;
+            display: none;
+        }
+
+        .password-strength {
+            height: 4px;
+            background: #808080;
+            margin-top: 5px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .password-strength-bar.weak {
+            width: 33%;
+            background-color: #ff0000;
+        }
+
+        .password-strength-bar.medium {
+            width: 66%;
+            background-color: #ffff00;
+        }
+
+        .password-strength-bar.strong {
+            width: 100%;
+            background-color: #00ff00;
+        }
+
+        /* Animação de entrada */
+        .register-window {
+            animation: registerSlideIn 0.5s ease-out;
+        }
+
+        @keyframes registerSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-window">
+            <div class="register-titlebar">
+                <div class="title">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Digital Detective Games - Registro</span>
+                </div>
+                <button class="close-btn" onclick="window.location.href='login.html'" title="Fechar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="register-content">
+                <div class="register-header">
+                    <img src="assets/img/DigitalDetective.svg" alt="Digital Detective Games">
+                    <h1>Criar Nova Conta</h1>
+                    <p>Preencha os dados para se registrar</p>
+                </div>
+
+                <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
+
+                <form id="registerForm" method="POST" action="register.php">
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i> Nome de Usuário:
+                        </label>
+                        <input type="text" id="username" name="username" required 
+                               placeholder="Digite um nome de usuário único" 
+                               autocomplete="username"
+                               pattern="[a-zA-Z0-9_]{3,20}"
+                               minlength="3"
+                               maxlength="20">
+                        <small>3-20 caracteres (letras, números e underscore)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">
+                            <i class="fas fa-id-card"></i> Nome Completo:
+                        </label>
+                        <input type="text" id="name" name="name" required 
+                               placeholder="Digite seu nome completo"
+                               minlength="3"
+                               maxlength="100">
+                        <small>Seu nome será exibido no sistema</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> E-mail:
+                        </label>
+                        <input type="email" id="email" name="email" 
+                               placeholder="Digite seu e-mail (opcional)"
+                               autocomplete="email"
+                               maxlength="100">
+                        <small>Opcional - usado para recuperação de conta</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i> Senha:
+                        </label>
+                        <input type="password" id="password" name="password" required 
+                               placeholder="Digite uma senha forte"
+                               autocomplete="new-password"
+                               minlength="6">
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="password-strength-bar"></div>
+                        </div>
+                        <small>Mínimo 6 caracteres</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password">
+                            <i class="fas fa-lock"></i> Confirmar Senha:
+                        </label>
+                        <input type="password" id="confirm_password" name="confirm_password" required 
+                               placeholder="Digite a senha novamente"
+                               autocomplete="new-password"
+                               minlength="6">
+                        <small>Digite a mesma senha para confirmar</small>
+                    </div>
+
+                    <div class="register-buttons">
+                        <button type="button" class="btn" onclick="window.location.href='login.html'">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> Registrar
+                        </button>
+                    </div>
+                </form>
+
+                <div class="register-footer">
+                    <p>© 2024 Digital Detective Games. Todos os direitos reservados.</p>
+                    <p>Já tem uma conta? <a href="login.html">Faça login aqui</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Efeitos sonoros do Windows 98
+        function playSound(frequency, duration, gain = 0.1) {
+            if (!DDGConfig.audio.enabled) return;
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(gain, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        // Configurações globais
+        const DDGConfig = {
+            audio: {
+                enabled: true,
+                sounds: {
+                    click: { frequency: 600, duration: 0.1, gain: 0.15 },
+                    error: { frequency: 200, duration: 0.3, gain: 0.2 },
+                    success: { frequency: 800, duration: 0.4, gain: 0.25 }
+                }
+            }
+        };
+
+        // Efeitos de interação
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar efeitos sonoros aos botões
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => playSound(600, 0.1, 0.15));
+            });
+
+            // Efeito de foco nos inputs
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => playSound(400, 0.05, 0.1));
+            });
+
+            // Indicador de força da senha
+            const passwordInput = document.getElementById('password');
+            const strengthBar = document.getElementById('password-strength-bar');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                
+                if (password.length >= 6) strength++;
+                if (password.length >= 10) strength++;
+                if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^a-zA-Z0-9]/.test(password)) strength++;
+                
+                strengthBar.className = 'password-strength-bar';
+                if (strength >= 4) {
+                    strengthBar.classList.add('strong');
+                } else if (strength >= 2) {
+                    strengthBar.classList.add('medium');
+                } else if (strength >= 1) {
+                    strengthBar.classList.add('weak');
+                }
+            });
+
+            // Validação do formulário
+            const form = document.getElementById('registerForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm_password').value;
+
+                // Validar nome de usuário
+                if (username.length < 3 || username.length > 20) {
+                    showError('Nome de usuário deve ter entre 3 e 20 caracteres');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                    showError('Nome de usuário deve conter apenas letras, números e underscore');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                // Validar nome
+                if (name.length < 3) {
+                    showError('Nome completo deve ter pelo menos 3 caracteres');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                // Validar e-mail (se preenchido)
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showError('E-mail inválido');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                // Validar senha
+                if (password.length < 6) {
+                    showError('Senha deve ter pelo menos 6 caracteres');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                // Validar confirmação de senha
+                if (password !== confirmPassword) {
+                    showError('As senhas não coincidem');
+                    playSound(200, 0.3, 0.2);
+                    return;
+                }
+
+                // Sucesso - som de confirmação
+                playSound(800, 0.4, 0.25);
+                
+                // Enviar formulário
+                this.submit();
+            });
+        });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Verificar se há mensagens de erro ou sucesso da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const success = urlParams.get('success');
+
+        if (error) {
+            showError(decodeURIComponent(error));
+            playSound(200, 0.3, 0.2);
+        }
+
+        if (success) {
+            showSuccess(decodeURIComponent(success));
+            playSound(800, 0.4, 0.25);
+        }
+    </script>
+</body>
+</html>
+

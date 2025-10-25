@@ -32,7 +32,7 @@ define('LOGIN_LOCKOUT_TIME', 900); // 15 minutos
 $GAME_CONFIG = [
     'tictactoe' => [
         'title' => 'Tic-Tac-Toe',
-        'url' => 'tictactoe.php',
+        'url' => 'games/tictactoe.html',
         'icon' => 'fa-times',
         'width' => 700,
         'height' => 750,
@@ -41,7 +41,7 @@ $GAME_CONFIG = [
     ],
     'minesweeper' => [
         'title' => 'Campo Minado',
-        'url' => 'minesweeper.php',
+        'url' => 'games/minesweeper.html',
         'icon' => 'fa-bomb',
         'width' => 700,
         'height' => 750,
@@ -50,7 +50,7 @@ $GAME_CONFIG = [
     ],
     'jogodaforca' => [
         'title' => 'Jogo da Forca',
-        'url' => 'jogodaforca.php',
+        'url' => 'games/jogodaforca.html',
         'icon' => 'fa-user-secret',
         'width' => 800,
         'height' => 700,
@@ -59,7 +59,7 @@ $GAME_CONFIG = [
     ],
     'pong' => [
         'title' => 'Pong',
-        'url' => 'pong.php',
+        'url' => 'games/pong.html',
         'icon' => 'fa-table-tennis',
         'width' => 700,
         'height' => 600,
@@ -68,7 +68,7 @@ $GAME_CONFIG = [
     ],
     'memory' => [
         'title' => 'Memory Game',
-        'url' => 'memory.php',
+        'url' => 'games/memory.html',
         'icon' => 'fa-brain',
         'width' => 700,
         'height' => 700,
@@ -77,7 +77,7 @@ $GAME_CONFIG = [
     ],
     'snake' => [
         'title' => 'Snake',
-        'url' => 'snake.php',
+        'url' => 'games/snake.html',
         'icon' => 'fa-gamepad',
         'width' => 600,
         'height' => 600,
@@ -86,7 +86,7 @@ $GAME_CONFIG = [
     ],
     'wordle' => [
         'title' => 'Wordle',
-        'url' => 'wordle.php',
+        'url' => 'games/wordle.html',
         'icon' => 'fa-font',
         'width' => 500,
         'height' => 600,
@@ -95,7 +95,7 @@ $GAME_CONFIG = [
     ],
     'solitaire' => [
         'title' => 'Paciência',
-        'url' => 'solitaire.php',
+        'url' => 'games/solitaire.html',
         'icon' => 'fa-spade',
         'width' => 800,
         'height' => 600,

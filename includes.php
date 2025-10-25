@@ -80,6 +80,12 @@ function renderStartMenu() {
             </div>
         </div>
         <div class="start-menu-items">
+            <?php if (isLoggedIn()): ?>
+                <div class="start-menu-item" onclick="window.location.href='profile.php'">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Meu Perfil</span>
+                </div>
+            <?php endif; ?>
             <div class="start-menu-item" data-action="about">
                 <i class="fas fa-info-circle"></i>
                 <span>Sobre</span>
@@ -121,7 +127,15 @@ function renderDesktopIcons() {
             <?php if ($game['enabled']): ?>
                 <div class="desktop-icon" data-game="<?php echo $gameId; ?>">
                     <div class="icon-image">
-                        <img src="img/<?php echo $gameId; ?>.png" 
+                        <?php 
+                        // Mapear nomes dos jogos para nomes das imagens
+                        $imageMap = [
+                            'jogodaforca' => 'forca',
+                            'pong' => 'pingpong'
+                        ];
+                        $imageName = $imageMap[$gameId] ?? $gameId;
+                        ?>
+                        <img src="assets/img/<?php echo $imageName; ?>.png" 
                              alt="<?php echo htmlspecialchars($game['title']); ?>" 
                              style="width: 40px; height: 40px;">
                     </div>

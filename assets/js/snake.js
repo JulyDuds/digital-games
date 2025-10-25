@@ -325,8 +325,12 @@ class SnakeGame {
         clearInterval(this.gameLoop);
         clearInterval(this.timerInterval);
 
+        // Calcular tempo jogado
+        const timePlayedSeconds = Math.floor((Date.now() - this.gameStartTime) / 1000);
+
         // Atualizar recorde
-        if (this.score > this.highScore) {
+        const isNewHighScore = this.score > this.highScore;
+        if (isNewHighScore) {
             this.highScore = this.score;
             this.stats.highScore = this.score;
             localStorage.setItem('snake-highscore', this.highScore);
@@ -340,6 +344,17 @@ class SnakeGame {
         this.pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
 
         this.playSound('gameover');
+
+        // Salvar estatísticas no banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            DDGConfig.utils.saveGameStats('snake', {
+                score: this.score,
+                won: false, // Snake não tem vitória definida
+                time: timePlayedSeconds
+            }).catch(err => {
+                console.log('Estatísticas salvas localmente, mas falhou no banco de dados');
+            });
+        }
     }
 
     updateTimer() {

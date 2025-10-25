@@ -344,7 +344,7 @@ class Minesweeper {
         }
 
         this.stats.games++;
-        this.saveStats();
+        this.saveStats(won);
         this.updateDisplay();
     }
 
@@ -497,8 +497,20 @@ class Minesweeper {
         return array;
     }
 
-    saveStats() {
+    saveStats(won = false) {
+        // Salvar no localStorage
         localStorage.setItem('minesweeper-stats', JSON.stringify(this.stats));
+        
+        // Salvar no banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            DDGConfig.utils.saveGameStats('minesweeper', {
+                score: won ? this.timer : 0,
+                won: won,
+                time: this.timer
+            }).catch(err => {
+                console.log('Estatísticas salvas localmente, mas falhou no banco de dados');
+            });
+        }
     }
 
     loadStats() {

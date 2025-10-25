@@ -230,7 +230,7 @@ class MemoryGame {
             }
             
             this.stats.games++;
-            this.saveStats();
+            this.saveStats(true); // Pass true to indicate win
             this.updateDisplay();
             this.playSound('win');
         }
@@ -310,8 +310,20 @@ class MemoryGame {
         }
     }
 
-    saveStats() {
+    saveStats(won = false) {
+        // Salvar no localStorage
         localStorage.setItem('memory-stats', JSON.stringify(this.stats));
+        
+        // Salvar no banco de dados se ganhou
+        if (won && typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            DDGConfig.utils.saveGameStats('memory', {
+                score: this.moves,
+                won: true,
+                time: this.timer
+            }).catch(err => {
+                console.log('Estatísticas salvas localmente, mas falhou no banco de dados');
+            });
+        }
     }
 
     loadStats() {

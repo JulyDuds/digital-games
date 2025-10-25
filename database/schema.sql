@@ -143,7 +143,7 @@ INSERT INTO system_settings (setting_key, setting_value, description) VALUES
 ('login_lockout_time', '900', 'Tempo de bloqueio após tentativas falhadas em segundos'),
 ('audio_enabled', '1', 'Efeitos sonoros habilitados'),
 ('maintenance_mode', '0', 'Modo de manutenção'),
-('registration_enabled', '0', 'Registro de novos usuários habilitado');
+('registration_enabled', '1', 'Registro de novos usuários habilitado');
 
 -- Criar views úteis
 CREATE VIEW user_stats AS

@@ -361,7 +361,19 @@ class TicTacToe {
     }
 
     saveStats() {
+        // Salvar no localStorage
         localStorage.setItem('tictactoe-stats', JSON.stringify(this.stats));
+        
+        // Salvar no banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            DDGConfig.utils.saveGameStats('tictactoe', {
+                score: this.stats.xWins,
+                won: this.stats.xWins > 0,
+                time: 0 // Tic-tac-toe não rastreia tempo por partida
+            }).catch(err => {
+                console.log('Estatísticas salvas localmente, mas falhou no banco de dados');
+            });
+        }
     }
 
     loadStats() {

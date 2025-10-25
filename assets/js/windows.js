@@ -360,49 +360,49 @@ class WindowManager {
         const configs = {
             'tictactoe': {
                 title: 'Tic-Tac-Toe',
-                url: 'tictactoe.html',
+                url: 'games/tictactoe.html',
                 width: 700,
                 height: 700
             },
             'minesweeper': {
                 title: 'Campo Minado',
-                url: 'minesweeper.html',
+                url: 'games/minesweeper.html',
                 width: 700,
                 height: 700
             },
             'jogodaforca': {
                 title: 'Jogo da Forca',
-                url: 'jogodaforca.html',
+                url: 'games/jogodaforca.html',
                 width: 800,
                 height: 700
             },
             'pong': {
                 title: 'Pong',
-                url: 'pong.html',
+                url: 'games/pong.html',
                 width: 900,
                 height: 700
             },
             'memory': {
                 title: 'Memory Game',
-                url: 'memory.html',
+                url: 'games/memory.html',
                 width: 700,
                 height: 600
             },
             'snake': {
                 title: 'Snake',
-                url: 'snake.html',
+                url: 'games/snake.html',
                 width: 800,
                 height: 750
             },
             'wordle': {
                 title: 'Wordle',
-                url: 'wordle.html',
+                url: 'games/wordle.html',
                 width: 750,
                 height: 850
             },
             'solitaire': {
                 title: 'Paciência',
-                url: 'solitaire.html',
+                url: 'games/solitaire.html',
                 width: 900,
                 height: 800
             }
