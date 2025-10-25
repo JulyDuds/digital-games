@@ -62,7 +62,7 @@ includeHeader('Gerenciar Usuários - DigitalGames');
 <style>
     .admin-container {
         min-height: 100vh;
-        background: linear-gradient(135deg, #008080 0%, #004040 100%);
+        background: #CBC1C1;
         padding: 20px;
     }
 
@@ -76,7 +76,7 @@ includeHeader('Gerenciar Usuários - DigitalGames');
     }
 
     .admin-titlebar {
-        background: linear-gradient(90deg, #000080 0%, #0000ff 100%);
+        background: linear-gradient(90deg, #600000 0%, #a00000 100%);
         color: white;
         padding: 10px 15px;
         display: flex;
@@ -142,7 +142,7 @@ includeHeader('Gerenciar Usuários - DigitalGames');
     }
 
     thead {
-        background: #000080;
+        background: #FD0100;
         color: white;
     }
 
@@ -205,7 +205,7 @@ includeHeader('Gerenciar Usuários - DigitalGames');
                 </div>
             <?php endif; ?>
 
-            <h2 style="font-family: 'Press Start 2P'; font-size: 14px; margin-bottom: 15px; color: #000080;">
+            <h2 style="font-family: 'Press Start 2P'; font-size: 14px; margin-bottom: 15px; color: black;">
                 <i class="fas fa-list"></i> Lista de Usuários (<?php echo count($users); ?>)
             </h2>
 

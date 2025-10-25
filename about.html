@@ -8,11 +8,22 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="about-page">
+    <!-- Indicador de scroll -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scroll-progress"></div>
+    </div>
+
     <div class="about-container">
         <div class="about-header">
             <img src="assets/img/DigitalDetective.svg" alt="DigitalGames" class="about-logo">
             <h1 class="about-title">DIGITALGAMES</h1>
             <p class="about-version">Versão 1.0.0</p>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="index.php" class="btn btn-demo">
+                <i class="fas fa-play"></i> Abrir Plataforma
+            </a>
         </div>
 
         <div class="about-section">
@@ -23,9 +34,8 @@
             <div class="section-content">
                 <p>
                     O <span class="highlight">Digital Detective Games</span> é uma plataforma de jogos clássicos 
-                    . O objetivo é demonstrar habilidades 
-                    em desenvolvimento web através de uma interface nostálgica inspirada no Windows 98, combinada 
-                    com uma paleta de cores moderna e corporativa.
+                    desenvolvida para demonstrar habilidades em desenvolvimento web através de uma interface nostálgica 
+                    inspirada no Windows 98, combinada com uma paleta de cores moderna e corporativa.
                 </p>
             </div>
         </div>
@@ -41,6 +51,174 @@
                     ambiente de desktop simulado. Cada jogo funciona em janelas modais independentes que podem ser 
                     arrastadas, redimensionadas e gerenciadas, proporcionando uma experiência nostálgica e funcional.
                 </p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title"><i class="fas fa-palette"></i> Paleta de Cores</h2>
+            <div class="color-palette">
+                <div class="color-box" style="background: #242424;">
+                    <div class="color-name">Cinza Escuro</div>
+                    <div class="color-code">#242424 (Primary)</div>
+                </div>
+                <div class="color-box" style="background: #808080;">
+                    <div class="color-name">Cinza Médio</div>
+                    <div class="color-code">#808080 (Secondary)</div>
+                </div>
+                <div class="color-box" style="background: #FD0100;">
+                    <div class="color-name">Vermelho</div>
+                    <div class="color-code">#FD0100 (Accent)</div>
+                </div>
+                <div class="color-box" style="background: #CBC1C1; color: #242424;">
+                    <div class="color-name">Cinza Claro</div>
+                    <div class="color-code">#CBC1C1 (Light)</div>
+                </div>
+                <div class="color-box" style="background: #F5F3F6; color: #242424;">
+                    <div class="color-name">Cinza Muito Claro</div>
+                    <div class="color-code">#F5F3F6 (Dark)</div>
+                </div>
+                <div class="color-box" style="background: #FFC3B5; color: #242424;">
+                    <div class="color-name">Rosa Claro</div>
+                    <div class="color-code">#FFC3B5 (Rose Light)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title"><i class="fas fa-star"></i> Funcionalidades</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-window-restore"></i></div>
+                    <div class="feature-title">Janelas Modais</div>
+                    <div class="feature-desc">
+                        Cada jogo funciona em uma janela independente, que pode ser arrastada, 
+                        redimensionada, minimizada e maximizada.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
+                    <div class="feature-title">8 Jogos Clássicos</div>
+                    <div class="feature-desc">
+                        Tic-Tac-Toe, Campo Minado, Jogo da Forca, Pong, Memory Game, Snake, Wordle e Paciência, 
+                        todos com IA e múltiplos níveis de dificuldade.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-save"></i></div>
+                    <div class="feature-title">Persistência de Dados</div>
+                    <div class="feature-desc">
+                        Todas as estatísticas, pontuações e recordes são salvos localmente 
+                        e persistem entre sessões.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-desktop"></i></div>
+                    <div class="feature-title">Design antigo para desktop</div>
+                    <div class="feature-desc">
+                        Interface feita para desktop, com design antigo e nostalgia.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-paint-brush"></i></div>
+                    <div class="feature-title">Tema Windows 98</div>
+                    <div class="feature-desc">
+                        Design nostálgico inspirado no Windows 98 com paleta de cores 
+                        corporativa moderna.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-code"></i></div>
+                    <div class="feature-title">Código Limpo</div>
+                    <div class="feature-desc">
+                        Código bem documentado, modular e seguindo boas práticas de 
+                        desenvolvimento JavaScript ES6+.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-gamepad"></i>
+                Jogos Disponíveis
+            </h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-times"></i></div>
+                    <div class="feature-title">Tic-Tac-Toe</div>
+                    <div class="feature-desc">
+                        Jogo da velha com IA baseada em Minimax. Jogue contra o computador 
+                        ou com um amigo no modo 2 jogadores.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bomb"></i></div>
+                    <div class="feature-title">Campo Minado</div>
+                    <div class="feature-desc">
+                        Clássico jogo de campo minado com três níveis de dificuldade. 
+                        Use bandeiras para marcar as minas suspeitas.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-user-secret"></i></div>
+                    <div class="feature-title">Jogo da Forca</div>
+                    <div class="feature-desc">
+                        Adivinhe a palavra antes que o boneco seja completado. 
+                        Inclui sistema de categorias e dicas.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-table-tennis"></i></div>
+                    <div class="feature-title">Pong</div>
+                    <div class="feature-desc">
+                        O primeiro videogame da história recriado. Jogue contra uma IA 
+                        com três níveis de dificuldade.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <div class="feature-title">Memory Game</div>
+                    <div class="feature-desc">
+                        Teste sua memória encontrando todos os pares. Três tamanhos de 
+                        tabuleiro disponíveis.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
+                    <div class="feature-title">Snake</div>
+                    <div class="feature-desc">
+                        O clássico jogo da cobrinha. Coma a comida, cresça e evite 
+                        bater nas paredes ou em você mesmo!
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-font"></i></div>
+                    <div class="feature-title">Wordle</div>
+                    <div class="feature-desc">
+                        Adivinhe a palavra em 6 tentativas. Sistema de cores para 
+                        indicar letras corretas e posições.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-heart"></i></div>
+                    <div class="feature-title">Paciência</div>
+                    <div class="feature-desc">
+                        Jogo de cartas clássico. Organize todas as cartas por naipe 
+                        e cor em ordem decrescente.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -68,8 +246,8 @@
                         <span>Web Audio API</span>
                     </li>
                     <li class="tech-item">
-                        <i class="fas fa-save"></i>
-                        <span>LocalStorage API</span>
+                        <i class="fas fa-database"></i>
+                        <span>MySQL</span>
                     </li>
                     <li class="tech-item">
                         <i class="fas fa-paint-brush"></i>
@@ -82,37 +260,6 @@
                     <li class="tech-item">
                         <i class="fas fa-font"></i>
                         <span>Google Fonts</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="about-section">
-            <h2 class="section-title">
-                <i class="fas fa-gamepad"></i>
-                Jogos Disponíveis
-            </h2>
-            <div class="section-content">
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin: 15px 0;">
-                        <strong style="color: var(--accent);">⚔️ Tic-Tac-Toe:</strong> 
-                        Jogo da velha com IA invencível usando algoritmo Minimax
-                    </li>
-                    <li style="margin: 15px 0;">
-                        <strong style="color: var(--accent);">💣 Campo Minado:</strong> 
-                        Clássico jogo de campo minado com 3 níveis de dificuldade
-                    </li>
-                    <li style="margin: 15px 0;">
-                        <strong style="color: var(--accent);">🕵️ Jogo da Forca:</strong> 
-                        Adivinhe palavras com sistema de categorias e dicas
-                    </li>
-                    <li style="margin: 15px 0;">
-                        <strong style="color: var(--accent);">🏓 Pong:</strong> 
-                        O primeiro videogame da história com física realista
-                    </li>
-                    <li style="margin: 15px 0;">
-                        <strong style="color: var(--accent);">🧠 Memory Game:</strong> 
-                        Teste sua memória encontrando pares de cartas
                     </li>
                 </ul>
             </div>
@@ -139,10 +286,18 @@
             </div>
         </div>
 
+        <div style="text-align: center; margin: 50px 0;">
+            <a href="index.php" class="btn btn-demo" style="font-size: 1.2rem; padding: 15px 30px;">
+                <i class="fas fa-rocket"></i> Começar a Jogar
+            </a>
+        </div>
+
         <div class="credits">
             <p><strong>IEFP Leiria</strong></p>
-            
             <p>&copy; <span id="current-year"></span> DigitalGames. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px; opacity: 0.7;">
+                Desenvolvido como refatoração do projeto GameLab - IEFP Leiria
+            </p>
         </div>
 
         <div class="back-link">
@@ -152,7 +307,88 @@
         </div>
     </div>
 
-    <script src="../assets/js/footer.js"></script>
+    <script src="assets/js/footer.js"></script>
+    
+    <script>
+        // Controle do indicador de scroll
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            const progressBar = document.getElementById('scroll-progress');
+            if (progressBar) {
+                progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+            }
+        });
+
+        // Scroll suave para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Botão de voltar ao topo
+        const backToTop = document.createElement('button');
+        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        backToTop.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FD0100, #ff8080);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(253, 1, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+        `;
+        
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        backToTop.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+            this.style.boxShadow = '0 6px 20px rgba(253, 1, 0, 0.5)';
+        });
+
+        backToTop.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '0 4px 15px rgba(253, 1, 0, 0.3)';
+        });
+
+        document.body.appendChild(backToTop);
+
+        // Mostrar/ocultar botão baseado no scroll
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.visibility = 'visible';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.visibility = 'hidden';
+            }
+        });
+    </script>
 </body>
 </html>
 

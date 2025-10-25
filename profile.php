@@ -83,10 +83,10 @@ includeHeader('Perfil de ' . $user['name']);
 ?>
 
 <style>
-    /* Estilos para a página de perfil */
+    /* Estilos para a página de perfil - Tema Vermelho/Cinza */
     .profile-container {
         min-height: 100vh;
-        background: linear-gradient(135deg, #008080 0%, #004040 100%);
+        background: #CBC1C1;
         padding: 20px;
         overflow-y: auto;
     }
@@ -104,7 +104,7 @@ includeHeader('Perfil de ' . $user['name']);
     }
 
     .profile-titlebar {
-        background: linear-gradient(90deg, #000080 0%, #0000ff 100%);
+        background: linear-gradient(90deg, #600000 0%, #a00000 100%);
         color: white;
         padding: 8px 12px;
         font-size: 12px;
@@ -192,7 +192,7 @@ includeHeader('Perfil de ' . $user['name']);
     .profile-avatar {
         width: 80px;
         height: 80px;
-        background: linear-gradient(135deg, #000080, #0000ff);
+        background: linear-gradient(135deg, #600000, #a00000);
         border: 2px solid #808080;
         display: flex;
         align-items: center;
@@ -208,7 +208,7 @@ includeHeader('Perfil de ' . $user['name']);
 
     .profile-info h1 {
         margin: 0 0 5px 0;
-        color: #000080;
+        color: #800000;
         font-size: 24px;
     }
 
@@ -220,7 +220,7 @@ includeHeader('Perfil de ' . $user['name']);
 
     .profile-badge {
         display: inline-block;
-        background: #000080;
+        background: #800000;
         color: white;
         padding: 2px 8px;
         font-size: 10px;
@@ -247,7 +247,7 @@ includeHeader('Perfil de ' . $user['name']);
     .stat-card .stat-value {
         font-size: 32px;
         font-weight: bold;
-        color: #000080;
+        color: #800000;
         margin: 10px 0;
     }
 
@@ -271,7 +271,7 @@ includeHeader('Perfil de ' . $user['name']);
 
     .games-section h2 {
         margin: 0 0 15px 0;
-        color: #000080;
+        color: #800000;
         font-size: 18px;
         border-bottom: 2px solid #808080;
         padding-bottom: 8px;
@@ -295,7 +295,7 @@ includeHeader('Perfil de ' . $user['name']);
     .game-stat-icon {
         width: 48px;
         height: 48px;
-        background: #000080;
+        background: #800000;
         color: white;
         display: flex;
         align-items: center;
@@ -311,7 +311,7 @@ includeHeader('Perfil de ' . $user['name']);
 
     .game-stat-info h3 {
         margin: 0 0 5px 0;
-        color: #000080;
+        color: #800000;
         font-size: 14px;
     }
 
@@ -369,13 +369,13 @@ includeHeader('Perfil de ' . $user['name']);
     }
 
     .btn-primary {
-        background: #000080;
+        background: #800000;
         color: white;
-        border-color: #000080;
+        border-color: #800000;
     }
 
     .btn-primary:hover {
-        background: #0000ff;
+        background: #a00000;
     }
 
     .win-rate-bar {
@@ -389,7 +389,7 @@ includeHeader('Perfil de ' . $user['name']);
 
     .win-rate-fill {
         height: 100%;
-        background: linear-gradient(90deg, #00ff00, #00aa00);
+        background: linear-gradient(90deg, #ff6b6b, #c00000);
         transition: width 0.5s;
     }
 
@@ -548,7 +548,7 @@ includeHeader('Perfil de ' . $user['name']);
             <?php if (hasPermission('admin')): ?>
                 <!-- Seção de Regras Administrativas -->
                 <div class="admin-section" style="background: #ffffff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; padding: 20px; margin-bottom: 20px;">
-                    <h2 style="color: #800080; margin-bottom: 15px;">
+                    <h2 style="color: #800000; margin-bottom: 15px;">
                         <i class="fas fa-cog"></i> Configurações Administrativas
                     </h2>
                     <p style="color: #808080; font-size: 12px; margin-bottom: 15px;">
@@ -556,29 +556,12 @@ includeHeader('Perfil de ' . $user['name']);
                     </p>
                     
                     <div id="admin-rules-container">
-                        <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
-                                        <i class="fas fa-sliders-h"></i> Manutenção
-                                    </h4>
-                                    <p style="margin: 0; color: #666; font-size: 11px;">
-                                        Ativa/desativa o modo de manutenção do sistema
-                                    </p>
-                                </div>
-                                <label class="switch" style="cursor: pointer;">
-                                    <input type="checkbox" 
-                                           id="rule_maintenance" 
-                                           onchange="updateRule('maintenance_mode', this.checked ? '1' : '0')">
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                        </div>
+                       
 
                         <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div>
-                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
+                                    <h4 style="margin: 0 0 5px 0; color: #800000; font-size: 14px;">
                                         <i class="fas fa-user-plus"></i> Registro de Usuários
                                     </h4>
                                     <p style="margin: 0; color: #666; font-size: 11px;">
@@ -598,7 +581,7 @@ includeHeader('Perfil de ' . $user['name']);
                         <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div>
-                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
+                                    <h4 style="margin: 0 0 5px 0; color: #800000; font-size: 14px;">
                                         <i class="fas fa-trophy"></i> Ranking Público
                                     </h4>
                                     <p style="margin: 0; color: #666; font-size: 11px;">
@@ -618,7 +601,7 @@ includeHeader('Perfil de ' . $user['name']);
                         <div class="admin-rule-item" style="background: #f0f0f0; border: 2px inset #c0c0c0; padding: 15px; margin-bottom: 10px;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div>
-                                    <h4 style="margin: 0 0 5px 0; color: #000080; font-size: 14px;">
+                                    <h4 style="margin: 0 0 5px 0; color: #800000; font-size: 14px;">
                                         <i class="fas fa-bell"></i> Notificações
                                     </h4>
                                     <p style="margin: 0; color: #666; font-size: 11px;">
@@ -700,7 +683,7 @@ includeHeader('Perfil de ' . $user['name']);
     }
 
     .switch input:checked + .slider {
-        background-color: #008000;
+        background-color: #800000;
     }
 
     .switch input:checked + .slider:before {
@@ -805,4 +788,3 @@ includeHeader('Perfil de ' . $user['name']);
 </script>
 
 <?php includeFooter(); ?>
-

@@ -63,7 +63,7 @@ includeHeader('Logs Administrativos - DigitalGames');
 <style>
     .admin-container {
         min-height: 100vh;
-        background: linear-gradient(135deg, #008080 0%, #004040 100%);
+        background: #CBC1C1;
         padding: 20px;
     }
 
@@ -77,7 +77,7 @@ includeHeader('Logs Administrativos - DigitalGames');
     }
 
     .admin-titlebar {
-        background: linear-gradient(90deg, #000080 0%, #0000ff 100%);
+        background: linear-gradient(90deg, #600000 0%, #a00000 100%);
         color: white;
         padding: 10px 15px;
         display: flex;
@@ -123,7 +123,7 @@ includeHeader('Logs Administrativos - DigitalGames');
     }
 
     thead {
-        background: #000080;
+        background: #FD0100;
         color: white;
     }
 
@@ -137,7 +137,7 @@ includeHeader('Logs Administrativos - DigitalGames');
 
     .log-success { color: #008000; font-weight: bold; }
     .log-failed { color: #ff0000; font-weight: bold; }
-    .log-admin { color: #000080; font-weight: bold; }
+    .log-admin { color: black; font-weight: bold; }
 </style>
 
 <div class="admin-container">
@@ -160,12 +160,12 @@ includeHeader('Logs Administrativos - DigitalGames');
         </div>
 
         <div class="admin-content">
-            <h2 style="font-family: 'Press Start 2P'; font-size: 14px; margin-bottom: 15px; color: #000080;">
+            <h2 style="font-family: 'Press Start 2P'; font-size: 14px; margin-bottom: 15px; color: black;">
                 <i class="fas fa-list"></i> Logs Recentes (<?php echo count($logs); ?>)
             </h2>
 
             <?php if (empty($logs)): ?>
-                <div style="padding: 20px; text-align: center; background: #ffffcc; border: 2px solid #808080;">
+                <div style="padding: 20px; text-align: center; background: #ffc3b5; border: 2px solid #808080;">
                     <i class="fas fa-info-circle" style="font-size: 48px; color: #808080; margin-bottom: 10px;"></i>
                     <p style="font-family: 'Press Start 2P'; font-size: 12px; color: #000;">
                         Nenhum log encontrado no banco de dados.
