@@ -23,19 +23,13 @@
     font-family: 'Press Start 2P', 'MS Sans Serif', monospace;
 }
 
-.btn btn-primary {
-    text-decoration: none;
-    color: #000000;
-
-}
-
 body {
     font-family: 'Press Start 2P', 'MS Sans Serif', monospace;
     background: #ffffff;
     color: #000000;
     min-height: 100vh;
-    max-height: 100vh; /* Limita altura para evitar scroll do body */
-    overflow: hidden; /* SEM SCROLL */
+    max-height: 100vh;
+    overflow: hidden;
     font-size: 15px;
     image-rendering: pixelated;
     -webkit-font-smoothing: none;
@@ -43,9 +37,6 @@ body {
     padding: 0;
 }
 
-/* ===== SISTEMA COM SCROLL ===== */
-
-/* Desktop Styles */
 .desktop {
     width: 100vw;
     height: 100vh;
@@ -111,7 +102,6 @@ body {
     word-break: break-word;
 }
 
-/* Taskbar */
 .taskbar {
     position: fixed;
     bottom: 0;
@@ -159,7 +149,7 @@ body {
     display: flex;
     gap: 3px;
     padding: 0 3px;
-    overflow: hidden; /* SEM SCROLL */
+    overflow: hidden;
 }
 
 .taskbar-app {
@@ -199,7 +189,6 @@ body {
     text-align: center;
 }
 
-/* Start Menu */
 .start-menu {
     position: fixed;
     bottom: 42px;
@@ -222,8 +211,6 @@ body {
     color: #ffffff;
     font-weight: normal;
     font-size: 18px;
-   
-   
 }
 
 .start-menu-items {
@@ -261,7 +248,6 @@ body {
     border-bottom: 1px solid #ffffff;
 }
 
-/* Window Styles */
 .window {
     position: absolute;
     min-width: 500px;
@@ -273,7 +259,8 @@ body {
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    overflow: hidden; /* SEM SCROLL */
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .window.maximized {
@@ -357,7 +344,6 @@ body {
     display: block;
 }
 
-/* Resize Handles */
 .resize-handle {
     position: absolute;
     z-index: 10;
@@ -427,7 +413,6 @@ body {
     cursor: sw-resize;
 }
 
-/* Game Styles Base */
 .container {
     background: #c0c0c0;
     width: 100%;
@@ -439,7 +424,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 
 .header {
     background: #c0c0c0;
@@ -544,75 +528,56 @@ body {
     flex-shrink: 0;
 }
 
-/* Utility Classes */
 .hidden {
     display: none !important;
 }
 
-/* ===== SCROLLBAR WINDOWS 95 ===== */
-.container::-webkit-scrollbar-thumb,
-.window-content {
-    scrollbar-width: auto;
-    scrollbar-color: #c0c0c0 #ffffff;
-}
-.container::-webkit-scrollbar-thumb,
 .window-content::-webkit-scrollbar {
     width: 16px;
     height: 16px;
 }
-.container::-webkit-scrollbar-thumb,
+
 .window-content::-webkit-scrollbar-track {
     background: #c0c0c0;
     border: 1px solid #808080;
 }
-.container::-webkit-scrollbar-thumb,
+
 .window-content::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border: 1px solid #808080;
     border-top: 1px solid #ffffff;
     border-left: 1px solid #ffffff;
 }
-.container::-webkit-scrollbar-thumb,
+
 .window-content::-webkit-scrollbar-thumb:hover {
     background: #a0a0a0;
 }
 
-.window-content::-webkit-scrollbar-button:vertical:start:decrement,
-.window-content::-webkit-scrollbar-button:vertical:end:increment,
-.window-content::-webkit-scrollbar-button:horizontal:start:decrement,
-.window-content::-webkit-scrollbar-button:horizontal:end:increment {
-    display: block;
-    width: 16px;
-    height: 16px;
-    background: #c0c0c0;
+.window-content::-webkit-scrollbar-button:vertical:start:decrement {
+    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,8 8,0 16,8" fill="black"/></svg>') no-repeat center;
     border: 1px solid #808080;
 }
 
-.window-content::-webkit-scrollbar-button:vertical:start:decrement {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,8 8,0 16,8" fill="black"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 .window-content::-webkit-scrollbar-button:vertical:end:increment {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,0 8,8 16,0" fill="black"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
+    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,0 8,8 16,0" fill="black"/></svg>') no-repeat center;
+    border: 1px solid #808080;
 }
 
 .window-content::-webkit-scrollbar-button:horizontal:start:decrement {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 0,8 8,16" fill="black"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
+    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 0,8 8,16" fill="black"/></svg>') no-repeat center;
+    border: 1px solid #808080;
 }
 
 .window-content::-webkit-scrollbar-button:horizontal:end:increment {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 16,8 8,16" fill="black"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
+    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 16,8 8,16" fill="black"/></svg>') no-repeat center;
+    border: 1px solid #808080;
 }
 
-/* Scroll para outros elementos */
+.window-content {
+    scrollbar-width: auto;
+    scrollbar-color: #c0c0c0 #c0c0c0;
+}
+
 .desktop-icons::-webkit-scrollbar,
 .game-area::-webkit-scrollbar,
 .solitaire-board::-webkit-scrollbar,
@@ -629,8 +594,7 @@ body {
 .tictactoe-container::-webkit-scrollbar,
 .minesweeper-container::-webkit-scrollbar,
 .hangman-container::-webkit-scrollbar,
-.solitaire-container::-webkit-scrollbar,
-.window-content::-webkit-scrollbar {
+.solitaire-container::-webkit-scrollbar {
     width: 16px;
     height: 16px;
 }
@@ -651,8 +615,7 @@ body {
 .tictactoe-container::-webkit-scrollbar-track,
 .minesweeper-container::-webkit-scrollbar-track,
 .hangman-container::-webkit-scrollbar-track,
-.solitaire-container::-webkit-scrollbar-track,
-.window-content::-webkit-scrollbar-track {
+.solitaire-container::-webkit-scrollbar-track {
     background: #c0c0c0;
     border: 1px solid #808080;
 }
@@ -673,8 +636,7 @@ body {
 .tictactoe-container::-webkit-scrollbar-thumb,
 .minesweeper-container::-webkit-scrollbar-thumb,
 .hangman-container::-webkit-scrollbar-thumb,
-.solitaire-container::-webkit-scrollbar-thumb,
-.window-content::-webkit-scrollbar-thumb {
+.solitaire-container::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border: 1px solid #808080;
     border-top: 1px solid #ffffff;
@@ -697,12 +659,10 @@ body {
 .tictactoe-container::-webkit-scrollbar-thumb:hover,
 .minesweeper-container::-webkit-scrollbar-thumb:hover,
 .hangman-container::-webkit-scrollbar-thumb:hover,
-.solitaire-container::-webkit-scrollbar-thumb:hover,
-.window-content::-webkit-scrollbar-thumb:hover {
+.solitaire-container::-webkit-scrollbar-thumb:hover {
     background: #a0a0a0;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -714,11 +674,6 @@ body {
     }
 }
 
-.window {
-    animation: fadeIn 0.3s ease-out;
-}
-
-/* Common Game Styles */
 .game-board {
     margin: 20px auto;
     padding: 20px;
@@ -829,24 +784,23 @@ body {
 .instructions strong {
     color: var(--accent);
 }
+
 .icon-red {
     color: #ff0000;
     margin-right: 5px;
 }
 
-/* Solitaire Styles */
 .solitaire-container {
     overflow: auto !important;
     max-height: 100vh !important;
     padding: 20px !important;
     height: 100vh !important;
 }
+
 .solitaire-board {
     padding: 20px;
     min-height: 600px;
-  
     max-width: 100%;
-   
 }
 
 .top-area {
@@ -998,13 +952,13 @@ body {
     background: #700000;
 }
 
-/* Tic-Tac-Toe Styles */
 .tictactoe-container {
     overflow: auto !important;
     max-height: 100vh !important;
     padding: 20px !important;
     height: 100vh !important;
 }
+
 .tictactoe-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1048,7 +1002,6 @@ body {
     cursor: not-allowed;
 }
 
-/* X vermelho e O preto */
 .cell.x {
     color: #ff0000;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
@@ -1157,19 +1110,16 @@ body {
     font-family: 'Press Start 2P';
 }
 
-/* Modo selecionado destacado */
 .mode-btn.active {
     background: #3f3b3b;
     color: #ffffff;
     border-color: #000000 #ffffff #ffffff #000000;
 }
 
-/* Efeito de hover nos botões de modo */
 .mode-btn:hover {
     background: #d4d4d4;
 }
 
-/* Wordle Styles */
 .wordle-container {
     overflow: auto !important;
     max-height: 100vh !important;
@@ -1242,7 +1192,6 @@ body {
     margin: auto;
     padding: 15px;
     overflow: 100%;
-    
 }
 
 .key {
@@ -1318,7 +1267,6 @@ body {
     background: #db7373;
 }
 
-/* Hangman Styles */
 .hangman-container {
     overflow: auto !important;
     max-height: 100vh !important;
@@ -1326,6 +1274,7 @@ body {
     height: 100% !important;
     min-height: 100% !important;
 }
+
 .hangman-canvas {
     width: 200px;
     height: 200px;
@@ -1364,8 +1313,8 @@ body {
     max-width: 500px;
     margin: 20px auto;
     padding: 15px;
-    overflow: auto; /* COM SCROLL */
-    max-height: 30vh; /* Limita altura para forçar scroll */
+    overflow: auto; 
+    max-height: 30vh; 
 }
 
 .hangman-key {
@@ -1414,7 +1363,6 @@ body {
     color: var(--accent);
 }
 
-/* Memory Game Styles */
 .memory-container {
     overflow: auto !important;
     max-height: 100vh !important;
@@ -1500,7 +1448,6 @@ body {
     color: #000000;
 }
 
-/* Dificuldades específicas */
 .memory-board[style*="grid-template-columns: repeat(4, 1fr)"] {
     max-width: 400px;
 }
@@ -1513,13 +1460,13 @@ body {
     max-width: 300px;
 }
 
-/* Minesweeper Styles */
 .minesweeper-container {
     overflow: auto !important;
     max-height: 100vh !important;
     padding: 20px !important;
     height: 100vh !important;
 }
+
 .minesweeper-board {
     display: grid;
     gap: 0;
@@ -1628,7 +1575,6 @@ body {
     100% { transform: scale(1); }
 }
 
-/* Número colors */
 .minesweeper-cell.number-1 { color: #ff8282; }
 .minesweeper-cell.number-2 { color: #1b1616; }
 .minesweeper-cell.number-3 { color: #ff0000; }
@@ -1638,7 +1584,6 @@ body {
 .minesweeper-cell.number-7 { color: #000000; }
 .minesweeper-cell.number-8 { color: #808080; }
 
-/* Diferentes tamanhos para dificuldades */
 .minesweeper-board.easy {
     grid-template-columns: repeat(8, 1fr);
 }
@@ -1651,7 +1596,6 @@ body {
     grid-template-columns: repeat(16, 1fr);
 }
 
-/* Status do jogo */
 #game-status {
     font-size: 15px;
     padding: 15px;
@@ -1680,7 +1624,6 @@ body {
     border-color: #3f3232 #8b7070 #4d3c3c #1d1818;
 }
 
-/* Melhor visibilidade para o contador de bandeiras */
 #flags-count {
     font-weight: normal;
     color: #ff0000;
@@ -1691,7 +1634,6 @@ body {
     color: #000000;
 }
 
-/* Pong Styles */
 .pong-container {
     overflow-y: auto !important;
     overflow-x: hidden !important;
@@ -1736,7 +1678,6 @@ body {
     font-family: 'Press Start 2P';
 }
 
-/* Snake Styles */
 .snake-container {
     overflow: auto !important;
     max-height: 100vh !important;
@@ -1744,6 +1685,7 @@ body {
     height: 100% !important;
     min-height: 100% !important;
 }
+
 .mobile-controls {
     display: none;
     margin: 0px auto;
@@ -1798,8 +1740,6 @@ body {
     grid-column: 2;
     grid-row: 3;
 }
-
-/* ===== RESPONSIVIDADE COM SCROLL ===== */
 
 @media (max-width: 768px) {
     .desktop-icons {
@@ -1860,18 +1800,17 @@ body {
         font-size: 12px;
     }
     
-    /* COM SCROLL em mobile */
     .container {
-        overflow: auto; /* COM SCROLL */
+        overflow: auto;
         height: auto;
         min-height: 100vh;
-        max-height: 100vh; /* Mantém limite de altura */
+        max-height: 100vh;
     }
     
     .game-area {
         padding: 10px;
-        overflow: auto; /* COM SCROLL */
-        max-height: calc(100vh - 100px); /* Ajusta para mobile */
+        overflow: auto;
+        max-height: calc(100vh - 100px);
     }
     
     .desktop-icons {
@@ -1881,13 +1820,12 @@ body {
         padding: 10px;
     }
     
-    /* Tabuleiros em mobile - COM SCROLL */
     .keyboard,
     .hangman-keyboard {
-        overflow: auto; /* COM SCROLL */
+        overflow: auto;
         max-width: 100vw;
         margin: 10px auto;
-        max-height: 50vh; /* Limita altura em mobile */
+        max-height: 50vh;
     }
 }
 
@@ -1914,20 +1852,17 @@ body {
     }
 }
 
-/* REGRAS FINAIS PARA REMOVER SCROLL PADRÃO */
 html, body, .desktop, .container, .window {
     overflow: hidden !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
 
-/* Container precisa ter scroll funcional mas invisível */
 .container {
     overflow-y: auto !important;
     overflow-x: hidden !important;
 }
 
-/* EXCEÇÃO PARA PÁGINA DEMO */
 .demo-page html,
 .demo-page body {
     overflow: auto !important;
@@ -1945,7 +1880,6 @@ body::-webkit-scrollbar,
     height: 0 !important;
 }
 
-/* EXCEÇÃO PARA SCROLLBARS DA PÁGINA DEMO */
 .demo-page html::-webkit-scrollbar,
 .demo-page body::-webkit-scrollbar {
     display: block !important;
@@ -1953,7 +1887,6 @@ body::-webkit-scrollbar,
     height: 12px !important;
 }
 
-/* Forçar remoção de scroll em TODOS os elementos principais */
 div, main, section, article, aside, nav, header, footer {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
@@ -1972,7 +1905,6 @@ footer::-webkit-scrollbar {
     height: 0 !important;
 }
 
-/* Garantir que apenas elementos específicos tenham scroll */
 .desktop-icons,
 .game-area,
 .window-content,
@@ -1988,7 +1920,7 @@ footer::-webkit-scrollbar {
 .minesweeper-container,
 .hangman-container,
 .solitaire-container {
-    scrollbar-width: thin !important;
+    scrollbar-width: auto !important;
     -ms-overflow-style: auto !important;
 }
 
@@ -2012,9 +1944,6 @@ footer::-webkit-scrollbar {
     height: 16px !important;
 }
 
-/* ===== ESTILOS DA PÁGINA DEMO ===== */
-
-/* Configurações específicas para a página demo */
 .demo-page body {
     overflow-y: auto !important;
     height: auto !important;
@@ -2031,33 +1960,31 @@ footer::-webkit-scrollbar {
     scroll-behavior: smooth;
 }
 
-/* Scrollbar personalizada para demo - CINZA */
 .demo-page ::-webkit-scrollbar {
-    width: 12px;
+    width: 16px;
 }
 
 .demo-page ::-webkit-scrollbar-track {
     background: #c0c0c0;
-    border-radius: 0;
+    border: 1px solid #808080;
 }
 
 .demo-page ::-webkit-scrollbar-thumb {
-    background: #808080;
-    border-radius: 0;
-    border: 1px solid #000000;
+    background: #c0c0c0;
+    border: 1px solid #808080;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
 }
 
 .demo-page ::-webkit-scrollbar-thumb:hover {
-    background: #909090;
+    background: #a0a0a0;
 }
 
-/* Para Firefox */
 .demo-page html {
-    scrollbar-width: thin;
-    scrollbar-color: #808080 #c0c0c0;
+    scrollbar-width: auto;
+    scrollbar-color: #c0c0c0 #c0c0c0;
 }
 
-/* Indicador de scroll */
 .scroll-indicator {
     position: fixed;
     top: 0;
@@ -2075,7 +2002,6 @@ footer::-webkit-scrollbar {
     transition: width 0.1s ease;
 }
 
-/* Container da demo */
 .demo-container {
     max-width: 1200px;
     margin: 50px auto;
@@ -2100,7 +2026,6 @@ footer::-webkit-scrollbar {
     margin-bottom: 40px;
 }
 
-/* Paleta de cores */
 .color-palette {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -2127,7 +2052,6 @@ footer::-webkit-scrollbar {
     opacity: 0.8;
 }
 
-/* Grid de features */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -2174,7 +2098,6 @@ footer::-webkit-scrollbar {
     text-decoration: none;
 }
 
-/* Seções da demo */
 .demo-section {
     margin: 50px 0;
     padding: 30px;
@@ -2190,7 +2113,6 @@ footer::-webkit-scrollbar {
     font-family: 'Fira Code', monospace;
 }
 
-/* Garantir que a página demo tenha scroll funcional */
 .demo-page {
     overflow: auto !important;
 }
@@ -2199,7 +2121,6 @@ footer::-webkit-scrollbar {
     box-sizing: border-box;
 }
 
-/* Forçar scroll na página demo */
 .demo-page body {
     position: static !important;
     overflow-y: scroll !important;
@@ -2208,36 +2129,31 @@ footer::-webkit-scrollbar {
     max-height: none !important;
 }
 
-/* ============================================
-   ESTILOS DA PÁGINA ABOUT
-   ============================================ */
-
-/* Scrollbar customizada global - CINZA */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #808080 #c0c0c0;
+    scrollbar-color: #c0c0c0 #c0c0c0;
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 16px;
 }
 
 ::-webkit-scrollbar-track {
     background: #c0c0c0;
-    border-left: 1px solid #808080;
+    border: 1px solid #808080;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #808080;
-    border-radius: 0;
-    border: 1px solid #000000;
+    background: #c0c0c0;
+    border: 1px solid #808080;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #909090;
+    background: #a0a0a0;
 }
 
-/* Estilos específicos para página About */
 html.about-page {
     scroll-behavior: smooth;
     overflow-y: scroll !important;
@@ -2262,7 +2178,6 @@ body.about-page {
     position: static !important;
 }
 
-/* Desabilitar estilos do desktop na página About */
 body.about-page .desktop {
     display: none !important;
 }
@@ -2383,7 +2298,6 @@ body.about-page .desktop {
     font-weight: bold;
 }
 
-/* Responsivo para About */
 @media (max-width: 768px) {
     .about-container {
         padding: 20px;
@@ -2401,6 +2315,7 @@ body.about-page .desktop {
         font-size: 1.5rem;
     }
 }
+
 a {
     color: #800000;
     text-decoration: underline;
@@ -2410,11 +2325,7 @@ a {
 a:hover {
     color: #a00000;
 }
-/* ============================================
-   ESTILOS DE LOGIN E REGISTRO
-   ============================================ */
 
-/* Estilos específicos para a página de login - Tema Vermelho/Cinza */
 .login-container {
     position: fixed;
     top: 0;
@@ -2589,17 +2500,6 @@ a:hover {
     display: none;
 }
 
-/* Links com cor vermelha */
-a {
-    color: #800000;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-a:hover {
-    color: #a00000;
-}
-
 .password-strength {
     height: 4px;
     background: #808080;
@@ -2644,7 +2544,6 @@ a:hover {
     padding: 20px 0;
 }
 
-/* Animações */
 .login-window, .register-window {
     animation: loginSlideIn 0.5s ease-out;
 }
@@ -2671,7 +2570,6 @@ a:hover {
     }
 }
 
-/* Efeito de digitação */
 .typing-effect {
     overflow: hidden;
     border-right: 2px solid #000080;
@@ -2689,7 +2587,6 @@ a:hover {
     50% { border-color: #800000; }
 }
 
-/* Estilos dos botões */
 .btn {
     padding: 6px 20px;
     border: 2px solid;
