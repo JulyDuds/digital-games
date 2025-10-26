@@ -91,6 +91,9 @@ class SolitaireGame {
 
         // Iniciar jogo
         this.newGame();
+        
+        // Carregar estatísticas do banco de dados
+        this.loadStatsFromDatabase();
     }
 
     createDeck() {
@@ -165,8 +168,6 @@ class SolitaireGame {
 
         this.render();
         this.updateDisplay();
-        this.stats.games++;
-        this.saveStats();
     }
 
     setupTableau() {
@@ -613,7 +614,16 @@ class SolitaireGame {
             );
             
             if (allComplete) {
-                this.statusDisplay.textContent = 'Jogo auto-completado com sucesso!';
+                this.gameActive = false;
+                clearInterval(this.timerInterval);
+                this.stats.wins++;
+                this.stats.games++;
+                this.score += 500; // Bônus por vencer
+                this.statusDisplay.textContent = '🎉 Jogo auto-completado com sucesso!';
+                this.playSound('win');
+                this.saveStats();
+                this.saveStatsToDatabase(true);
+                this.updateDisplay();
             } else {
                 this.statusDisplay.textContent = 'Não foi possível completar o jogo automaticamente.';
             }
@@ -826,10 +836,12 @@ class SolitaireGame {
             this.gameActive = false;
             clearInterval(this.timerInterval);
             this.stats.wins++;
+            this.stats.games++;
             this.score += 500; // Bônus por vencer
             this.statusDisplay.textContent = '🎉 Parabéns! Você venceu!';
             this.playSound('win');
             this.saveStats();
+            this.saveStatsToDatabase(true);
             this.updateDisplay();
         }
     }
@@ -938,6 +950,41 @@ class SolitaireGame {
         const saved = localStorage.getItem('solitaire-stats');
         if (saved) {
             this.stats = JSON.parse(saved);
+        }
+    }
+
+    async loadStatsFromDatabase() {
+        // Carregar estatísticas do banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.getGameStats) {
+            try {
+                const stats = await DDGConfig.utils.getGameStats('solitaire');
+                if (stats) {
+                    this.stats.wins = stats.games_won || 0;
+                    this.stats.games = stats.games_played || 0;
+                    this.updateDisplay();
+                }
+            } catch (err) {
+                console.log('Erro ao carregar estatísticas do banco de dados');
+            }
+        }
+    }
+
+    async saveStatsToDatabase(won) {
+        // Salvar no banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            try {
+                console.log('Tentando salvar estatísticas Solitaire no banco de dados...', { won, score: this.score, timer: this.timer, stats: this.stats });
+                const result = await DDGConfig.utils.saveGameStats('solitaire', {
+                    score: this.score,
+                    won: won,
+                    time: this.timer
+                });
+                console.log('Resultado do salvamento:', result);
+            } catch (err) {
+                console.error('Erro ao salvar estatísticas Solitaire no banco de dados:', err);
+            }
+        } else {
+            console.error('DDGConfig.utils.saveGameStats não está disponível');
         }
     }
 }

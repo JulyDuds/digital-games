@@ -59,9 +59,12 @@ class HangmanGame {
         this.init();
     }
 
-    init() {
+    async init() {
         // Carregar estatísticas
         this.loadStats();
+
+        // Carregar estatísticas do banco de dados primeiro
+        await this.loadStatsFromDatabase();
 
         // Criar teclado
         this.createKeyboard();
@@ -100,8 +103,8 @@ class HangmanGame {
 
         // Atualizar display
         this.categoryDisplay.textContent = this.currentCategory;
-        this.updateDisplay();
         this.drawHangman();
+        this.updateDisplay();
         this.statusDisplay.innerHTML = '<i class="fas fa-search icon-red"></i> Adivinhe a palavra!';
     }
 
@@ -279,6 +282,9 @@ class HangmanGame {
             this.saveStats();
             this.updateDisplay();
             this.playSound('win');
+            
+            // Salvar no banco de dados após atualizar display
+            this.saveStatsToDatabase(true);
         }
     }
 
@@ -290,6 +296,9 @@ class HangmanGame {
             this.saveStats();
             this.updateDisplay();
             this.playSound('lose');
+            
+            // Salvar no banco de dados após atualizar display
+            this.saveStatsToDatabase(false);
         }
     }
 
@@ -361,6 +370,41 @@ class HangmanGame {
         const saved = localStorage.getItem('hangman-stats');
         if (saved) {
             this.stats = JSON.parse(saved);
+        }
+    }
+
+    async loadStatsFromDatabase() {
+        // Carregar estatísticas do banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.getGameStats) {
+            try {
+                const stats = await DDGConfig.utils.getGameStats('jogodaforca');
+                if (stats) {
+                    this.stats.wins = stats.games_won || 0;
+                    this.stats.games = stats.games_played || 0;
+                    this.updateDisplay();
+                }
+            } catch (err) {
+                console.log('Erro ao carregar estatísticas do banco de dados');
+            }
+        }
+    }
+
+    async saveStatsToDatabase(won) {
+        // Salvar no banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            try {
+                console.log('Tentando salvar estatísticas no banco de dados...', { won, stats: this.stats });
+                const result = await DDGConfig.utils.saveGameStats('jogodaforca', {
+                    score: won ? 1 : 0,
+                    won: won,
+                    time: 0
+                });
+                console.log('Resultado do salvamento:', result);
+            } catch (err) {
+                console.error('Erro ao salvar estatísticas no banco de dados:', err);
+            }
+        } else {
+            console.error('DDGConfig.utils.saveGameStats não está disponível');
         }
     }
 }

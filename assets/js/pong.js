@@ -127,6 +127,9 @@ class PongGame {
         // Desenhar estado inicial
         this.draw();
         this.updateDisplay();
+        
+        // Carregar estatísticas do banco de dados
+        this.loadStatsFromDatabase();
     }
 
     startGame() {
@@ -293,6 +296,7 @@ class PongGame {
 
             this.stats.games++;
             this.saveStats();
+            this.saveStatsToDatabase(this.playerScore > this.aiScore);
             this.updateDisplay();
         }
     }
@@ -415,6 +419,41 @@ class PongGame {
         const saved = localStorage.getItem('pong-stats');
         if (saved) {
             this.stats = JSON.parse(saved);
+        }
+    }
+
+    async loadStatsFromDatabase() {
+        // Carregar estatísticas do banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.getGameStats) {
+            try {
+                const stats = await DDGConfig.utils.getGameStats('pong');
+                if (stats) {
+                    this.stats.wins = stats.games_won || 0;
+                    this.stats.games = stats.games_played || 0;
+                    this.updateDisplay();
+                }
+            } catch (err) {
+                console.log('Erro ao carregar estatísticas do banco de dados');
+            }
+        }
+    }
+
+    async saveStatsToDatabase(won) {
+        // Salvar no banco de dados
+        if (typeof DDGConfig !== 'undefined' && DDGConfig.utils && DDGConfig.utils.saveGameStats) {
+            try {
+                console.log('Tentando salvar estatísticas Pong no banco de dados...', { won, score: this.playerScore, stats: this.stats });
+                const result = await DDGConfig.utils.saveGameStats('pong', {
+                    score: this.playerScore,
+                    won: won,
+                    time: 0
+                });
+                console.log('Resultado do salvamento:', result);
+            } catch (err) {
+                console.error('Erro ao salvar estatísticas Pong no banco de dados:', err);
+            }
+        } else {
+            console.error('DDGConfig.utils.saveGameStats não está disponível');
         }
     }
 }
