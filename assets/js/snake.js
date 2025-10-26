@@ -114,30 +114,49 @@ class SnakeGame {
     }
 
     handleKeyPress(e) {
-        if (!this.gameRunning) return;
-
         switch(e.key) {
             case 'ArrowUp':
-                this.changeDirection('up');
-                e.preventDefault();
+            case 'w':
+            case 'W':
+                if (this.gameRunning) {
+                    this.changeDirection('up');
+                    e.preventDefault();
+                }
                 break;
             case 'ArrowDown':
-                this.changeDirection('down');
-                e.preventDefault();
+            case 's':
+            case 'S':
+                if (this.gameRunning) {
+                    this.changeDirection('down');
+                    e.preventDefault();
+                }
                 break;
             case 'ArrowLeft':
-                this.changeDirection('left');
-                e.preventDefault();
+            case 'a':
+            case 'A':
+                if (this.gameRunning) {
+                    this.changeDirection('left');
+                    e.preventDefault();
+                }
                 break;
             case 'ArrowRight':
-                this.changeDirection('right');
-                e.preventDefault();
+            case 'd':
+            case 'D':
+                if (this.gameRunning) {
+                    this.changeDirection('right');
+                    e.preventDefault();
+                }
                 break;
             case ' ':
-                this.togglePause();
                 e.preventDefault();
+                if (!this.gameRunning) {
+                    this.startGame();
+                } else {
+                    this.togglePause();
+                }
                 break;
         }
+        
     }
 
     changeDirection(newDirection) {

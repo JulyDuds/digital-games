@@ -104,6 +104,16 @@ class PongGame {
                 this.keys[e.key] = true;
                 e.preventDefault();
             }
+            
+            // Espaço para iniciar/pausar
+            if (e.key === ' ') {
+                e.preventDefault();
+                if (!this.gameRunning) {
+                    this.startGame();
+                } else {
+                    this.togglePause();
+                }
+            }
         });
 
         document.addEventListener('keyup', (e) => {
@@ -113,6 +123,7 @@ class PongGame {
             }
         });
 
+    
         // Desenhar estado inicial
         this.draw();
         this.updateDisplay();
