@@ -123,8 +123,8 @@ const DDGConfig = {
 
     // API endpoints
     api: {
-        saveStats: '/digital-games/api/save_stats.php',
-        getStats: '/digital-games/api/get_stats.php'
+        saveStats: '../api/save_stats.php',
+        getStats: '../api/get_stats.php'
     },
 
     // Utilitários
@@ -154,6 +154,11 @@ const DDGConfig = {
             }
         },
 
+        // API endpoints (corrigidos para caminho relativo)
+        api: {
+            saveStats: '../api/save_stats.php',
+            getStats: '../api/get_stats.php'
+        },
         // Salvar estatísticas do jogo no banco de dados
         async saveGameStats(gameId, stats) {
             try {

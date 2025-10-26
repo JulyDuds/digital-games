@@ -428,9 +428,6 @@ includeHeader('Perfil de ' . $user['name']);
                 <button onclick="window.location.href='index.php'">
                     <i class="fas fa-home"></i> Início
                 </button>
-                <button onclick="window.close()">
-                    <i class="fas fa-times"></i>
-                </button>
             </div>
         </div>
 
