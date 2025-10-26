@@ -1,4 +1,4 @@
-# 🎮 DigitalGames
+# DigitalGames
 
 Sistema de jogos retro no estilo Windows 98 com autenticação PHP, MySQL e interface nostálgica. Desenvolvido para demonstrar habilidades em desenvolvimento web full-stack.
 
@@ -9,10 +9,8 @@ digital-games/
 ├── 📁 admin/                    # Ferramentas administrativas
 │   ├── 403.php                 # Página de erro 403
 │   ├── 404.php                 # Página de erro 404
-│   ├── 500.php                 # Página de erro 500
-│   ├── install_database.php   # Instalador do banco de dados
-│   └── install.php             # Instalador básico
-│
+│   └── 500.php                 # Página de erro 500
+│ 
 ├── 📁 api/                     # APIs REST do sistema
 │   ├── get_stats.php           # API para obter estatísticas
 │   ├── save_stats.php          # API para salvar estatísticas
@@ -38,8 +36,7 @@ digital-games/
 ├── 📁 database/                # Arquivos de banco de dados
 │   ├── Database.php            # Classe de conexão PDO
 │   ├── schema.sql             # Schema original
-│   ├── schema_fixed.sql        # Schema corrigido
-│   └── admin_features.sql      # Recursos administrativos
+│   └── schema_fixed.sql        #Schema corrigido
 │
 ├── 📁 games/                   # Páginas dos jogos (HTML)
 │   ├── tictactoe.html
@@ -70,7 +67,7 @@ digital-games/
 └── README.md                  # Este arquivo
 ```
 
-## 🚀 Instalação e Configuração
+##  Instalação e Configuração
 
 ### **1. Pré-requisitos**
 - XAMPP instalado e funcionando
@@ -87,18 +84,11 @@ http://localhost/digital-games/admin/install_database.php
 ```
 
 Este script irá:
-- Criar o banco de dados `digital_detective_games`
+- Criar o banco de dados `digital_games`
 - Criar as tabelas necessárias (users, games, game_stats, activity_logs)
 - Inserir dados iniciais (usuários padrão e jogos)
 
-### **3. Teste do Sistema**
-
-Testar conexão com banco:
-```
-http://localhost/digital-games/admin/test_database.php
-```
-
-### **4. Acesso ao Sistema**
+### **3. Acesso ao Sistema**
 
 Login:
 ```
@@ -110,15 +100,16 @@ Página principal:
 http://localhost/digital-games/index.php
 ```
 
-## 👤 Credenciais Padrão
+
+##  Credenciais Padrão
 
 | Usuário | Senha | Função |
 |---------|-------|--------|
 | admin | admin123 | Administrador |
-| user | user123 | Usuário comum |
+| user | user123 | Usuário |
 | guest | guest123 | Convidado |
 
-## 🎯 Funcionalidades
+##  Funcionalidades
 
 ### **Sistema de Autenticação**
 - ✅ Login seguro com validação PHP
@@ -131,8 +122,8 @@ http://localhost/digital-games/index.php
 ### **Jogos Disponíveis** (8 jogos)
 
 1. **Tic-Tac-Toe** (`tictactoe`)
-   - Jogo da Velha contra IA inteligente
-   - 3 níveis de dificuldade
+   - Jogo da Velha contra IA
+   - Jogo da Velha contra outro jogador
    - Estatísticas de vitórias
 
 2. **Campo Minado** (`minesweeper`)
@@ -152,7 +143,7 @@ http://localhost/digital-games/index.php
 
 5. **Memory Game** (`memory`)
    - Encontre todos os pares
-   - Múltiplos níveis de dificuldade
+   - 3 níveis de dificuldade
    - Sistema de tempo
 
 6. **Snake** (`snake`)
@@ -193,7 +184,7 @@ http://localhost/digital-games/index.php
 - ✅ Controle de permissões
 - ✅ Atualização de regras via API (`update_rule.php`)
 
-## 🔧 Configuração Avançada
+##  Configuração Avançada
 
 ### **Configuração de Banco de Dados**
 
@@ -229,7 +220,7 @@ As APIs usam autenticação baseada em sessão:
 - `api/get_stats.php` - Obtém estatísticas de jogos
 - `api/update_rule.php` - Atualiza regras (apenas admin)
 
-## 🛡️ Segurança
+##  Segurança
 
 - ✅ Validação de entrada em formulários
 - ✅ Sanitização de dados com `sanitizeInput()`
@@ -240,7 +231,7 @@ As APIs usam autenticação baseada em sessão:
 - ✅ Controle de acesso por níveis (admin/user/guest)
 - ✅ Proteção CSRF implícita via sessões
 
-## 📊 Estrutura do Banco de Dados
+##  Estrutura do Banco de Dados
 
 ### **Tabelas Principais:**
 
@@ -256,7 +247,7 @@ As APIs usam autenticação baseada em sessão:
 4. **activity_logs** - Histórico de atividades
    - id, user_id, action_type, description, created_at
 
-## 🎨 Personalização
+##  Personalização
 
 ### **Cores do Sistema**
 
@@ -284,11 +275,10 @@ audio: {
 ```
 
 
-## 📝 Notas de Desenvolvimento
+##  Notas de Desenvolvimento
 
 ### **Estrutura de Armazenamento**
 
-- **LocalStorage**: Usado para estatísticas locais temporárias
 - **MySQL**: Banco de dados principal para estatísticas persistentes
 - **Sessões PHP**: Autenticação e controle de acesso
 
@@ -307,7 +297,7 @@ audio: {
 - `database/Database.php` - Classe de conexão PDO
 - `includes.php` - Funções auxiliares reutilizáveis
 
-## 📞 Suporte e Desenvolvimento
+##  Suporte e Desenvolvimento
 
 ### **Ferramentas de Debugging**
 
@@ -322,30 +312,29 @@ audio: {
 
 3. **Banco de Dados**
    - Visualizar dados: `phpMyAdmin` (http://localhost/phpmyadmin)
-   - Testar conexão: `admin/test_database.php`
 
-## 🎉 Conclusão
+##  Conclusão
 
 Sistema completamente funcional com:
 - ✅ Interface Windows 98 nostálgica
-- ✅ 8 jogos clássicos totalmente funcionais
+- ✅ 8 jogos
 - ✅ Sistema de estatísticas completo
 - ✅ Autenticação e autorização robustos
 - ✅ Banco de dados MySQL integrado
 - ✅ APIs RESTful para comunicação
 - ✅ Painel administrativo
 - ✅ Sistema de logs e monitoramento
-- ✅ Responsivo e acessível
 
-**Desenvolvido com paixão pelos jogos retro! 🕹️**
+
+**Desenvolvido com paixão pelos jogos retro!**
 
 ---
 
-## 📜 Licença
+##  Licença
 
 Este projeto foi desenvolvido como demonstração de habilidades em desenvolvimento web full-stack.
 
-## 🤝 Contribuições
+##  Contribuições
 
 Contribuições são bem-vindas! Sinta-se livre para:
 - Reportar bugs
@@ -356,5 +345,5 @@ Contribuições são bem-vindas! Sinta-se livre para:
 ---
 
 **Versão:** 1.0.0  
-**Autor:** DigitalGames Team  
+**Autor:** DigitalGames Team (Juliana Alves e Thalyson Santos) 
 **Ano:** 2025

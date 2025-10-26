@@ -544,9 +544,8 @@ body {
 
 .window-content::-webkit-scrollbar-thumb {
     background: #c0c0c0;
-    border: 1px solid #808080;
-    border-top: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
+    border: 1px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
 }
 
 .window-content::-webkit-scrollbar-thumb:hover {
@@ -554,23 +553,43 @@ body {
 }
 
 .window-content::-webkit-scrollbar-button:vertical:start:decrement {
-    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,8 8,0 16,8" fill="black"/></svg>') no-repeat center;
+    background: #c0c0c0;
     border: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="3,10 8,5 13,10" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .window-content::-webkit-scrollbar-button:vertical:end:increment {
-    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="0,0 8,8 16,0" fill="black"/></svg>') no-repeat center;
+    background: #c0c0c0;
     border: 1px solid #808080;
+    border-top: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="3,6 8,11 13,6" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .window-content::-webkit-scrollbar-button:horizontal:start:decrement {
-    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 0,8 8,16" fill="black"/></svg>') no-repeat center;
+    background: #c0c0c0;
     border: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="10,3 5,8 10,13" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .window-content::-webkit-scrollbar-button:horizontal:end:increment {
-    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="8,0 16,8 8,16" fill="black"/></svg>') no-repeat center;
+    background: #c0c0c0;
     border: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="6,3 11,8 6,13" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .window-content {
@@ -638,9 +657,8 @@ body {
 .hangman-container::-webkit-scrollbar-thumb,
 .solitaire-container::-webkit-scrollbar-thumb {
     background: #c0c0c0;
-    border: 1px solid #808080;
-    border-top: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
+    border: 1px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
 }
 
 .desktop-icons::-webkit-scrollbar-thumb:hover,
@@ -1971,9 +1989,8 @@ footer::-webkit-scrollbar {
 
 .demo-page ::-webkit-scrollbar-thumb {
     background: #c0c0c0;
-    border: 1px solid #808080;
-    border-top: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
+    border: 1px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
 }
 
 .demo-page ::-webkit-scrollbar-thumb:hover {
@@ -2145,9 +2162,8 @@ footer::-webkit-scrollbar {
 
 ::-webkit-scrollbar-thumb {
     background: #c0c0c0;
-    border: 1px solid #808080;
-    border-top: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
+    border: 1px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
 }
 
 ::-webkit-scrollbar-thumb:hover {

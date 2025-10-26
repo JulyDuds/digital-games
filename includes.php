@@ -174,7 +174,7 @@ function renderWelcomeMessage() {
             <div class="welcome-content">
                 <i class="fas fa-check-circle"></i>
                 <h3>Login realizado com sucesso!</h3>
-                <p>Bem-vindo de volta, <?php echo htmlspecialchars($user['name']); ?>!</p>
+                <p>Bem-vindo, <?php echo htmlspecialchars($user['name']); ?>!</p>
                 <br>
                 <center><button onclick="closeWelcome()" class="btn btn-primary">Continuar</button></center>
             </div>

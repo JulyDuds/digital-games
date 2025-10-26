@@ -17,7 +17,7 @@ class Database {
         'host' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'database' => 'digital_detective_games',
+        'database' => 'digital_games',
         'charset' => 'utf8mb4'
     ];
     

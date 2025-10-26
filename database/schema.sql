@@ -2,12 +2,12 @@
 -- Script de criação do banco de dados para XAMPP
 
 -- Criar banco de dados
-CREATE DATABASE IF NOT EXISTS digital_detective_games 
+CREATE DATABASE IF NOT EXISTS digital_games 
 CHARACTER SET utf8mb4 
 COLLATE utf8mb4_unicode_ci;
 
 -- Usar o banco de dados
-USE digital_detective_games;
+USE digital_games;
 
 -- Tabela de usuários
 CREATE TABLE IF NOT EXISTS users (

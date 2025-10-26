@@ -2,12 +2,12 @@
 -- Script de criação do banco de dados para XAMPP - Compatível com MySQL 5.7+
 
 -- Criar banco de dados
-CREATE DATABASE IF NOT EXISTS digital_detective_games 
+CREATE DATABASE IF NOT EXISTS digital_games 
 CHARACTER SET utf8mb4 
 COLLATE utf8mb4_unicode_ci;
 
 -- Usar o banco de dados
-USE digital_detective_games;
+USE digital_games;
 
 -- Tabela de usuários
 CREATE TABLE IF NOT EXISTS users (
@@ -241,7 +241,7 @@ CREATE INDEX idx_activity_logs_date ON activity_logs(created_at);
 CREATE INDEX idx_game_stats_last_played ON game_stats(last_played);
 
 -- Mostrar informações do banco criado
-SELECT 'Banco de dados Digital Detective Games criado com sucesso!' as status;
+SELECT 'Banco de dados Digital Games criado com sucesso!' as status;
 SELECT COUNT(*) as total_users FROM users;
 SELECT COUNT(*) as total_games FROM games;
 SELECT COUNT(*) as total_settings FROM system_settings;
