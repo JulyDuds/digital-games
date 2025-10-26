@@ -79,26 +79,7 @@ digital-games/
 - Apache ativo
 - Navegador moderno (Chrome, Firefox, Edge)
 
-### **2. Configuração do Banco de Dados**
-
-Abra no navegador:
-```
-http://localhost/digital-games/admin/install_database.php
-```
-
-Este script irá:
-- Criar o banco de dados `digital_detective_games`
-- Criar as tabelas necessárias (users, games, game_stats, activity_logs)
-- Inserir dados iniciais (usuários padrão e jogos)
-
-### **3. Teste do Sistema**
-
-Testar conexão com banco:
-```
-http://localhost/digital-games/admin/test_database.php
-```
-
-### **4. Acesso ao Sistema**
+### **2. Acesso ao Sistema**
 
 Login:
 ```
